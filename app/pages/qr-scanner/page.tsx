@@ -8,7 +8,7 @@ import {
   User,
   Camera,
   Keyboard,
-  Menu
+  Menu,
 } from "lucide-react";
 import Sidebar from "@/app/component/sidebar/page";
 
@@ -44,83 +44,92 @@ export default function QRScanner() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   function handleScan() {
-    if (scanInput.includes("CRCL")) {
-      setScanResult({
+    // simple simulated validation
+    if (scanInput.trim() && scanInput.includes("CRCL")) {
+      const successPayload: ScanSuccess = {
         success: true,
         customerName: "John Doe",
-        memberId: scanInput,
+        memberId: scanInput.trim(),
         memberSince: "2023-05-15",
         tier: "Gold",
         availableOffers: [
           { id: 1, name: "20% Off Lunch Menu", remainingUses: 1, validUntil: "2024-12-31" },
           { id: 2, name: "Happy Hour 2-for-1", remainingUses: 3, validUntil: "2024-11-30" },
-          { id: 3, name: "Free Dessert", remainingUses: 0, validUntil: "2024-11-15" }
+          { id: 3, name: "Free Dessert", remainingUses: 0, validUntil: "2024-11-15" },
         ],
         totalRedemptions: 42,
-        lastVisit: "2024-11-08"
-      });
+        lastVisit: "2024-11-08",
+      };
+      setScanResult(successPayload);
     } else {
-      setScanResult({
+      const failPayload: ScanFailure = {
         success: false,
-        reason: "Invalid membership code. Please try again."
-      });
+        reason: "Invalid membership code. Please try again.",
+      };
+      setScanResult(failPayload);
     }
   }
 
   function handleRedeem(offerId: number) {
+    // Narrow to ScanSuccess before updating
     if (scanResult && scanResult.success) {
-      const updatedOffers = scanResult.availableOffers.map((offer) => {
-        if (offer.id === offerId && offer.remainingUses > 0) {
-          return { ...offer, remainingUses: offer.remainingUses - 1 };
-        }
-        return offer;
-      });
+      const prev = scanResult as ScanSuccess;
+      const updatedOffers = prev.availableOffers.map((offer) =>
+        offer.id === offerId && offer.remainingUses > 0
+          ? { ...offer, remainingUses: offer.remainingUses - 1 }
+          : offer
+      );
 
-      setScanResult({
-        ...scanResult,
+      const updated: ScanSuccess = {
+        ...prev,
         availableOffers: updatedOffers,
-        totalRedemptions: scanResult.totalRedemptions + 1
-      });
+        totalRedemptions: prev.totalRedemptions + 1,
+      };
+
+      setScanResult(updated);
     }
   }
 
   return (
-    <div className="font-glacial flex">
-      {/* DESKTOP SIDEBAR */}
+    <div className="flex font-glacial">
+
+      {/* Mobile overlay Sidebar when open */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40">
+          <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
+          <div className="fixed left-0 top-0 h-full w-80 bg-[var(--background)] border-r border-border z-50">
+            {/* If your Sidebar accepts props use them; else plain render */}
+            {/* @ts-ignore allow unknown props if Sidebar doesn't accept them */}
+            <Sidebar isMobile onClose={() => setSidebarOpen(false)} />
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Sidebar */}
       <div className="hidden md:block fixed left-0 top-0 h-screen">
         <Sidebar />
       </div>
 
-      {/* MOBILE SIDEBAR */}
-      {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 z-50">
-          <div className="fixed left-0 top-0 h-full w-80 bg-[var(--background)] border-r border-border z-60">
-            <Sidebar />
-          </div>
-          <div 
-            onClick={() => setSidebarOpen(false)} 
-            className="fixed inset-0 bg-black/60 z-50"
-          />
-        </div>
-      )}
+      {/* Main */}
+      <main className="flex-1 md:ml-64 min-h-screen bg-[var(--background)] p-4 md:p-8 transition-colors duration-300">
 
-      {/* MAIN CONTENT */}
-      <div className="md:ml-64 min-h-screen p-4 md:p-8 bg-[var(--background)] text-text transition-colors duration-300 flex-1 relative">
-        
-        {/* Mobile Header */}
-        <div className="md:hidden flex justify-between items-center mb-6 py-3">
-          <div>
-            <h1 className="text-xl font-semibold text-text">QR Scanner</h1>
-          </div>
-          <button 
-            onClick={() => setSidebarOpen(true)} 
-            className="p-2 dark:bg-[#111] border border-border rounded-lg"
+        {/* Mobile header */}
+        <div className="md:hidden flex items-center justify-between mb-6">
+          <h1 className="text-lg font-semibold text-text">PrivateCRCL</h1>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 rounded-lg border border-border bg-background"
+            aria-label="Open menu"
           >
-            <Menu size={22} />
+            <Menu size={20} />
           </button>
         </div>
+        <div className="md:hidden mb-4">
+          <h1 className="text-xl font-semibold">QR Scanner</h1>
+          <p className="text-sm text-all-sub-h">Scan customer membership cards for redemptions</p>
+        </div>
 
-        {/* Header */}
+        {/* Desktop header */}
         <div className="hidden md:block mb-6">
           <h1 className="text-[30px] text-text font-light">QR Scanner</h1>
           <p className="text-[16px] text-all-sub-h">Scan customer membership cards for redemptions</p>
@@ -129,23 +138,19 @@ export default function QRScanner() {
         {/* Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          {/* ------- Scanner Card ------- */}
-          <div className="rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] border-border">
+          {/* Scanner Card */}
+          <section className="rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] border-border">
             <div className="flex items-center gap-2 mb-4">
               <ScanLine className="w-5 h-5 text-[#E8600F]" />
               <h2 className="text-[16px] text-white-off font-medium">Scan Membership Card</h2>
             </div>
 
-            {/* Tabs */}
             <div>
               <div className="flex p-1 gap-1 mb-4 bg-offer-search border-[0.82px] border-border rounded-[10px]">
                 <button
                   onClick={() => setScanMode("camera")}
-                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${
-                    scanMode === "camera" 
-                      ? "bg-[#E8600F] text-white" 
-                      : "text-table-text-id"
-                  }`}
+                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${scanMode === "camera" ? "bg-[#E8600F] text-white" : "text-table-text-id"
+                    }`}
                 >
                   <Camera className="w-4 h-4" />
                   Camera Scan
@@ -153,18 +158,15 @@ export default function QRScanner() {
 
                 <button
                   onClick={() => setScanMode("manual")}
-                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${
-                    scanMode === "manual" 
-                      ? "bg-[#E8600F] text-white" 
-                      : "text-table-text-id"
-                  }`}
+                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${scanMode === "manual" ? "bg-[#E8600F] text-white" : "text-table-text-id"
+                    }`}
                 >
                   <Keyboard className="w-4 h-4" />
                   Manual Entry
                 </button>
               </div>
 
-              {/* Camera Mode */}
+              {/* Camera Mode (placeholder UI) */}
               {scanMode === "camera" && (
                 <div className="mt-4">
                   <div className="bg-offer-search border-2 border-dashed border-border rounded-[14px] aspect-square flex flex-col items-center justify-center p-4">
@@ -172,12 +174,8 @@ export default function QRScanner() {
                       <ScanLine className="w-16 h-16 md:w-24 md:h-24 text-table-text-id animate-pulse" />
                     </div>
 
-                    <p className="text-table-text-id mt-4 text-center text-[14px]">
-                      Position QR code within the frame
-                    </p>
-                    <p className="text-[12px] text-table-text-id mt-1">
-                      Camera will scan automatically
-                    </p>
+                    <p className="text-table-text-id mt-4 text-center text-[14px]">Position QR code within the frame</p>
+                    <p className="text-[12px] text-table-text-id mt-1">Camera will scan automatically</p>
                   </div>
                 </div>
               )}
@@ -208,16 +206,17 @@ export default function QRScanner() {
                 </div>
               )}
             </div>
-          </div>
+          </section>
 
-          {/* ------- Result Card ------- */}
-          <div className={`rounded-[14px] p-4 md:p-6 ${
-            scanResult
-              ? scanResult.success
-                ? "bg-offer-search-main border-[0.82px] border-green-500"
-                : "bg-offer-search-main border-[0.82px] border-red-500"
-              : "bg-offer-search-main border-[0.82px] border-border"
-          }`}>
+          {/* Result Card */}
+          <aside
+            className={`rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] ${scanResult
+                ? scanResult.success
+                  ? "border-green-500"
+                  : "border-red-500"
+                : "border-border"
+              }`}
+          >
             <div className="flex items-center gap-2 mb-4">
               {!scanResult ? (
                 <span className="text-table-text-id text-[14px]">Scan Result</span>
@@ -234,7 +233,7 @@ export default function QRScanner() {
               )}
             </div>
 
-            {/* Empty State */}
+            {/* Empty state */}
             {!scanResult && (
               <div className="text-center text-table-text-id py-8 md:py-12">
                 <ScanLine className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 opacity-30" />
@@ -242,7 +241,7 @@ export default function QRScanner() {
               </div>
             )}
 
-            {/* Success State */}
+            {/* Success state */}
             {scanResult && scanResult.success && (
               <div className="space-y-4 md:space-y-6">
 
@@ -260,9 +259,7 @@ export default function QRScanner() {
                       <span className="bg-[#E8600F] text-white px-2 py-1 rounded text-[10px] md:text-[12px]">
                         {scanResult.tier}
                       </span>
-                      <span className="text-[10px] md:text-[12px] text-table-text-id">
-                        Member since {scanResult.memberSince}
-                      </span>
+                      <span className="text-[10px] md:text-[12px] text-table-text-id">Member since {scanResult.memberSince}</span>
                     </div>
                   </div>
                 </div>
@@ -288,11 +285,8 @@ export default function QRScanner() {
                     {scanResult.availableOffers.map((offer) => (
                       <div
                         key={offer.id}
-                        className={`p-3 rounded-[10px] border ${
-                          offer.remainingUses > 0
-                            ? "bg-offer-search border-border"
-                            : "bg-offer-search border-border opacity-50"
-                        }`}
+                        className={`p-3 rounded-[10px] border ${offer.remainingUses > 0 ? "bg-offer-search border-border" : "bg-offer-search border-border opacity-50"
+                          }`}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
@@ -300,29 +294,20 @@ export default function QRScanner() {
                               <span className="text-[14px] text-white-off">{offer.name}</span>
 
                               {offer.remainingUses > 0 ? (
-                                <span className="bg-green-600 text-white px-2 py-1 rounded text-[10px]">
-                                  {offer.remainingUses} left
-                                </span>
+                                <span className="bg-green-600 text-white px-2 py-1 rounded text-[10px]">{offer.remainingUses} left</span>
                               ) : (
-                                <span className="bg-red-600 text-white px-2 py-1 rounded text-[10px]">
-                                  Used
-                                </span>
+                                <span className="bg-red-600 text-white px-2 py-1 rounded text-[10px]">Used</span>
                               )}
                             </div>
 
-                            <div className="text-[12px] text-table-text-id mt-1">
-                              Valid until {offer.validUntil}
-                            </div>
+                            <div className="text-[12px] text-table-text-id mt-1">Valid until {offer.validUntil}</div>
                           </div>
 
                           <button
                             disabled={offer.remainingUses === 0}
                             onClick={() => handleRedeem(offer.id)}
-                            className={`px-3 py-2 rounded-[8px] text-white text-[12px] cursor-pointer ${
-                              offer.remainingUses > 0
-                                ? "bg-[#E8600F] hover:bg-[#d15509]"
-                                : "bg-table-text-id cursor-not-allowed"
-                            }`}
+                            className={`px-3 py-2 rounded-[8px] text-white text-[12px] cursor-pointer ${offer.remainingUses > 0 ? "bg-[#E8600F] hover:bg-[#d15509]" : "bg-table-text-id cursor-not-allowed"
+                              }`}
                           >
                             Redeem
                           </button>
@@ -345,7 +330,7 @@ export default function QRScanner() {
               </div>
             )}
 
-            {/* Failure State */}
+            {/* Failure state */}
             {scanResult && !scanResult.success && (
               <div className="space-y-4">
                 <div className="p-4 bg-red-600/20 border border-red-500 rounded-[10px]">
@@ -363,19 +348,18 @@ export default function QRScanner() {
                 </button>
               </div>
             )}
-          </div>
+          </aside>
         </div>
 
-        {/* ------- Quick Guide ------- */}
-        <div className="mt-6 rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] border-border">
+        {/* Quick Guide */}
+        <section className="mt-6 rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] border-border">
           <h3 className="text-white-off text-[16px] font-medium mb-4">Quick Guide</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
             {[
               { title: "Scan or Enter ID", desc: "Use camera or manually enter membership ID" },
               { title: "Verify Member", desc: "System will show member details and offers" },
-              { title: "Redeem Offer", desc: "Click redeem to apply offer" }
+              { title: "Redeem Offer", desc: "Click redeem to apply offer" },
             ].map((item, i) => (
               <div key={i} className="p-4 bg-offer-search rounded-[10px] border border-border">
                 <div className="w-8 h-8 md:w-10 md:h-10 bg-offer-search border-[0.82px] border-border text-white-off rounded-full flex items-center justify-center mb-3 text-[14px] md:text-[16px]">
@@ -383,16 +367,12 @@ export default function QRScanner() {
                 </div>
 
                 <h4 className="text-white-off text-[14px] font-medium mb-2">{item.title}</h4>
-
-                <p className="text-[12px] text-table-text-id">
-                  {item.desc}
-                </p>
+                <p className="text-[12px] text-table-text-id">{item.desc}</p>
               </div>
             ))}
-
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

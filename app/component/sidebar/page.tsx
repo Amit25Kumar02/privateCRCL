@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "../ThemeToggle";
-
 import {
   LayoutDashboard,
   Tag,
@@ -13,9 +12,10 @@ import {
   Store,
   QrCode,
   Settings,
+  X,
 } from "lucide-react";
 
-export default function Sidebar() {
+export default function Sidebar({ isMobile = false, onClose }: any) {
   const pathname = usePathname();
 
   const menu = [
@@ -30,57 +30,61 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="">
-      <aside className="h-screen w-[263px] bg-offer-search-main text-[var(--text)] border-[0.82px] border-[var(--border)] flex flex-col justify-between p-4">
+    <aside
+      className={`
+        bg-offer-search-main text-[var(--text)] border-r border-[var(--border)]
+        h-screen flex flex-col justify-between p-4 fixed top-0
+        ${isMobile ? "w-full left-0 z-50 animate-slideIn" : "w-[263px] left-0"}
+      `}
+    >
+      {isMobile && (
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4  text-white-off p-2 rounded-lg"
+        >
+          <X size={22} />
+        </button>
+      )}
 
-        {/* Logo */}
-        <div>
-          <div className="h-[89px] p-[24px]">
-            <div className="h-[39px] px-4  border-b-[0.82px]">
-          <h1 className="text-2xl font-semibold">
-            PrivateCRCL
-          </h1>
-            </div>
-          </div>
-
-          {/* Menu Items */}
-          <nav className="h-[422px] w-[230px] flex-1 space-y-1">
-            {menu.map((item, idx) => {
-              const isActive = pathname === item.href;
-
-              return (
-                <Link
-                  key={idx}
-                  href={item.href}
-                  className={`flex items-center gap-3 px-4 py-2 rounded-[10px] cursor-pointer transition
-                    ${isActive
-                      ? "bg-[#E8600F] text-[#FFFFFF] text-[16px] h-[49px]"
-                      : " text-sidebar-text text-[16px] hover:bg-[#E8600F] hover:text-[#FFFFFF] h-[49px]"
-                    }
-                  `}
-                >
-                  {item.icon}
-                  <span className="text-sm">{item.label}</span>
-                </Link>
-              );
-            })}
-          </nav>
+      <div>
+        <div className="px-4 pb-4">
+          <h1 className="text-2xl font-semibold">PrivateCRCL</h1>
         </div>
-        <div className="flex justify-between items-center mb-8">
-          {/* <h1 className="text-2xl font-semibold tracking-wide">PrivateCRCL</h1> */}
-          <ThemeToggle />
-        </div>
-        {/* User Section */}
+
+        <nav className="mt-2 space-y-1">
+          {menu.map((item, idx) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={idx}
+                href={item.href}
+                onClick={onClose}
+                className={`
+                  flex items-center gap-3 px-4 py-3 rounded-lg transition
+                  ${active ? "bg-[#E8600F] text-white" : "text-sidebar-text hover:bg-[#E8600F] hover:text-white"}
+                `}
+              >
+                {item.icon}
+                <span className="text-sm">{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
+      <div className="p-2 space-y-4">
+        <ThemeToggle />
+
         <div className="dark:bg-[#09090B] rounded-xl p-3 flex items-center gap-3">
-          <div className="h-[32px] w-[32px] text-[16px] text-[#364153] flex items-center justify-center rounded-full bg-[#E5E7EB] dark:text-[#FFFFFF]">
+          <div className="h-[32px] w-[32px] flex items-center justify-center rounded-full bg-[#E5E7EB] dark:bg-[#333] text-[#364153] dark:text-white">
             B
           </div>
           <div>
-            <p className="text-[14px] text-[#101828]">Business Name</p>
-            <p className="text-[12px] text-[#6A7282]">Manager</p>
+            <p className="text-sm text-white-off">Business Name</p>
+            <p className="text-xs text-[#6A7282]">Manager</p>
           </div>
         </div>
-      </aside>
-    </div>
+      </div>
+    </aside>
   );
 }

@@ -2,14 +2,14 @@
 
 import React, { useState, useRef } from "react";
 import Sidebar from "../../component/sidebar/page";
-import { MapPin, Clock, Edit, Globe } from "lucide-react";
+import { MapPin, Clock, Edit, Globe, Menu } from "lucide-react";
 
 const designImage = "/mnt/data/88ec2f84-50a6-4262-bfbb-e349b96f80b4.png";
 
 type Hours = { open?: string; close?: string; closed?: boolean };
 
 export default function BusinessProfilePage() {
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [tab, setTab] = useState<"basic" | "hours" | "location" | "media">(
     "basic"
   );
@@ -82,21 +82,37 @@ export default function BusinessProfilePage() {
 
   return (
     <div className="font-glacial flex">
-      {/* Sidebar */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+          <Sidebar isMobile={true} onClose={() => setSidebarOpen(false)} />
+        </div>
+      )}
+      {/* Desktop Sidebar */}
       <div className="hidden md:block fixed left-0 top-0 h-screen">
         <Sidebar />
       </div>
 
-      <main
-        className="
-          ml-64 min-h-screen p-8
-        bg-[var(--background)] text-text
-          transition-colors duration-300 flex-1
-        "
-      >
+      {/* Main */}
+      <main className="md:ml-64 flex-1 min-h-screen p-6 md:p-8 bg-background text-text">
+        {/* Mobile top bar */}
+        <div className="md:hidden flex justify-between items-center mb-4">
+          <h1 className="text-xl font-semibold">PrivateCRCL</h1>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 border-[0.82px] border-border rounded-lg bg-background">
+            <Menu size={22} />
+          </button>
+        </div>
+
+        {/* Mobile heading */}
+        <div className="md:hidden mb-4">
+          <h1 className="text-xl font-semibold">Business Profile</h1>
+          <p className="text-sm text-all-sub-h">  Manage your public business information</p>
+        </div>
+
         {/* Header + Edit button */}
         <div className="flex items-start justify-between mb-6">
-          <div>
+          <div className="hidden md:block">
             <h1 className="text-[30px] text-text">Business Profile</h1>
             <p className="text-[16px] text-all-sub-h">
               Manage your public business information
@@ -113,7 +129,7 @@ export default function BusinessProfilePage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-3 bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit px-2 py-1 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-full md:w-fit px-2 py-1 mb-6">
           <Tab label="Basic Info" active={tab === "basic"} onClick={() => setTab("basic")} />
           <Tab label="Opening Hours" active={tab === "hours"} onClick={() => setTab("hours")} />
           <Tab label="Location" active={tab === "location"} onClick={() => setTab("location")} />
@@ -164,11 +180,10 @@ export default function BusinessProfilePage() {
                               : [...prev.categories, c],
                           }))
                         }
-                        className={`px-4 py-2 rounded-lg cursor-pointer text-sm border-[0.82px] border-border ${
-                          active
-                            ? "bg-[#E8600F] text-white-off border-border"
-                            : "bg-offer-search text-table-text-id border-border opacity-70 "
-                        }`}
+                        className={`px-4 py-2 rounded-lg cursor-pointer text-sm border-[0.82px] border-border ${active
+                          ? "bg-[#E8600F] text-white-off border-border"
+                          : "bg-offer-search text-table-text-id border-border opacity-70 "
+                          }`}
                       >
                         {c}
                       </button>
@@ -224,11 +239,11 @@ export default function BusinessProfilePage() {
             <section className="rounded-xl p-6 borde bg-offer-search-main border-[0.82px] border-border">
               <h2 className="text-[16px] text-white-off font-medium mb-4">Opening Hours</h2>
 
-              <div className="space-y-3">
+              <div className="space-y-3 w-[310px] md:w-full overflow-auto">
                 {Object.keys(hours).map((day) => {
                   const h = hours[day];
                   return (
-                    <div key={day} className="rounded-md p-3 bg-offer-search  border border-border  flex items-center gap-4">
+                    <div key={day} className="rounded-md p-3 bg-offer-search  border border-border w-[610px] md:w-full flex items-center gap-4">
                       <div className="w-36 text-[14px] text-white-off">{day}</div>
 
                       <div className="flex items-center gap-2">
@@ -251,18 +266,6 @@ export default function BusinessProfilePage() {
                           className="px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search text-table-text-id  text-[14px]"
                         />
                       </div>
-
-                      {/* <div className="ml-auto">
-                        <label className="text-sm flex items-center gap-2">
-                          <input
-                            type="checkbox"
-                            checked={!!h.closed}
-                            onChange={(e) => updateHour(day, "closed", e.target.checked)}
-                            className="w-4 h-4"
-                          />
-                          <span className="text-xs text-gray-500 dark:text-[#9F9FA9]">Closed</span>
-                        </label>
-                      </div> */}
                     </div>
                   );
                 })}
@@ -318,7 +321,7 @@ export default function BusinessProfilePage() {
           {/* MEDIA */}
           {tab === "media" && (
             <section>
-              <div className="grid grid-cols-1 lg:grid-cols-2 h-[218px] gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 md:h-[218px] gap-6">
                 {/* Logo */}
                 <div className="rounded-[14px] p-4 border-[0.82px] border-border bg-offer-search-main  ">
                   <div className="text-[14px] text-table-text-h mb-3">Logo</div>
@@ -327,7 +330,7 @@ export default function BusinessProfilePage() {
                       <img src={logoPreview.current} alt="logo preview" className="h-20 object-contain" />
                     ) : (
                       <label className="flex flex-col items-center gap-2 cursor-pointer text-table-text-h">
-                        <Globe size={24} className="text-table-text-id opacity-70"/>
+                        <Globe size={24} className="text-table-text-id opacity-70" />
                         <div className="text-[14px] text-table-text-id opacity-70">Upload your business logo</div>
                         <input type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
                       </label>
@@ -373,11 +376,10 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-[14px] text-[14px] ${
-        active
-          ? "bg-[#E8600F] cursor-pointer text-white-off"
-          : "text-[#A1A1A1] cursor-pointer"
-      }`}
+      className={`px-4 py-2 rounded-[14px] text-[14px] ${active
+        ? "bg-[#E8600F] cursor-pointer text-white-off"
+        : "text-[#A1A1A1] cursor-pointer"
+        }`}
     >
       {label}
     </button>

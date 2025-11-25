@@ -208,30 +208,38 @@ export default function OffersPage() {
 
   return (
     <div className="font-glacial flex">
-
-      {/* DESKTOP SIDEBAR */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+          <Sidebar isMobile={true} onClose={() => setSidebarOpen(false)} />
+        </div>
+      )}
       <div className="hidden md:block fixed left-0 top-0 h-screen">
         <Sidebar />
       </div>
 
-      {/* MOBILE SIDEBAR */}
-      {sidebarOpen && (
-        <div className="md:hidden fixed inset-0 bg-black/60 z-50">
-          <Sidebar />
-          <div onClick={() => setSidebarOpen(false)} className="absolute inset-0" />
-        </div>
-      )}
+   
 
       {/* MAIN CONTENT */}
-      <div className="md:ml-64 min-h-screen p-6 md:p-8 bg-background text-text transition-colors duration-300 flex-1 relative">
+      <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
 
-        {/* Mobile menu */}
-        <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 mb-4  dark:bg-[#111] border border-border rounded-lg">
-          <Menu size={22} />
-        </button>
+      
+                <div className="md:hidden flex items-center justify-between mb-4 pt-1">
+                    <div className="text-xl font-semibold">PrivateCRCL</div>
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="p-2 rounded-lg border border-border bg-background"
+                    >
+                        <Menu size={22} />
+                    </button>
+                </div>
+
+                <div className="md:hidden mb-4">
+                    <h1 className="text-xl font-semibold">Dashboard</h1>
+                    <p className="text-sm text-all-sub-h">Today at a glance</p>
+                </div>
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <div className="flex flex-col hidden md:block md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
             <h1 className="text-[30px] text-text">Offers Management</h1>
             <p className="text-[16px] text-all-sub-h">Create and manage perks and discounts</p>
@@ -272,7 +280,7 @@ export default function OffersPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex overflow-x-auto bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit mt-5 p-2 hide-scrollbar">
+        <div className="grid grid-cols-3 md:grid-cols-1 md:flex bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit mt-5 p-2 hide-scrollbar">
           {tabs.map((t) => (
             <button
               key={t}
@@ -455,8 +463,8 @@ export default function OffersPage() {
         )}
 
         {/* DESKTOP TABLE */}
-        <div className="mt-6 block rounded-[14px] bg-table-bg overflow-hidden  border-[0.82px] border-border">
-          <table className="w-full text-[14px] ">
+        <div className="mt-6 w-[310px] md:w-full  overflow-x-auto rounded-[14px] bg-table-bg border-[0.82px] border-border">
+          <table className="text-[14px] ">
             <thead>
               <tr className=" text-[14px] border-[0.82px] border-border text-table-text-h">
                 <th className="p-4 text-left">Offer</th>
@@ -556,7 +564,7 @@ export default function OffersPage() {
         </div> */}
       </div>
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-999">
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
 
           <div className="bg-background w-[90%] md:w-[600px] max-h-[90vh] overflow-y-auto rounded-lg p-6 border border-border shadow-xl">
 

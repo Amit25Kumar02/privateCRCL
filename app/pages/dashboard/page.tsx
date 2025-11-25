@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
     LineChart,
     Line,
@@ -11,7 +12,15 @@ import {
     Bar,
 } from "recharts";
 
-import { TrendingUp, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
+import {
+    TrendingUp,
+    AlertCircle,
+    CheckCircle,
+    Clock,
+    XCircle,
+    Menu,
+} from "lucide-react";
+
 import Sidebar from "../../component/sidebar/page";
 
 const performanceData = [
@@ -35,131 +44,152 @@ const redemptionData = [
 ];
 
 export default function Dashboard() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
-        <div className="flex">
-            {/* Sidebar */}
-            <div className="fixed left-0 top-0 h-screen">
+        <div className="flex font-glacial">
+            {sidebarOpen && (
+                <div className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm">
+                    <Sidebar isMobile={true} onClose={() => setSidebarOpen(false)} />
+                </div>
+            )}
+
+            <div className="hidden md:block fixed left-0 top-0 h-screen">
                 <Sidebar />
             </div>
 
-            {/* Main Content */}
-            <div className="ml-64 min-h-screen bg-[var(--background)] text-text border-[0.82px] border-border p-6 flex-1">
-                <h1 className="text-[30px] text-text font-saga mb-4">Dashboard</h1>
-                <p className="text-[16px] text-all-sub-h mb-6">Today at a glance</p>
+            <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 h-[157px] gap-4 mb-6">
-                    <div className="bg-offer-search-main p-5 rounded-[14px]  border-[0.82px] border-border">
+                <div className="md:hidden flex items-center justify-between mb-4 pt-1">
+                    <div className="text-xl font-semibold">PrivateCRCL</div>
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="p-2 rounded-lg border border-border bg-background"
+                    >
+                        <Menu size={22} />
+                    </button>
+                </div>
+
+                <div className="md:hidden mb-4">
+                    <h1 className="text-xl font-semibold">Dashboard</h1>
+                    <p className="text-sm text-all-sub-h">Today at a glance</p>
+                </div>
+
+                <div className="hidden md:block mb-6">
+                    <h1 className="text-[30px] font-saga">Dashboard</h1>
+                    <p className="text-[16px] text-all-sub-h">Today at a glance</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                    <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
-                            <p className="text-[14px] text-table-text-h mb-10">Active Offers</p>
-                            <CheckCircle className="text-[#00C950]" size={16} />
+                            <p className="text-table-text-h text-sm">Active Offers</p>
+                            <CheckCircle className="text-[#00C950]" size={18} />
                         </div>
-                        <h2 className="text-[24px] text-white-off mt-2">8</h2>
-                        <p className="text-[12px] text-[#6A7282]  mt-1">2 scheduled</p>
+                        <h2 className="text-white-off text-[24px] mt-2">8</h2>
+                        <p className="text-xs text-[#6A7282]">2 scheduled</p>
                     </div>
 
-                    <div className="bg-offer-search-main p-5 rounded-xl border-[0.82px] border-border">
+                    <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
-                            <p className="text-[14px] text-table-text-h mb-10">Pending Approvals</p>
-                            <Clock className="text-[#F0B100]" size={16} />
+                            <p className="text-table-text-h text-sm">Pending Approvals</p>
+                            <Clock className="text-[#F0B100]" size={18} />
                         </div>
-                        <h2 className="text-[24px] text-white-off mt-2">3</h2>
-                        <p className="text-[12px] text-[#6A7282] mt-1">2 drafts saved</p>
+                        <h2 className="text-white-off text-[24px] mt-2">3</h2>
+                        <p className="text-xs text-[#6A7282]">2 drafts saved</p>
                     </div>
 
-                    <div className="bg-offer-search-main  p-5 rounded-xl border-[0.82px] border-border">
+                    <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
-                            <p className="text-[14px] text-table-text-h mb-10">Paused / Expired</p>
-                            <XCircle className="text-[#71717B]" size={16} />
+                            <p className="text-table-text-h text-sm">Paused / Expired</p>
+                            <XCircle className="text-[#71717B]" size={18} />
                         </div>
-                        <h2 className="text-[24px] text-white-off mt-2">5</h2>
-                        <p className="text-[12px] text-[#6A7282] mt-1">2 paused, 3 expired</p>
+                        <h2 className="text-white-off text-[24px] mt-2">5</h2>
+                        <p className="text-xs text-[#6A7282]">2 paused, 3 expired</p>
                     </div>
 
-                    <div className="bg-offer-search-main  p-5 rounded-xl border-[0.82px]  border-border">
+                    <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
-                            <p className="text-[14px] text-table-text-h mb-10">Conversion Rate</p>
-                            <TrendingUp className="text-[#E8600F]" size={16} />
+                            <p className="text-table-text-h text-sm">Conversion Rate</p>
+                            <TrendingUp className="text-[#E8600F]" size={18} />
                         </div>
-                        <h2 className="text-[24px] text-white-off mt-2">18.5%</h2>
-                        <p className="text-[12px] text-[#00C950] mt-1">+2.4% from last week</p>
+                        <h2 className="text-white-off text-[24px] mt-2">18.5%</h2>
+                        <p className="text-xs text-[#00C950]">+2.4% from last week</p>
                     </div>
                 </div>
 
-                {/* Charts */}
-                <div className="grid grid-cols-1 md:grid-cols-2 h-[426px] gap-6">
-                    <div className="bg-offer-search-main p-6 rounded-[14px] border-[0.82px] border-border">
-                        <p className="mb-3 text-white-off text-[16px]">Performance Overview</p>
-                        <p className="mb-3 opacity-90 text-[#4A5565] text-[14px]">Last 7 days</p>
-                        <ResponsiveContainer width="100%" height={250}>
-                            <LineChart data={performanceData}>
-                                <XAxis dataKey="name" stroke="#6B7280" />
-                                <YAxis stroke="#6B7280" />
-                                <Tooltip />
-                                <Line
-                                    type="monotone"
-                                    dataKey="value"
-                                    stroke="#E8600F"
-                                    strokeWidth={3}
-                                    dot={false}
-                                />
-                            </LineChart>
-                        </ResponsiveContainer>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
+                    <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
+                        <p className="text-white-off text-[16px] mb-1">Performance Overview</p>
+                        <p className="text-table-text-id text-sm mb-4">Last 7 days</p>
+                        <div className="h-[250px] md:h-[300px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={performanceData}>
+                                    <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
+                                    <YAxis stroke="#6B7280" fontSize={12} />
+                                    <Tooltip />
+                                    <Line type="monotone" dataKey="value" stroke="#E8600F" strokeWidth={3} dot={false} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
 
-                    <div className=" bg-offer-search-main p-6 rounded-[14px] border-[0.82px] border-border">
-                        <p className="mb-3 dark:text-[#FAFAFA] text-[16px]">Redemptions by Day</p>
-                        <p className="mb-3 opacity-90 text-[#4A5565] text-[14px]">Last 7 days</p>
-                        <ResponsiveContainer width="100%" height={250}>
-                            <BarChart data={redemptionData}>
-                                <XAxis dataKey="name" stroke="#6B7280" />
-                                <YAxis stroke="#6B7280" />
-                                <Tooltip />
-                                <Bar dataKey="value" fill="#E8600F" radius={[6, 6, 0, 0]} />
-                            </BarChart>
-                        </ResponsiveContainer>
+                    <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
+                        <p className="text-white-off text-[16px] mb-1">Redemptions by Day</p>
+                        <p className="text-table-text-id text-sm mb-4">Last 7 days</p>
+                        <div className="h-[250px] md:h-[300px]">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={redemptionData}>
+                                    <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
+                                    <YAxis stroke="#6B7280" fontSize={12} />
+                                    <Tooltip />
+                                    <Bar dataKey="value" fill="#E8600F" radius={[6, 6, 0, 0]} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
 
-                {/* Action Center */}
-                <div className="mt-10 bg-offer-search-main border-[0.82px] border-border p-6 rounded-[14px] h-auto">
-                    <h3 className="text-[16px] text-white-off mb-4">Action Center</h3>
-                    <p className="text-[14px] text-table-text-h mb-4">Recent notifications and alerts</p>
+                <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
+                    <h3 className="text-white-off text-[16px] mb-2">Action Center</h3>
+                    <p className="text-table-text-id text-sm mb-4">Recent notifications and alerts</p>
 
                     <div className="space-y-3">
-                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
-                            <AlertCircle className="text-[#F0B100]" />
+                        <div className="flex gap-3 bg-offer-search p-4 rounded-[10px] border border-border">
+                            <AlertCircle className="text-[#F0B100]" size={20} />
                             <div>
-                                <p className="text-[14px] text-white-off">Happy Hour offer expires in 2 days</p>
-                                <span className="text-[12px] text-table-text-id ">18 hrs ago</span>
+                                <p className="text-white-off text-[14px]">Happy Hour offer expires in 2 days</p>
+                                <p className="text-table-text-id text-xs">18 hrs ago</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
-                            <Clock className="text-[#2B7FFF]" />
+                        <div className="flex gap-3 bg-offer-search p-4 rounded-[10px] border border-border">
+                            <Clock className="text-[#2B7FFF]" size={20} />
                             <div>
-                                <p className="text-[14px] text-white-off">New event booking request from Sarah M.</p>
-                                <span className="text-[12px] text-table-text-id">35 mins ago</span>
+                                <p className="text-white-off text-[14px]">New event booking request from Sarah M.</p>
+                                <p className="text-table-text-id text-xs">35 mins ago</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
-                            <CheckCircle className="text-[#00C950]" />
+                        <div className="flex gap-3 bg-offer-search p-4 rounded-[10px] border border-border">
+                            <CheckCircle className="text-[#00C950]" size={20} />
                             <div>
-                                <p className="text-[14px] text-white-off">Weekend Brunch offer approved</p>
-                                <span className="text-[12px] text-table-text-id">5 hrs ago</span>
+                                <p className="text-white-off text-[14px]">Weekend Brunch offer approved</p>
+                                <p className="text-table-text-id text-xs">5 hrs ago</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
-                            <AlertCircle className="text-[#F0B100]" />
+                        <div className="flex gap-3 bg-offer-search p-4 rounded-[10px] border border-border">
+                            <AlertCircle className="text-[#F0B100]" size={20} />
                             <div>
-                                <p className="text-[14px] text-white-off">Student Discount has reached 80% redemption cap</p>
-                                <span className="text-[12px] text-table-text-id">1d ago</span>
+                                <p className="text-white-off text-[14px]">Student Discount reached 80% cap</p>
+                                <p className="text-table-text-id text-xs">1d ago</p>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     );
