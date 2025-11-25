@@ -27,6 +27,8 @@ const initialOffers: Offer[] = [
 
 export default function OffersPage() {
   const [offers] = useState<Offer[]>(initialOffers);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+
 
   const [activeTab, setActiveTab] = useState<string>("All");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -196,7 +198,7 @@ export default function OffersPage() {
   }, [filterOpen]);
 
   // small UI colors for status badge mapping (keeps previous colors)
-  const statusColor: Record<OfferStatus, string>  = {
+  const statusColor: Record<OfferStatus, string> = {
     active: "bg-[#E8600F] text-[#FFFFFF]",
     submitted: "bg-[#DBEAFE] dark:bg-[#1C398E] text-[#1447E6] dark:text-[#8EC5FF]",
     approved: "bg-[#DCFCE7] dark:bg-[#0D542B] text-[#008236] dark:text-[#7BF1A8]",
@@ -221,36 +223,39 @@ export default function OffersPage() {
       )}
 
       {/* MAIN CONTENT */}
-      <div className="ml-64 min-h-screen p-6 md:p-8 dark:bg-black  dark:text-white transition-colors duration-300 flex-1 relative">
+      <div className="md:ml-64 min-h-screen p-6 md:p-8 bg-background text-text transition-colors duration-300 flex-1 relative">
 
         {/* Mobile menu */}
-        <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 mb-4 bg-gray-200 dark:bg-[#111] border border-gray-300 dark:border-[#333] rounded-lg">
+        <button onClick={() => setSidebarOpen(true)} className="md:hidden p-2 mb-4  dark:bg-[#111] border border-border rounded-lg">
           <Menu size={22} />
         </button>
 
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 className="text-[30px] text-[#101828]">Offers Management</h1>
-            <p className="text-[16px] text-[#4A5565] dark:text-[#9F9FA9]">Create and manage perks and discounts</p>
+            <h1 className="text-[30px] text-text">Offers Management</h1>
+            <p className="text-[16px] text-all-sub-h">Create and manage perks and discounts</p>
           </div>
 
           <div className="flex h-[37px] items-center gap-3 w-full md:w-auto">
-            <button className="bg-[#E8600F] px-4 py-2 rounded-[8px] text-[14px] text-[#FFFFFF]">
-              +  Create Offer
+            <button
+              onClick={() => setShowCreateModal(true)}
+              className="bg-[#E8600F] px-4 py-2 rounded-lg cursor-pointer text-[14px] text-[#FFFFFF]"
+            >
+              + Create Offer
             </button>
           </div>
         </div>
 
         {/* Search + Filters row */}
-        <div className="rounded-[14px] p-[24px] flex flex-col md:flex-row gap-4 items-center bg-[#FFFFFF] dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-          <div className="flex h-[40px] px-4 items-center gap-3 w-full rounded-[8px] border-[0.82px] bg-[#F9FAFB] dark:bg-[#2626264D] border-[#D1D5DC] dark:border-[#27272A]">
-            <Search size={18} className="text-[#717182]" />
+        <div className="rounded-[14px] p-6 flex flex-col md:flex-row gap-4 items-center bg-offer-search-main border-[0.82px] border-border">
+          <div className="flex h-10 px-4 items-center gap-3 w-full rounded-lg border-[0.82px] bg-offer-search border-border">
+            <Search size={18} className="dark:text-[#A1A1A1]" />
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search offers"
-              className="bg-transparent w-full text-[14px] focus:outline-none text-[#717182] dark:text-white"
+              className="w-full text-[14px] focus:outline-none dark:text-[#A1A1A1]"
             />
           </div>
 
@@ -258,7 +263,7 @@ export default function OffersPage() {
             <button
               ref={filterBtnRef}
               onClick={() => setFilterOpen((s) => !s)}
-              className="px-4 py-2 rounded-[8px] flex items-center gap-2 text-[14px] border border-[#D1D5DC] dark:border-[#2a2a2a] text-[#364153] dark:text-gray-300 bg-[#FFFFFF] dark:bg-transparent cursor-pointer relative"
+              className="px-4 py-2 rounded-lg flex items-center gap-2 text-[14px] border-[0.82px] border-border dark:text-gray-300  bg-offer-search cursor-pointer relative"
             >
               <Filter size={16} />
               Filters
@@ -267,14 +272,14 @@ export default function OffersPage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex overflow-x-auto bg-[#FFFFFF] border-[0.82px] border-[#E5E7EB] rounded-[14px] w-fit mt-5 p-2 hide-scrollbar">
+        <div className="flex overflow-x-auto bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit mt-5 p-2 hide-scrollbar">
           {tabs.map((t) => (
             <button
               key={t}
               onClick={() => setActiveTab(t)}
-              className={`px-[8px] py-[4px] cursor-pointer text-[14px] whitespace-nowrap rounded-[14px] ${activeTab === t
-                  ? "bg-[#E8600F] text-[#FFFFFF] dark:bg-[#FFFFFF] dark:text-black border-black dark:border-white"
-                  : "text-[#0A0A0A] dark:text-gray-400"
+              className={`px-2 py-1 cursor-pointer text-[14px] whitespace-nowrap rounded-[14px] ${activeTab === t
+                ? "bg-[#E8600F] dark:bg-[#2626264D] text-offer-tab-text border-border"
+                : " dark:text-[#A1A1A1]"
                 }`}
             >
               {t}
@@ -450,10 +455,10 @@ export default function OffersPage() {
         )}
 
         {/* DESKTOP TABLE */}
-        <div className="mt-6 hidden md:block rounded-[14px] overflow-hidden bg-[#FFFFFF] border-[0.82px] border-[#E5E7EB] dark:border-[#2a2a2a]">
+        <div className="mt-6 block rounded-[14px] bg-table-bg overflow-hidden  border-[0.82px] border-border">
           <table className="w-full text-[14px] ">
             <thead>
-              <tr className=" text-[#4A5565] text-[14px] border-[0.82px] border-[#E5E7EB] dark:text-[#9F9FA9]">
+              <tr className=" text-[14px] border-[0.82px] border-border text-table-text-h">
                 <th className="p-4 text-left">Offer</th>
                 <th className="p-4 text-left">Status</th>
                 <th className="p-4 text-left">Performance</th>
@@ -463,46 +468,46 @@ export default function OffersPage() {
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200 dark:divide-[#1f1f1f]">
+            <tbody className="divide-y  dark:divide-[#1f1f1f]">
               {filteredOffers.map((item) => (
-                <tr key={item.id} className="hover:bg-gray-100 dark:hover:bg-[#141414] transition">
+                <tr key={item.id} className="border-border">
                   <td className="p-4">
-                    <p className="text-[#101828] text-[14px]">{item.title}</p>
-                    <p className="text-[14px] text-[#6A7282]">ID: {item.id}</p>
+                    <p className="text-white-off text-[14px]">{item.title}</p>
+                    <p className="text-[14px] text-table-text-id">ID: {item.id}</p>
                   </td>
 
                   <td className="p-4">
-                    <span className={`px-2 py-1 text-[12px] rounded-[8px] ${statusColor[item.status]}`}>
+                    <span className={`px-2 py-1 text-[12px] rounded-lg ${statusColor[item.status]}`}>
                       {item.status}
                     </span>
                   </td>
 
                   <td className="p-4">
-                    <p className="text-[#101828] text-[14px]">{item.impressions} impressions</p>
-                    <p className="text-[14px] text-[#6A7282]">{item.clicks} clicks</p>
+                    <p className="text-white-off text-[14px]">{item.impressions} impressions</p>
+                    <p className="text-[14px] text-table-text-id">{item.clicks} clicks</p>
                   </td>
 
                   <td className="p-4">
-                    <p className="text-[14px] text-[#101828]">{item.redeemed} / {item.total}</p>
-                    <div className="w-full bg-[#E5E7EB] dark:bg-[#2a2a2a] rounded-full h-[6px] mt-1">
-                      <div className="bg-[#E8600F] h-[6px] rounded-full" style={{ width: `${(item.redeemed / item.total) * 100}%` }} />
+                    <p className="text-[14px] text-white-off">{item.redeemed} / {item.total}</p>
+                    <div className="w-full bg-payout-line-bg rounded-full h-1.5 mt-1">
+                      <div className="bg-[#E8600F] h-1.5 rounded-full" style={{ width: `${(item.redeemed / item.total) * 100}%` }} />
                     </div>
                   </td>
 
                   <td className="p-4">
-                    <p className="text-[14px] text-[#101828]">{item.start}</p>
-                    <p className="text-[14px] text-[#6A7282]">{item.end}</p>
+                    <p className="text-[14px] text-white-off">{item.start}</p>
+                    <p className="text-[14px] text-table-text-id">{item.end}</p>
                   </td>
 
                   <td className="p-4">
-                    <MoreVertical className="text-[#364153] dark:text-gray-400 cursor-pointer" />
+                    <MoreVertical className="text-white-off cursor-pointer" />
                   </td>
                 </tr>
               ))}
 
               {filteredOffers.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="p-6 text-center text-sm text-gray-500">
+                  <td colSpan={6} className="p-6 text-center text-sm dark:text-[#FAFAFA]">
                     No offers match your filters.
                   </td>
                 </tr>
@@ -512,7 +517,7 @@ export default function OffersPage() {
         </div>
 
         {/* MOBILE CARDS */}
-        <div className="md:hidden mt-6 space-y-4">
+        {/* <div className="md:hidden mt-6 space-y-4">
           {filteredOffers.map((item) => (
             <div key={item.id} className="p-4 space-y-3 rounded-xl border bg-gray-50 dark:bg-[#111] border-gray-300 dark:border-[#27272A]">
               <div className="flex justify-between">
@@ -548,8 +553,126 @@ export default function OffersPage() {
           {filteredOffers.length === 0 && (
             <div className="p-4 text-center text-sm text-gray-500">No offers match your filters.</div>
           )}
-        </div>
+        </div> */}
       </div>
+      {showCreateModal && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-999">
+
+          <div className="bg-background w-[90%] md:w-[600px] max-h-[90vh] overflow-y-auto rounded-lg p-6 border border-border shadow-xl">
+
+            {/* Header */}
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-[20px] font-medium text-text">Create New Offer</h2>
+
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="text-text cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Offer Title */}
+            <div className="mb-4">
+              <label className="text-sm text-all-sub-h">Offer Title</label>
+              <input
+                type="text"
+                placeholder="e.g., 20% Off Lunch Menu"
+                className="mt-2 w-full px-3 py-3 rounded-[10px] bg-offer-search-main border border-border text-sm outline-none"
+              />
+            </div>
+
+            {/* Description */}
+            <div className="mb-4">
+              <label className="text-sm text-all-sub-h">Short Description</label>
+              <textarea
+                placeholder="Brief description of the offer…"
+                className="mt-2 w-full px-3 py-3 rounded-[10px] bg-offer-search-main border border-border text-sm min-h-[100px] outline-none"
+              />
+            </div>
+
+            {/* Dates */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="text-sm text-all-sub-h">Start Date</label>
+                <input
+                  type="date"
+                  className="mt-2 w-full px-3 py-3 rounded-[10px] bg-offer-search-main border border-border text-sm outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm text-all-sub-h">End Date</label>
+                <input
+                  type="date"
+                  className="mt-2 w-full px-3 py-3 outline-none rounded-[10px] bg-offer-search-main border border-border text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Redemption Limits */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label className="text-sm text-all-sub-h">Redemption Limit</label>
+                <input
+                  type="number"
+                  placeholder="e.g., 500"
+                  className="mt-2 w-full px-3 py-3 outline-none rounded-[10px] bg-offer-search-main  border border-border text-sm"
+                />
+              </div>
+              <div>
+                <label className="text-sm text-all-sub-h">Per Customer Limit</label>
+                <input
+                  type="number"
+                  placeholder="e.g., 1"
+                  className="mt-2 w-full px-3 py-3 outline-none rounded-[10px] bg-offer-search-main border border-border text-sm"
+                />
+              </div>
+            </div>
+
+            {/* Days of Week */}
+            <div className="mb-4">
+              <label className="text-sm text-all-sub-h">Days of Week</label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                  <button
+                    key={d}
+                    className="px-4 py-2 cursor-pointer rounded-[10px] border border-border bg-offer-search-main"
+                  >
+                    {d}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* T&C */}
+            <div className="mb-4">
+              <label className="text-sm text-all-sub-h">Terms & Conditions</label>
+              <textarea
+                placeholder="Detailed terms and conditions…"
+                className="mt-2 w-full px-3 py-3 outline-none rounded-[10px] min-h-[120px] bg-offer-search-main border border-border text-sm"
+              />
+            </div>
+
+            {/* Footer buttons */}
+            <div className="flex justify-end gap-3 mt-6">
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="px-4 py-2 rounded-lg bg-offer-search-main cursor-pointer border border-border"
+              >
+                Cancel
+              </button>
+
+              <button className="px-6 py-2 rounded-lg cursor-pointer bg-[#E8600F] text-white">
+                Save Offer
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </div>
+
   );
 }

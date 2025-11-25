@@ -11,7 +11,7 @@ import {
     Bar,
 } from "recharts";
 
-import { FaBell, FaClock, FaCheckCircle } from "react-icons/fa";
+import { TrendingUp, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
 import Sidebar from "../../component/sidebar/page";
 
 const performanceData = [
@@ -43,42 +43,54 @@ export default function Dashboard() {
             </div>
 
             {/* Main Content */}
-            <div className="ml-64 min-h-screen dark:bg-[#000000] dark:text-[#FFFFFF] p-6 flex-1">
-                <h1 className="text-[30.5px] text-[#101828] dark:text-[#FFFFFF] font-saga mb-4">Dashboard</h1>
-                <p className="text-[16.4px] text-[#4A5565] mb-6">Today at a glance</p>
+            <div className="ml-64 min-h-screen bg-[var(--background)] text-text border-[0.82px] border-border p-6 flex-1">
+                <h1 className="text-[30px] text-text font-saga mb-4">Dashboard</h1>
+                <p className="text-[16px] text-all-sub-h mb-6">Today at a glance</p>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 h-[157px] gap-4 mb-6">
-                    <div className="dark:bg-[#09090B] bg-[#FFFFFF] p-5 rounded-[14] h-[157px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="text-[14px] text-[#4A5565] opacity-60 mb-10">Active Offers</p>
-                        <h2 className="text-[24px] text-[#101828] dark:text-[#FAFAFA] mt-2">8</h2>
-                        <p className="text-[12px] text-[#6A7282] opacity-50 mt-1">2 scheduled</p>
+                    <div className="bg-offer-search-main p-5 rounded-[14px]  border-[0.82px] border-border">
+                        <div className="flex justify-between">
+                            <p className="text-[14px] text-table-text-h mb-10">Active Offers</p>
+                            <CheckCircle className="text-[#00C950]" size={16} />
+                        </div>
+                        <h2 className="text-[24px] text-white-off mt-2">8</h2>
+                        <p className="text-[12px] text-[#6A7282]  mt-1">2 scheduled</p>
                     </div>
 
-                    <div className="dark:bg-[#09090B] bg-[#FFFFFF] p-5 rounded-xl border border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="text-[14px] text-[#4A5565] opacity-60 mb-10">Pending Approvals</p>
-                        <h2 className="text-[24px] text-[#101828] dark:text-[#FAFAFA] mt-2">3</h2>
-                        <p className="text-[12px] text-[#6A7282] opacity-50 mt-1">2 drafts saved</p>
+                    <div className="bg-offer-search-main p-5 rounded-xl border-[0.82px] border-border">
+                        <div className="flex justify-between">
+                            <p className="text-[14px] text-table-text-h mb-10">Pending Approvals</p>
+                            <Clock className="text-[#F0B100]" size={16} />
+                        </div>
+                        <h2 className="text-[24px] text-white-off mt-2">3</h2>
+                        <p className="text-[12px] text-[#6A7282] mt-1">2 drafts saved</p>
                     </div>
 
-                    <div className="dark:bg-[#09090B] bg-[#FFFFFF] p-5 rounded-xl border border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="text-[14px] text-[#4A5565] opacity-60 mb-10">Paused / Expired</p>
-                        <h2 className="text-[24px] text-[#101828] dark:text-[#FAFAFA] mt-2">5</h2>
-                        <p className="text-[12px] text-[#6A7282] opacity-50 mt-1">2 paused, 3 expired</p>
+                    <div className="bg-offer-search-main  p-5 rounded-xl border-[0.82px] border-border">
+                        <div className="flex justify-between">
+                            <p className="text-[14px] text-table-text-h mb-10">Paused / Expired</p>
+                            <XCircle className="text-[#71717B]" size={16} />
+                        </div>
+                        <h2 className="text-[24px] text-white-off mt-2">5</h2>
+                        <p className="text-[12px] text-[#6A7282] mt-1">2 paused, 3 expired</p>
                     </div>
 
-                    <div className="dark:bg-[#09090B] bg-[#FFFFFF] p-5 rounded-xl border border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="text-[14px] text-[#4A5565] opacity-60 mb-10">Conversion Rate</p>
-                        <h2 className="text-[24px] text-[#101828] dark:text-[#FAFAFA] mt-2">18.5%</h2>
+                    <div className="bg-offer-search-main  p-5 rounded-xl border-[0.82px]  border-border">
+                        <div className="flex justify-between">
+                            <p className="text-[14px] text-table-text-h mb-10">Conversion Rate</p>
+                            <TrendingUp className="text-[#E8600F]" size={16} />
+                        </div>
+                        <h2 className="text-[24px] text-white-off mt-2">18.5%</h2>
                         <p className="text-[12px] text-[#00C950] mt-1">+2.4% from last week</p>
                     </div>
                 </div>
 
                 {/* Charts */}
                 <div className="grid grid-cols-1 md:grid-cols-2 h-[426px] gap-6">
-                    <div className="bg-[#FFFFFF] dark:bg-[#09090B] p-6 rounded-[14px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="mb-3 text-[#101828] dark:text-[#FAFAFA] text-[16px]">Performance Overview</p>
-                        <p className="mb-3 opacity-70 text-[#4A5565] text-[14px]">Last 7 days</p>
+                    <div className="bg-offer-search-main p-6 rounded-[14px] border-[0.82px] border-border">
+                        <p className="mb-3 text-white-off text-[16px]">Performance Overview</p>
+                        <p className="mb-3 opacity-90 text-[#4A5565] text-[14px]">Last 7 days</p>
                         <ResponsiveContainer width="100%" height={250}>
                             <LineChart data={performanceData}>
                                 <XAxis dataKey="name" stroke="#6B7280" />
@@ -95,9 +107,9 @@ export default function Dashboard() {
                         </ResponsiveContainer>
                     </div>
 
-                    <div className="bg-[#FFFFFF] dark:bg-[#09090B] p-6 rounded-[14px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                        <p className="mb-3 text-[#101828] dark:text-[#FAFAFA] text-[16px]">Redemptions by Day</p>
-                        <p className="mb-3 opacity-70 text-[#4A5565] text-[14px]">Last 7 days</p>
+                    <div className=" bg-offer-search-main p-6 rounded-[14px] border-[0.82px] border-border">
+                        <p className="mb-3 dark:text-[#FAFAFA] text-[16px]">Redemptions by Day</p>
+                        <p className="mb-3 opacity-90 text-[#4A5565] text-[14px]">Last 7 days</p>
                         <ResponsiveContainer width="100%" height={250}>
                             <BarChart data={redemptionData}>
                                 <XAxis dataKey="name" stroke="#6B7280" />
@@ -110,40 +122,40 @@ export default function Dashboard() {
                 </div>
 
                 {/* Action Center */}
-                <div className="mt-10 bg-[#FFFFFF] dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A] p-6 rounded-[14px] h-[437px]">
-                    <h3 className="text-[16px] text-[#101828] dark:text-[#FAFAFA] mb-4">Action Center</h3>
-                    <p className="text-[14px] text-[#4A5565] mb-4">Recent notifications and alerts</p>
+                <div className="mt-10 bg-offer-search-main border-[0.82px] border-border p-6 rounded-[14px] h-auto">
+                    <h3 className="text-[16px] text-white-off mb-4">Action Center</h3>
+                    <p className="text-[14px] text-table-text-h mb-4">Recent notifications and alerts</p>
 
                     <div className="space-y-3">
-                        <div className="flex items-center gap-3 bg-[#F9FAFB] dark:bg-[#18181B] p-4 rounded-[10px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                            <FaClock className="text-[#F0B100]" />
+                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
+                            <AlertCircle className="text-[#F0B100]" />
                             <div>
-                                <p className="text-[14px] text-[#101828] dark:text-[#FAFAFA]">Happy Hour offer expires in 2 days</p>
-                                <span className="text-[12px] text-[#6A7282] ">18 hrs ago</span>
+                                <p className="text-[14px] text-white-off">Happy Hour offer expires in 2 days</p>
+                                <span className="text-[12px] text-table-text-id ">18 hrs ago</span>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-[#F9FAFB] dark:bg-[#18181B] p-4 rounded-[10px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                            <FaBell className="text-[#2B7FFF]" />
+                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
+                            <Clock className="text-[#2B7FFF]" />
                             <div>
-                                <p className="text-[14px] text-[#101828] dark:text-[#FAFAFA]">New event booking request from Sarah M.</p>
-                                <span className="text-[12px] text-[#6A7282]">35 mins ago</span>
+                                <p className="text-[14px] text-white-off">New event booking request from Sarah M.</p>
+                                <span className="text-[12px] text-table-text-id">35 mins ago</span>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-[#F9FAFB] dark:bg-[#18181B] p-4 rounded-[10px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                            <FaCheckCircle className="text-[#00C950]" />
+                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
+                            <CheckCircle className="text-[#00C950]" />
                             <div>
-                                <p className="text-[14px] text-[#101828] dark:text-[#FAFAFA]">Weekend Brunch offer approved</p>
-                                <span className="text-[12px] text-[#6A7282]">5 hrs ago</span>
+                                <p className="text-[14px] text-white-off">Weekend Brunch offer approved</p>
+                                <span className="text-[12px] text-table-text-id">5 hrs ago</span>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 bg-[#F9FAFB] dark:bg-[#18181B] p-4 rounded-[10px] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
-                            <FaCheckCircle className="text-[#00C950]" />
+                        <div className="flex items-center gap-3 bg-table-row-bg p-4 rounded-[10px] border-[0.82px] border-border">
+                            <AlertCircle className="text-[#F0B100]" />
                             <div>
-                                <p className="text-[14px] text-[#101828] dark:text-[#FAFAFA]">Student Discount has reached 80% redemption cap</p>
-                                <span className="text-[12px] text-[#6A7282]">1d ago</span>
+                                <p className="text-[14px] text-white-off">Student Discount has reached 80% redemption cap</p>
+                                <span className="text-[12px] text-table-text-id">1d ago</span>
                             </div>
                         </div>
                     </div>

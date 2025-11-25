@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import Sidebar from "../../component/sidebar/page";
-import { Users,Building2, Shield, CreditCard, Edit, Plus, Trash, Check } from "lucide-react";
+import { Users, Building2, Shield, CreditCard, Edit, Plus, Trash, Check } from "lucide-react";
 
 /**
  * Design reference (local). This will be transformed to a URL by the environment.
@@ -115,28 +115,24 @@ export default function AccountSettings() {
       <main
         className="
           ml-64 min-h-screen p-8
-          dark:bg-[#000000] dark:text-[#FAFAFA]
+          bg-[var(--background)] text-text
           transition-colors duration-300 flex-1
         "
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-[30px] text-[#101828] font-light">Account Settings</h1>
-            <p className="text-[16px] text-[#4A5565] dark:text-[#9F9FA9]">
+            <h1 className="text-[30px] text-text font-light">Account Settings</h1>
+            <p className="text-[16px] text-all-sub-h">
               Manage your business account and team
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button className="px-3 py-2 rounded-md bg-[#E8600F] text-white flex items-center gap-2">
-              <Edit size={14} /> Save Changes
-            </button>
-          </div>
+
         </div>
 
         {/* Tabs */}
-        <div className="flex px-2 py-1 gap-3 mb-6 bg-[#F3F4F6] border-[0.82px] border-[#E5E7EB] w-fit rounded-[14px]">
+        <div className="flex px-2 py-1 gap-3 mb-6 bg-offer-search-main border-[0.82px] border-border w-fit rounded-[14px]">
           <Tab label="Business Details" active={tab === "details"} onClick={() => setTab("details")} icon={<Building2 size={14} />} />
           <Tab label="Users & Roles" active={tab === "users"} onClick={() => setTab("users")} icon={<Users size={14} />} />
           <Tab label="Security" active={tab === "security"} onClick={() => setTab("security")} icon={<Shield size={14} />} />
@@ -144,83 +140,89 @@ export default function AccountSettings() {
         </div>
 
         {/* Content Container */}
-        <div className="rounded-[14px] p-6 border-[0.82px] bg-[#FFFFFF] border-[#E5E7EB] dark:bg-[#09090B] dark:border-[#27272A] space-y-6">
+        <div >
           {/* Business Details */}
           {tab === "details" && (
             <section>
-              <h3 className="text-sm font-medium mb-4">Legal Information</h3>
+              <div className="rounded-[14px] p-6 border-[0.82px] bg-offer-search-main border-border space-y-6">
+                <h3 className="text-[16px] text-white-off font-medium mb-4">Legal Information</h3>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Legal Business Name</label>
-                  <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.legalName} onChange={(e)=>setBusiness({...business, legalName: e.target.value})}/>
-                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-table-text-h">Legal Business Name</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.legalName} onChange={(e) => setBusiness({ ...business, legalName: e.target.value })} />
+                  </div>
 
-                <div>
-                  <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Trade Name</label>
-                  <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.tradeName} onChange={(e)=>setBusiness({...business, tradeName: e.target.value})}/>
-                </div>
+                  <div>
+                    <label className="text-xs text-table-text-h">Trade Name</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.tradeName} onChange={(e) => setBusiness({ ...business, tradeName: e.target.value })} />
+                  </div>
 
-                <div>
-                  <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Commercial Registration (CR)</label>
-                  <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.cr} onChange={(e)=>setBusiness({...business, cr: e.target.value})}/>
-                </div>
+                  <div>
+                    <label className="text-xs text-table-text-h">Commercial Registration (CR)</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.cr} onChange={(e) => setBusiness({ ...business, cr: e.target.value })} />
+                  </div>
 
-                <div>
-                  <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">VAT Number</label>
-                  <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.vat} onChange={(e)=>setBusiness({...business, vat: e.target.value})}/>
+                  <div>
+                    <label className="text-xs text-table-text-h">VAT Number</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.vat} onChange={(e) => setBusiness({ ...business, vat: e.target.value })} />
+                  </div>
                 </div>
               </div>
-
               {/* Address */}
-              <div className="mt-6">
+              <div className="rounded-[14px] p-6 border-[0.82px] bg-offer-search-main border-border space-y-6 mt-6">
                 <h4 className="text-sm font-medium mb-3">Business Address</h4>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                  <div className="col-span-2">
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Street Address</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.street} onChange={(e)=>setBusiness({...business, street: e.target.value})}/>
+                  <div className="col-span-3">
+                    <label className="text-xs text-table-text-h">Street Address</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.street} onChange={(e) => setBusiness({ ...business, street: e.target.value })} />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Postal Code</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.postal} onChange={(e)=>setBusiness({...business, postal: e.target.value})}/>
-                  </div>
-
-                  <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">City</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.city} onChange={(e)=>setBusiness({...business, city: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">Postal Code</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.postal} onChange={(e) => setBusiness({ ...business, postal: e.target.value })} />
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Province</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.province} onChange={(e)=>setBusiness({...business, province: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">City</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.city} onChange={(e) => setBusiness({ ...business, city: e.target.value })} />
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-table-text-h">Province</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.province} onChange={(e) => setBusiness({ ...business, province: e.target.value })} />
                   </div>
                 </div>
               </div>
 
               {/* Primary contact */}
-              <div className="mt-6">
+              <div className="rounded-[14px] p-6 border-[0.82px] bg-offer-search-main  border-border space-y-6 mt-6">
                 <h4 className="text-sm font-medium mb-3">Primary Contact</h4>
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Contact Name</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.contactName} onChange={(e)=>setBusiness({...business, contactName: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">Contact Name</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.contactName} onChange={(e) => setBusiness({ ...business, contactName: e.target.value })} />
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Position</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.position} onChange={(e)=>setBusiness({...business, position: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">Position</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.position} onChange={(e) => setBusiness({ ...business, position: e.target.value })} />
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Email</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.contactEmail} onChange={(e)=>setBusiness({...business, contactEmail: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">Email</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.contactEmail} onChange={(e) => setBusiness({ ...business, contactEmail: e.target.value })} />
                   </div>
 
                   <div>
-                    <label className="text-xs text-gray-500 dark:text-[#9F9FA9]">Phone</label>
-                    <input className="w-full mt-2 p-2 rounded-md bg-white dark:bg-[#0b0b0b] border text-sm" value={business.contactPhone} onChange={(e)=>setBusiness({...business, contactPhone: e.target.value})}/>
+                    <label className="text-xs text-table-text-h">Phone</label>
+                    <input className="w-full mt-2 p-2 rounded-md bg-offer-search border-[0.82px] border-border text-table-text-id text-sm" value={business.contactPhone} onChange={(e) => setBusiness({ ...business, contactPhone: e.target.value })} />
                   </div>
                 </div>
+              </div>
+              <div className="flex items-center justify-end gap-3 mt-6 ">
+                <button className="px-3 py-2 rounded-md bg-[#E8600F] text-white flex items-center gap-2">
+                  <Edit size={14} /> Save Changes
+                </button>
               </div>
             </section>
           )}
@@ -228,39 +230,42 @@ export default function AccountSettings() {
           {/* Users & Roles */}
           {tab === "users" && (
             <section>
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-sm font-medium">Team Members</h3>
-                <button onClick={inviteUser} className="px-3 py-2 rounded-md bg-[#E8600F] text-white flex items-center gap-2"><Plus size={14} /> Invite User</button>
-              </div>
+              <div className="rounded-md border-[0.82px] border-border bg-offer-search overflow-hidden px-6 py-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-sm text-white-off font-medium mb-2">Team Members</h3>
+                    <p className=" text-sm text-table-text-h">Manage user access and permissions</p>
+                  </div>
+                  <button onClick={inviteUser} className="px-3 py-2 rounded-md bg-[#E8600F] text-[#ffffff] flex items-center gap-2"><Plus size={14} /> Invite User</button>
+                </div>
 
-              <div className="rounded-md border bg-white dark:bg-[#0b0b0b] dark:border-[#222] overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="text-gray-600 dark:text-[#9F9FA9]">
+                    <tr className="text-table-text-h border-b-[0.82px] border-border">
                       <th className="p-4 text-left">Name</th>
                       <th className="p-4 text-left">Email</th>
                       <th className="p-4 text-left">Role</th>
                       <th className="p-4 text-left">Status</th>
                       <th className="p-4 text-left">Last Login</th>
-                      <th className="p-4 text-left w-36">Actions</th>
+                      <th className="p-4 text-right w-36">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#E5E7EB] dark:divide-[#1f1f1f]">
+                  <tbody className="divide-y">
                     {team.map((m) => (
-                      <tr key={m.id} className="hover:bg-[#F5F5F5] dark:hover:bg-[#141414] transition">
-                        <td className="p-4">{m.name}</td>
-                        <td className="p-4 text-xs text-gray-500">{m.email}</td>
+                      <tr key={m.id} className="transition border-b-[0.82px] border-b-border">
+                        <td className="p-4 text-white-off">{m.name}</td>
+                        <td className="p-4 text-xs text-all-sub-h">{m.email}</td>
                         <td className="p-4">
                           <span className={`px-3 py-1 rounded-full text-xs ${roleColors[m.role]}`}>{m.role}</span>
                         </td>
                         <td className="p-4">
                           <span className={`px-3 py-1 rounded-full text-xs ${statusColors[m.status]}`}>{m.status}</span>
                         </td>
-                        <td className="p-4">{m.lastLogin ?? "—"}</td>
-                        <td className="p-4">
+                        <td className="p-4 text-all-sub-h">{m.lastLogin ?? "—"}</td>
+                        <td className="py-4 px-4">
                           <div className="flex gap-2">
-                            <button onClick={() => {/* edit */}} className="px-3 py-1 rounded-md border">Edit</button>
-                            <button onClick={() => removeTeamMember(m.id)} className="px-3 py-1 rounded-md border text-red-500"><Trash size={14}/></button>
+                            <button onClick={() => { }} className="px-3 py-2 cursor-pointer text-white-off rounded-md bg-offer-search border-[0.82px] border-border">Edit</button>
+                            <button onClick={() => removeTeamMember(m.id)} className="px-3 py-1 rounded-md border-[0.82px] bg-offer-search cursor-pointer border-border text-[#FF6467]"><Trash size={14} /></button>
                           </div>
                         </td>
                       </tr>
@@ -271,24 +276,24 @@ export default function AccountSettings() {
 
               {/* Role permissions */}
               <div className="mt-6">
-                <h4 className="text-sm font-medium mb-3">Role Permissions</h4>
-                <div className="rounded-md border bg-white dark:bg-[#0b0b0b] dark:border-[#222] overflow-hidden">
+                <div className="py-6 px-4 rounded-md border-[0.82px] bg-offer-search border-border overflow-hidden">
+                  <h4 className="text-sm font-medium mb-3">Role Permissions</h4>
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="text-gray-600 dark:text-[#9F9FA9]">
+                      <tr className="text-table-text-h border-b-[0.82px] border-b-border">
                         <th className="p-4 text-left">Permission</th>
-                        <th className="p-4 text-left">Owner</th>
-                        <th className="p-4 text-left">Manager</th>
-                        <th className="p-4 text-left">Staff</th>
+                        <th className="p-4 text-center">Owner</th>
+                        <th className="p-4 text-center">Manager</th>
+                        <th className="p-4 text-center">Staff</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#E5E7EB] dark:divide-[#1f1f1f]">
+                    <tbody className="divide-y ">
                       {permissions.map((p, i) => (
-                        <tr key={i} className="hover:bg-[#F5F5F5] dark:hover:bg-[#141414] transition">
+                        <tr key={i} className="transition border-b-[0.82px] text-silver-text border-b-border">
                           <td className="p-4">{p.label}</td>
-                          <td className="p-4 text-center">{p.owner ? <Check size={14} className="mx-auto text-green-400" /> : "—"}</td>
-                          <td className="p-4 text-center">{p.manager ? <Check size={14} className="mx-auto text-green-400" /> : "—"}</td>
-                          <td className="p-4 text-center">{p.staff ? <Check size={14} className="mx-auto text-green-400" /> : "—"}</td>
+                          <td className="p-4 text-center">{p.owner ? <Check size={14} className="mx-auto text-white-off" /> : "—"}</td>
+                          <td className="p-4 text-center">{p.manager ? <Check size={14} className="mx-auto text-white-off" /> : "—"}</td>
+                          <td className="p-4 text-center">{p.staff ? <Check size={14} className="mx-auto text-white-off" /> : "—"}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -301,54 +306,58 @@ export default function AccountSettings() {
           {/* Security */}
           {tab === "security" && (
             <section>
-              <h3 className="text-sm font-medium mb-4">Two-Factor Authentication</h3>
-              <div className="space-y-4">
-                <div className="rounded-md p-4 bg-white dark:bg-[#0b0b0b] border dark:border-[#222] flex items-center justify-between">
+              <div className="space-y-4 border-[0.82px] border-border bg-offer-search-main py-6 px-4 rounded-lg">
+                <h3 className="text-sm font-medium yext-white-off mb-2">Two-Factor Authentication</h3>
+                <p className="text-sm text-table-text-h mb-4">Add an extra layer of security to your account</p>
+                <div className="rounded-md p-4 bg-offer-search border-[0.82px] border-border flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium">2FA via SMS</div>
-                    <div className="text-xs text-gray-500">+966 50 *** *567</div>
+                    <div className="text-sm font-medium text-white-off">2FA via SMS</div>
+                    <div className="text-xs text-table-text-id">+966 50 *** *567</div>
                   </div>
                   <label className="inline-flex items-center cursor-pointer">
-                    <input type="checkbox" checked={twoFA_SMS} onChange={(e)=>setTwoFA_SMS(e.target.checked)} className="hidden" />
-                    <div className={`w-12 h-6 rounded-full p-0.5 ${twoFA_SMS ? "bg-green-500" : "bg-gray-400"}`}>
-                      <div className={`bg-white w-5 h-5 rounded-full transition-transform ${twoFA_SMS ? "translate-x-6" : "translate-x-0"}`} />
+                    <input type="checkbox" checked={twoFA_SMS} onChange={(e) => setTwoFA_SMS(e.target.checked)} className="hidden" />
+                    <div className={`w-12 h-6 rounded-full p-0.5 ${twoFA_SMS ? "bg-silver-text" : "bg-silver-text"}`}>
+                      <div className={`bg-black w-5 h-5 rounded-full transition-transform ${twoFA_SMS ? "translate-x-6" : "translate-x-0"}`} />
                     </div>
                   </label>
                 </div>
 
-                <div className="rounded-md p-4 bg-white dark:bg-[#0b0b0b] border dark:border-[#222] flex items-center justify-between">
+                <div className="rounded-md p-4 bg-offer-search border-[0.82px] border-border flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium">2FA via Authenticator App</div>
-                    <div className="text-xs text-gray-500">Not configured</div>
+                    <div className="text-sm font-medium text-white-off">2FA via Authenticator App</div>
+                    <div className="text-xs text-table-text-id">Not configured</div>
                   </div>
-                  <button onClick={()=>setTwoFA_App(true)} className="px-3 py-2 rounded-md border">Set Up</button>
+                  <button onClick={() => setTwoFA_App(true)} className="px-3 py-2 rounded-md border-[0.82px] border-border text-white-off cursor-pointer">Set Up</button>
                 </div>
               </div>
 
               {/* Active devices */}
-              <div className="mt-6">
-                <h4 className="text-sm font-medium mb-3">Active Devices</h4>
+              <div className="mt-6 border-[0.82px] border-border bg-offer-search-main py-6 px-4 rounded-lg">
+                <h4 className="text-sm font-medium text-white-off mb-3">Active Devices</h4>
                 <div className="space-y-3">
                   {devices.map((d) => (
-                    <div key={d.id} className="rounded-md p-3 bg-white dark:bg-[#0b0b0b] border dark:border-[#222] flex items-center justify-between">
+                    <div key={d.id} className="rounded-md p-3 bg-offer-search border-[0.82px] border-border flex items-center justify-between">
                       <div>
-                        <div className="font-medium">{d.name} <span className="text-xs text-gray-400">· {d.type}</span></div>
-                        <div className="text-xs text-gray-500">Last active: {d.lastActive}</div>
+                        <div className="font-medium">{d.name} <span className="text-xs text-white-off border-[0.82px] border-border bg-offer-search rounded-lg px-2 py-1 ml-2"> {d.type}</span></div>
+                        <div className="text-xs text-table-text-id mt-2">Last active: {d.lastActive}</div>
                       </div>
-                      <button onClick={()=>removeDevice(d.id)} className="px-3 py-1 rounded-md border text-red-400">Remove</button>
+                      <button onClick={() => removeDevice(d.id)} className="px-3 py-1 rounded-md border-[0.82px] border-border bg-offer-search text-[#FF6467]">Remove</button>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Change password */}
-              <div className="mt-6">
-                <h4 className="text-sm font-medium mb-3">Change Password</h4>
+              <div className="mt-6 border-[0.82px] border-border bg-offer-search-main py-6 px-4 rounded-lg">
+                <h4 className="text-sm font-medium text-white-off mb-3">Change Password</h4>
                 <div className="space-y-3">
-                  <input placeholder="Current Password" type="password" className="w-full p-2 rounded-md bg-white dark:bg-[#0b0b0b] border" />
-                  <input placeholder="New Password" type="password" className="w-full p-2 rounded-md bg-white dark:bg-[#0b0b0b] border" />
-                  <input placeholder="Confirm New Password" type="password" className="w-full p-2 rounded-md bg-white dark:bg-[#0b0b0b] border" />
-                  <button className="px-3 py-2 rounded-md bg-[#E8600F] text-white">Update Password</button>
+                  <label className="text-table-text-h mb-2 text-xs">Current Password</label>
+                  <input type="password" className="w-full p-2 rounded-md bg-offer-search border-[0.82px] border-border outline-none" />
+                  <label className="text-table-text-h mb-2 text-xs">New Password</label>
+                  <input type="password" className="w-full p-2 rounded-md bg-offer-search border-[0.82px] border-border outline-none" />
+                  <label className="text-table-text-h mb-2 text-xs">Confirm New Password</label>
+                  <input type="password" className="w-full p-2 rounded-md bg-offer-search border-[0.82px] border-border outline-none" />
+                  <button className="px-3 py-2 rounded-md bg-[#E8600F] text-white-off">Update Password</button>
                 </div>
               </div>
             </section>
@@ -356,24 +365,29 @@ export default function AccountSettings() {
 
           {/* Billing */}
           {tab === "billing" && (
-            <section>
+            <section className="border-[0.82px] border-border bg-offer-search-main rounded-lg px-4 py-6">
               <h3 className="text-sm font-medium mb-4">Payment Methods</h3>
-
               <div className="space-y-3">
+
                 {cards.map((c) => (
-                  <div key={c.id} className="rounded-md p-3 bg-white dark:bg-[#0b0b0b] border dark:border-[#222] flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">**** **** **** {c.last4}</div>
-                      <div className="text-xs text-gray-500">Expires {c.expiry}</div>
+                  <div key={c.id} className="rounded-md p-3 bg-offer-search border-[0.82px] border-border flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div>
+                        <CreditCard className="w-10 h-8 text-gray-400" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-white-off">**** **** **** {c.last4}</div>
+                        <div className="text-xs text-table-text-id">Expires {c.expiry}</div>
+                      </div>
+                      {c.default && <span className="px-2 py-1 rounded-md bg-green-600 text-white text-xs ml-4">Default</span>}
                     </div>
                     <div className="flex items-center gap-3">
-                      {c.default && <span className="px-2 py-1 rounded-md bg-green-600 text-white text-xs">Default</span>}
-                      <button onClick={()=>removeCard(c.id)} className="px-3 py-1 rounded-md border">Edit</button>
+                      <button onClick={() => removeCard(c.id)} className="px-3 py-1 rounded-md border-[0.82px] border-border bg-offer-search text-white-off cursor-pointer">Edit</button>
                     </div>
                   </div>
                 ))}
 
-                <button className="w-full px-3 py-2 rounded-md border">+ Add Payment Method</button>
+                <button className="w-full px-3 py-2 rounded-md border-[0.82px] border-border bg-offer-search text-table-text-h cursor-pointer">+ Add Payment Method</button>
               </div>
             </section>
           )}
@@ -390,7 +404,7 @@ export default function AccountSettings() {
 
 function Tab({ label, active, onClick, icon }: { label: string; active: boolean; onClick: () => void; icon?: React.ReactNode }) {
   return (
-    <button onClick={onClick} className={`px-4 py-2 rounded-[14px] text-[14px]  flex items-center gap-2 ${active ? "bg-[#E8600F] cursor-pointer text-[#FFFFFF] dark:bg-[#111827]" : " text-[#0A0A0A] dark:text-[#FAFAFA] cursor-pointer "}`}>
+    <button onClick={onClick} className={`px-4 py-2 rounded-[14px] text-[14px]  flex items-center gap-2 ${active ? "bg-[#E8600F] cursor-pointer text-white-off" : " text-[#A1A1A1] cursor-pointer "}`}>
       {icon} <span>{label}</span>
     </button>
   );

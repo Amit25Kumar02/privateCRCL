@@ -90,15 +90,15 @@ export default function BusinessProfilePage() {
       <main
         className="
           ml-64 min-h-screen p-8
-          dark:bg-[#000000] dark:text-[#FAFAFA]
+        bg-[var(--background)] text-text
           transition-colors duration-300 flex-1
         "
       >
         {/* Header + Edit button */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-[30px] text-[#101828]">Business Profile</h1>
-            <p className="text-[16px] text-[#4A5565] dark:text-[#9F9FA9]">
+            <h1 className="text-[30px] text-text">Business Profile</h1>
+            <p className="text-[16px] text-all-sub-h">
               Manage your public business information
             </p>
           </div>
@@ -113,7 +113,7 @@ export default function BusinessProfilePage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-3 bg-[#F3F4F6] border-[0.82px] border-[#E5E7EB] rounded-[14px] w-fit px-2 py-1 mb-6">
+        <div className="flex gap-3 bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit px-2 py-1 mb-6">
           <Tab label="Basic Info" active={tab === "basic"} onClick={() => setTab("basic")} />
           <Tab label="Opening Hours" active={tab === "hours"} onClick={() => setTab("hours")} />
           <Tab label="Location" active={tab === "location"} onClick={() => setTab("location")} />
@@ -121,35 +121,35 @@ export default function BusinessProfilePage() {
         </div>
 
         {/* Content container */}
-        <div className="rounded-xl p-6 borde dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
+        <div >
           {/* BASIC INFO */}
           {tab === "basic" && (
-            <section>
-              <h2 className="text-[16px] text-[#101828] font-medium mb-4">Basic Information</h2>
+            <section className="rounded-xl p-6 borde bg-offer-search-main border-[0.82px] border-border">
+              <h2 className="text-[16px] text-white-off font-medium mb-4">Basic Information</h2>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Business Name (English)</label>
+                  <label className="text-[14px] text-table-text-h">Business Name (English)</label>
                   <input
                     value={basicInfo.nameEn}
                     onChange={(e) => setBasicInfo({ ...basicInfo, nameEn: e.target.value })}
-                    className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] text-[14px] text-[#101828] opacity-70 outline-none"
+                    className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search text-[14px] text-table-text-id outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Business Name (Arabic)</label>
+                  <label className="text-[14px] text-table-text-h">Business Name (Arabic)</label>
                   <input
                     value={basicInfo.nameAr}
                     onChange={(e) => setBasicInfo({ ...basicInfo, nameAr: e.target.value })}
-                    className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] text-[14px] text-[#101828] opacity-70 outline-none"
+                    className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search   text-[14px] text-table-text-id  outline-none"
                   />
                 </div>
               </div>
 
               {/* categories */}
               <div className="mt-4">
-                <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Categories</label>
+                <label className="text-[14px] text-table-text-h">Categories</label>
                 <div className="mt-2 grid grid-cols-3 gap-2">
                   {allCategories.map((c) => {
                     const active = basicInfo.categories.includes(c);
@@ -164,10 +164,10 @@ export default function BusinessProfilePage() {
                               : [...prev.categories, c],
                           }))
                         }
-                        className={`px-4 py-2 rounded-[8px] cursor-pointer text-sm border-[0.82px] border-[#D1D5DC] ${
+                        className={`px-4 py-2 rounded-lg cursor-pointer text-sm border-[0.82px] border-border ${
                           active
-                            ? "bg-[#E8600F] text-[#FFFFFF]  dark:bg-[#111827]"
-                            : "bg-[#FFFFFF] text-[#364153] opacity-70 dark:text-[#9F9FA9] border-[#2a2a2a]"
+                            ? "bg-[#E8600F] text-white-off border-border"
+                            : "bg-offer-search text-table-text-id border-border opacity-70 "
                         }`}
                       >
                         {c}
@@ -180,19 +180,19 @@ export default function BusinessProfilePage() {
               {/* bios */}
               <div className="mt-4 grid grid-cols-1 gap-4">
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Short Bio (English)</label>
+                  <label className="text-[14px] text-table-text-h">Short Bio (English)</label>
                   <textarea
                     value={basicInfo.bioEn}
                     onChange={(e) => setBasicInfo({ ...basicInfo, bioEn: e.target.value })}
-                    className="w-full mt-2 px-3 py-3 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] text-[14px] text-[#101828] opacity-70 min-h-[80px]"
+                    className="w-full mt-2 px-3 py-3 rounded-lg border-[0.82px] border-border text-[14px] text-table-text-id opacity-70 min-h-20"
                   />
                 </div>
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Short Bio (Arabic)</label>
+                  <label className="text-[14px] text-table-text-h">Short Bio (Arabic)</label>
                   <textarea
                     value={basicInfo.bioAr}
                     onChange={(e) => setBasicInfo({ ...basicInfo, bioAr: e.target.value })}
-                    className="w-full mt-2 px-3 py-3 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] text-[14px] text-[#101828] opacity-70 min-h-[80px]"
+                    className="w-full mt-2 px-3 py-3 rounded-lg border-[0.82px] border-border bg-offer-search   text-[14px] text-table-text-id opacity-70 min-h-[80px]"
                   />
                 </div>
               </div>
@@ -200,19 +200,19 @@ export default function BusinessProfilePage() {
               {/* contact */}
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Phone Number</label>
+                  <label className="text-[14px] text-table-text-h">Phone Number</label>
                   <input
                     value={basicInfo.phone}
                     onChange={(e) => setBasicInfo({ ...basicInfo, phone: e.target.value })}
-                    className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] opacity-70 border-[#D1D5DC] text-[14px] text-[#101828]"
+                    className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] bg-offer-search   opacity-70 border-border text-[14px] text-table-text-id"
                   />
                 </div>
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">WhatsApp Number</label>
+                  <label className="text-[14px] text-table-text-h">WhatsApp Number</label>
                   <input
                     value={basicInfo.whatsapp}
                     onChange={(e) => setBasicInfo({ ...basicInfo, whatsapp: e.target.value })}
-                    className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] opacity-70 border-[#D1D5DC] text-[14px] text-[#101828]"
+                    className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] bg-offer-search   opacity-70 border-border text-[14px] text-table-text-id"
                   />
                 </div>
               </div>
@@ -221,15 +221,15 @@ export default function BusinessProfilePage() {
 
           {/* OPENING HOURS */}
           {tab === "hours" && (
-            <section>
-              <h2 className="text-[16px] text-[#101828] font-medium mb-4">Opening Hours</h2>
+            <section className="rounded-xl p-6 borde bg-offer-search-main border-[0.82px] border-border">
+              <h2 className="text-[16px] text-white-off font-medium mb-4">Opening Hours</h2>
 
               <div className="space-y-3">
                 {Object.keys(hours).map((day) => {
                   const h = hours[day];
                   return (
-                    <div key={day} className="rounded-md p-3 bg-[#F3F4F6] dark:bg-[#0f0f10] border border-[#E5E7EB] dark:border-[#222] flex items-center gap-4">
-                      <div className="w-36 text-[14px] text-[#364153]">{day}</div>
+                    <div key={day} className="rounded-md p-3 bg-offer-search  border border-border  flex items-center gap-4">
+                      <div className="w-36 text-[14px] text-white-off">{day}</div>
 
                       <div className="flex items-center gap-2">
                         <ClockIcon />
@@ -237,18 +237,18 @@ export default function BusinessProfilePage() {
                           type="time"
                           value={h.open ?? ""}
                           onChange={(e) => updateHour(day, "open", e.target.value)}
-                          className="px-3 py-2 rounded-[8px] border-[0.82px] border-[#E5E7EB] bg-[#FFFFFF] dark:bg-[#0b0b0b] text-sm"
+                          className="px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search  text-sm"
                         />
                       </div>
 
-                      <div className="px-2 text-[14px] text-[#364153]">to</div>
+                      <div className="px-2 text-[14px] text-table-text-id">to</div>
 
                       <div className="flex items-center gap-2">
                         <input
                           type="time"
                           value={h.close ?? ""}
                           onChange={(e) => updateHour(day, "close", e.target.value)}
-                          className="px-3 py-2 rounded-[8px] border-[0.82px] border-[#E5E7EB] bg-[#FFFFFF] dark:bg-[#0b0b0b] text-[14px]"
+                          className="px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search text-table-text-id  text-[14px]"
                         />
                       </div>
 
@@ -272,43 +272,43 @@ export default function BusinessProfilePage() {
 
           {/* LOCATION */}
           {tab === "location" && (
-            <section>
-              <h2 className="text-[16px] text-[#101828] font-medium mb-4">Location Information</h2>
+            <section className="rounded-xl p-6 borde bg-offer-search-main border-[0.82px] border-border">
+              <h2 className="text-[16px] text-white-off font-medium mb-4">Location Information</h2>
 
               <div className="grid grid-cols-1 gap-4">
                 <div>
-                  <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Address</label>
+                  <label className="text-[14px] text-table-text-h">Address</label>
                   <input
                     value={location.address}
                     onChange={(e) => setLocation({ ...location, address: e.target.value })}
-                    className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] text-[14px] opacity-70 outline-none"
+                    className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search  text-[14px] opacity-70 outline-none"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Latitude</label>
+                    <label className="text-[14px] text-table-text-h">Latitude</label>
                     <input
                       value={location.latitude}
                       onChange={(e) => setLocation({ ...location, latitude: e.target.value })}
-                      className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] text-[14px] opacity-70 outline-none"
+                      className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search  text-[14px] opacity-70 outline-none"
                     />
                   </div>
                   <div>
-                    <label className="text-[14px] text-[#364153] dark:text-[#9F9FA9]">Longitude</label>
+                    <label className="text-[14px] text-table-text-h">Longitude</label>
                     <input
                       value={location.longitude}
                       onChange={(e) => setLocation({ ...location, longitude: e.target.value })}
-                      className="w-full mt-2 px-3 py-2 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] text-[14px] opacity-70 outline-none"
+                      className="w-full mt-2 px-3 py-2 rounded-lg border-[0.82px] border-border bg-offer-search  text-[14px] opacity-70 outline-none"
                     />
                   </div>
                 </div>
 
-                <div className="mt-3 rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#111317] h-48 flex items-center justify-center text-gray-400">
+                <div className="mt-3 rounded-lg border-[0.82px] border-border bg-offer-search dark:bg-[#111317] h-48 flex items-center justify-center text-gray-400">
                   <div className="text-center">
-                    <MapPin size={32} className="mx-auto mb-2 text-[#101828] opacity-70" />
-                    <p className="text-[14px] text-[#101828] opacity-70">Map View</p>
-                    <p className="text-[14px] text-[#101828] opacity-70">Interactive map would be displayed here</p>
+                    <MapPin size={32} className="mx-auto mb-2 text-table-text-id opacity-70" />
+                    <p className="text-[14px] text-table-text-id opacity-70">Map View</p>
+                    <p className="text-[14px] text-table-text-id opacity-70">Interactive map would be displayed here</p>
                   </div>
                 </div>
               </div>
@@ -318,19 +318,17 @@ export default function BusinessProfilePage() {
           {/* MEDIA */}
           {tab === "media" && (
             <section>
-              <h2 className="text-[16px] text-[#101828] font-medium mb-4">Media</h2>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 h-[218px] gap-6">
                 {/* Logo */}
-                <div className="rounded-[14px] p-4 border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#09090B] dark:border-[#27272A]">
-                  <div className="text-[14px] text-[#364153] dark:text-[#9F9FA9] mb-3">Logo</div>
-                  <div className="rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#F4F4F5] dark:bg-[#111217] h-36 flex items-center justify-center">
+                <div className="rounded-[14px] p-4 border-[0.82px] border-border bg-offer-search-main  ">
+                  <div className="text-[14px] text-table-text-h mb-3">Logo</div>
+                  <div className="rounded-lg border-[0.82px] border-border bg-offer-search h-36 flex items-center justify-center">
                     {logoPreview.current ? (
                       <img src={logoPreview.current} alt="logo preview" className="h-20 object-contain" />
                     ) : (
-                      <label className="flex flex-col items-center gap-2 cursor-pointer text-gray-500">
-                        <Globe size={24} className="text-[#101828] opacity-70"/>
-                        <div className="text-[14px] text-[#101828] opacity-70">Upload your business logo</div>
+                      <label className="flex flex-col items-center gap-2 cursor-pointer text-table-text-h">
+                        <Globe size={24} className="text-table-text-id opacity-70"/>
+                        <div className="text-[14px] text-table-text-id opacity-70">Upload your business logo</div>
                         <input type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
                       </label>
                     )}
@@ -338,9 +336,9 @@ export default function BusinessProfilePage() {
                 </div>
 
                 {/* Hero */}
-                <div className="rounded-xl p-4 border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#09090B] dark:border-[#27272A]">
-                  <div className="text-[14px] text-[#364153] dark:text-[#9F9FA9] mb-3">Hero Image</div>
-                  <div className="rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#F4F4F5] dark:bg-[#111217] h-36 overflow-hidden">
+                <div className="rounded-xl p-4 border-[0.82px] border-border bg-offer-search  ">
+                  <div className="text-[14px] text-table-text-h mb-3">Hero Image</div>
+                  <div className="rounded-lg border-[0.82px] border-border bg-offer-search h-36 overflow-hidden">
                     {heroPreview.current ? (
                       <img src={heroPreview.current} alt="hero preview" className="w-full h-full object-cover rounded-md text-[14px] text-[#364153]" />
                     ) : (
@@ -351,21 +349,6 @@ export default function BusinessProfilePage() {
                     )}
                   </div>
 
-                  <div className="mt-3 flex gap-2">
-                    <label className="px-3 py-2 text-[14px] text-[#364153] rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] cursor-pointer">
-                      Change
-                      <input type="file" accept="image/*" onChange={handleHeroChange} className="hidden" />
-                    </label>
-                    <button
-                      onClick={() => {
-                        heroPreview.current = designImage;
-                        setHeroFile(null);
-                      }}
-                      className="px-3 py-2 text-[14px] text-[#364153] rounded-[8px] border-[0.82px] border-[#D1D5DC] bg-[#FFFFFF] dark:bg-[#0b0b0b] dark:border-[#333] cursor-pointer"
-                    >
-                      Use default
-                    </button>
-                  </div>
                 </div>
               </div>
             </section>
@@ -392,8 +375,8 @@ function Tab({
       onClick={onClick}
       className={`px-4 py-2 rounded-[14px] text-[14px] ${
         active
-          ? "bg-[#E8600F] cursor-pointer text-[#FFFFFF] dark:bg-[#111827]"
-          : "text-[#0A0A0A] cursor-pointer dark:text-[#FAFAFA]"
+          ? "bg-[#E8600F] cursor-pointer text-white-off"
+          : "text-[#A1A1A1] cursor-pointer"
       }`}
     >
       {label}
@@ -404,7 +387,7 @@ function Tab({
 function ClockIcon() {
   return (
     <div className="w-6 h-6 rounded-full bg-transparent flex items-center justify-center text-gray-400">
-      <Clock size={14} />
+      <Clock size={14} className="text-table-text-id" />
     </div>
   );
 }

@@ -30,8 +30,8 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="dark:bg-[#000000]">
-      <aside className="h-screen w-[263px] bg-[#FFFFFF] dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:text-[#FFFFFF] flex flex-col justify-between p-4">
+    <div className="">
+      <aside className="h-screen w-[263px] bg-offer-search-main text-[var(--text)] border-[0.82px] border-[var(--border)] flex flex-col justify-between p-4">
 
         {/* Logo */}
         <div>
@@ -55,7 +55,7 @@ export default function Sidebar() {
                   className={`flex items-center gap-3 px-4 py-2 rounded-[10px] cursor-pointer transition
                     ${isActive
                       ? "bg-[#E8600F] text-[#FFFFFF] text-[16px] h-[49px]"
-                      : "text-[#4A5565] dark:text-[#9F9FA9] text-[16px] hover:bg-[#E8600F] hover:text-[#FFFFFF] h-[49px]"
+                      : " text-sidebar-text text-[16px] hover:bg-[#E8600F] hover:text-[#FFFFFF] h-[49px]"
                     }
                   `}
                 >
@@ -68,7 +68,7 @@ export default function Sidebar() {
         </div>
         <div className="flex justify-between items-center mb-8">
           {/* <h1 className="text-2xl font-semibold tracking-wide">PrivateCRCL</h1> */}
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
         </div>
         {/* User Section */}
         <div className="dark:bg-[#09090B] rounded-xl p-3 flex items-center gap-3">

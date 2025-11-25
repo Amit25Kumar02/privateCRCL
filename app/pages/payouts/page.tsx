@@ -60,9 +60,10 @@ const topOffers = [
 
 const topRedeemers = [
     { rank: 1, name: "Sarah Johnson", redemptions: 12, last: "2024-11-10" },
-    { rank: 2, name: "Michael Chen", redemptions: 10, last: "2024-11-09" },
-    { rank: 3, name: "Emma Wilson", redemptions: 9, last: "2024-11-08" },
-    { rank: 4, name: "David Park", redemptions: 8, last: "2024-11-07" },
+    { rank: 2, name: "Michael Chen", redemptions: 10, last: "2024-11-11" },
+    { rank: 3, name: "Emma Wilson", redemptions: 9, last: "2024-11-09" },
+    { rank: 4, name: "David Park", redemptions: 8, last: "2024-11-11" },
+    { rank: 5, name: "Lisa Anderson", redemptions: 7, last: "2024-11-08" },
 ];
 
 const benchmarkData = [
@@ -88,16 +89,15 @@ export default function PayoutsAnalyticsPage() {
             <main
                 className="
           ml-64 min-h-screen p-6 md:p-8
-        
-          dark:bg-[#000000] dark:text-[#FAFAFA]
+        bg-[var(--background)] border-border
           transition-colors duration-300 flex-1
         "
             >
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
                     <div>
-                        <h1 className="text-[30px] text-[#101828]">Payouts & analytics</h1>
-                        <p className="text-[16px] text-[#4A5565] dark:text-[#9F9FA9]">
+                        <h1 className="text-[30px] text-text">Payouts & analytics</h1>
+                        <p className="text-[16px] text-all-sub-h">
                             Track performance and customer insights
                         </p>
                     </div>
@@ -106,7 +106,7 @@ export default function PayoutsAnalyticsPage() {
                         <button className="
         px-4 py-2 rounded-[8px] 
         text-[14px] font-medium 
-        bg-[#E8600F] text-[#FFFFFF] 
+        bg-[#E8600F] text-text 
         flex items-center gap-2
     ">
                             <img src={csv.src} alt="CSV Icon" className="w-5 h-5" />
@@ -125,8 +125,7 @@ export default function PayoutsAnalyticsPage() {
                                 key={i}
                                 className="
             relative p-4 rounded-[14px] h-[157px] border
-            bg-[#FFFFFF] border-[#E5E7EB] 
-            dark:bg-[#09090B] dark:border-[#27272A]
+            bg-offer-search-main border-border
         "
                             >
                                 {/* ICON TOP-RIGHT */}
@@ -135,12 +134,12 @@ export default function PayoutsAnalyticsPage() {
                                 </div>
 
                                 {/* TITLE */}
-                                <div className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9]">
+                                <div className="text-[14px] text-table-text-h">
                                     {c.title}
                                 </div>
 
                                 {/* VALUE */}
-                                <div className="mt-12 text-[24px] text-[#101828] dark:text-[#FAFAFA]">
+                                <div className="mt-12 text-[24px] text-white-off">
                                     {c.value}
                                 </div>
 
@@ -153,8 +152,8 @@ export default function PayoutsAnalyticsPage() {
 
 
                 {/* Performance chart */}
-                <div className="rounded-[14px] border-[0.82px] p-4 mb-6 bg-[#FFFFFF] border-[#E5E7EB] dark:bg-[#09090B] dark:border-[#27272A]">
-                    <h3 className="text-[16px] text-[#101828] mb-2">Performance Overview</h3>
+                <div className="rounded-[14px] border-[0.82px] p-4 mb-6 bg-offer-search-main border-border">
+                    <h3 className="text-[16px] text-table-text-h mb-2">Performance Overview</h3>
                     <p className="text-[14px] text-[#4A5565] mb-2">Last 6 months</p>
 
                     <div style={{ width: "100%", height: 260 }}>
@@ -203,11 +202,11 @@ export default function PayoutsAnalyticsPage() {
                 {/* two columns: pies + top offers */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
                     {/* Age Distribution */}
-                    <div className="rounded-[14px] border-[0.82px] p-4 bg-[#FFFFFF] border-[#E5E7EB] text-[#000000] dark:bg-[#09090B] dark:border-[#27272A] dark:text-[#FAFAFA]">
-                        <h4 className="text-[16px] text-[#101828] mb-1">Customer Demographics</h4>
-                        <p className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9] mb-3">Age distribution</p>
+                    <div className="rounded-[14px] border-[0.82px] p-4 bg-offer-search-main border-border text-white-off">
+                        <h4 className="text-[16px] text-white-off mb-1">Customer Demographics</h4>
+                        <p className="text-[14px] text-table-text-h mb-3">Age distribution</p>
 
-                        <div className="w-full h-[308px] flex items-center justify-center">
+                        <div className="w-full h-[308px] flex items-center justify-center outline-none">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
                                     <Pie
@@ -229,13 +228,13 @@ export default function PayoutsAnalyticsPage() {
                     </div>
 
                     {/* Gender Distribution */}
-                    <div className="rounded-[14px] border-[0.82px] p-4 bg-[#FFFFFF] border-[#E5E7EB] text-[#000000] dark:bg-[#09090B] dark:border-[#27272A] dark:text-[#FAFAFA]">
-                        <h4 className="text-[16px] text-[#101828] mb-1">Gender Distribution</h4>
-                        <p className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9] mb-3">Customer breakdown</p>
+                    <div className="rounded-[14px] border-[0.82px] p-4 bg-offer-search-main border-border">
+                        <h4 className="text-[16px] text-white-off mb-1">Gender Distribution</h4>
+                        <p className="text-[14px] text-table-text-h mb-3">Customer breakdown</p>
 
                         <div className="w-full h-[260px] flex items-center justify-center">
                             <ResponsiveContainer width="100%" height="100%">
-                                <PieChart>
+                                <PieChart >
                                     <Pie
                                         data={genderData}
                                         dataKey="value"
@@ -255,34 +254,32 @@ export default function PayoutsAnalyticsPage() {
                 </div>
 
                 {/* Top performing offers */}
-                <div className="rounded-[14px] mb-6 border-[0.82px] p-5 bg-[#FFFFFF] border-[#E5E7EB] dark:bg-[#09090B] dark:border-[#27272A]">
+                <div className="rounded-[14px] mb-6 border-[0.82px] p-5 bg-offer-search-main border-border">
 
-                    <h4 className="text-[16px] text-[#101828] mb-1 dark:text-white">
+                    <h4 className="text-[16px] text-white-off mb-1 ">
                         Top Performing Offers
                     </h4>
-                    <p className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9] mb-4">
+                    <p className="text-[14px] text-table-text-h mb-4">
                         November 2024
                     </p>
 
-                    <div className="grid grid-cols-5 px-2 py-2 text-[14px] font-medium text-[#4A5565] dark:text-[#9F9FA9]">
+                    <div className="grid grid-cols-3 px-2 py-2 text-[14px] font-medium text-table-text-h">
                         <div>Offer Name</div>
                         <div>Redemptions</div>
-                        <div>Est. Revenue</div>
-                        <div>Avg. Per Customer</div>
                         <div className="text-right">Actions</div>
                     </div>
 
                     {/* Divider */}
-                    <div className="border-b border-[#E5E7EB] dark:border-[#1f1f1f] mb-2"></div>
+                    <div className="border-b border-border mb-2"></div>
 
                     {/* Rows */}
                     {topOffers.map((o) => (
                         <div
                             key={o.id}
-                            className="grid grid-cols-5 px-2 py-3 items-center border-b border-[#E5E7EB] dark:border-[#1f1f1f]"
+                            className="grid grid-cols-3 px-2 py-3 items-center border-b border-border"
                         >
                             {/* Offer Name */}
-                            <div className="text-[14px] text-[#101828] dark:text-white">
+                            <div className="text-[14px] text-white-off">
                                 {o.title}
                             </div>
 
@@ -293,19 +290,9 @@ export default function PayoutsAnalyticsPage() {
                                 </span>
                             </div>
 
-                            {/* Est. Revenue */}
-                            <div className="text-[14px] text-[#101828] dark:text-white">
-                                SAR {(o.redemptions * 30).toLocaleString()}
-                            </div>
-
-                            {/* Avg Per Customer */}
-                            <div className="text-[14px] text-[#101828] dark:text-white">
-                                SAR {Math.floor(Math.random() * 20) + 10}
-                            </div>
-
                             {/* Action Button */}
                             <div className="flex justify-end">
-                                <button className="flex items-center gap-3 text-[13px] px-3 py-1 rounded-[8px] bg-[#FFFFFF] border-[0.82px] border-[#D1D5DC] dark:border-[#27272A]">
+                                <button className="flex items-center gap-3 text-[13px] px-3 py-1 rounded-lg bg-offer-search border-[0.82px] border-border text-white-off">
                                     <Eye size={16} />
                                     View Details
                                 </button>
@@ -316,9 +303,9 @@ export default function PayoutsAnalyticsPage() {
 
 
                 {/* Top redeemers table */}
-                <div className="rounded-[14px] border-[0.82px] p-5 bg-[#FFFFFF] border-[#E5E7EB] dark:bg-[#09090B] dark:border-[#27272A]">
-                    <h4 className="text-[16px] text-[#101828] mb-1 dark:text-white">Top Redeemers</h4>
-                    <p className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9] mb-4">
+                <div className="rounded-[14px] border-[0.82px] p-5 bg-offer-search-main border-border ">
+                    <h4 className="text-[16px] text-white-off mb-1">Top Redeemers</h4>
+                    <p className="text-[14px] text-table-text-h mb-4">
                         Most active customers this month
                     </p>
 
@@ -326,7 +313,7 @@ export default function PayoutsAnalyticsPage() {
                         <table className="w-full text-sm">
                             {/* HEADER */}
                             <thead>
-                                <tr className="text-[14px] border-b-[0.82px] border-[#E5E7EB] dark:border-[#1f1f1f] text-[#4A5565] dark:text-[#9F9FA9]">
+                                <tr className="text-[14px] border-b-[0.82px] border-border text-table-text-h">
                                     <th className="py-3 text-left w-30">Rank</th>
                                     <th className="py-3 text-left">Customer</th>
                                     <th className="py-3 text-left">Redemptions</th>
@@ -338,46 +325,46 @@ export default function PayoutsAnalyticsPage() {
                             {/* BODY */}
                             <tbody className="divide-y divide-[#E5E7EB] dark:divide-[#1f1f1f]">
                                 {topRedeemers.map((r) => (
-                                    <tr key={r.rank} className="hover:bg-[#F5F5F5] dark:hover:bg-[#141414]">
+                                    <tr key={r.rank} >
 
                                         {/* RANK CIRCLE */}
                                         <td className="py-3 text-left w-30">
-                                            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-[#E5E7EB] dark:bg-[#1f1f1f] text-[#101828] dark:text-white ">
+                                            <div className="w-8 h-8 flex items-center justify-center rounded-full bg-offer-search text-white-off ">
                                                 {r.rank}
                                             </div>
                                         </td>
 
                                         {/* CUSTOMER NAME */}
-                                        <td className="py-3 text-[14px] text-[#101828] dark:text-white">
+                                        <td className="py-3 text-[14px] text-white-off">
                                             {r.name}
                                         </td>
 
                                         {/* REDEMPTION BADGE */}
                                         <td className="py-3">
-                                            <span className="px-3 py-1 rounded-[8px] bg-[#DCFCE7] text-[#008236] text-[12px]">
+                                            <span className="px-3 py-1 rounded-lg bg-payout-bg text-payout-bg-text text-[12px]">
                                                 {r.redemptions} times
                                             </span>
                                         </td>
 
                                         {/* LAST VISIT */}
-                                        <td className="py-3 text-[14px] text-[#4A5565] dark:text-white">
+                                        <td className="py-3 text-[14px] text-white-off">
                                             {r.last}
                                         </td>
 
                                         {/* TIER BADGE */}
                                         <td className="py-3">
                                             {r.rank === 1 && (
-                                                <span className="px-3 py-1 rounded-[8px] bg-[#FEF9C2] text-[#A65F00] text-[12px]">
+                                                <span className="px-3 py-1 rounded-lg bg-gold text-gold-text text-[12px]">
                                                     Gold
                                                 </span>
                                             )}
                                             {r.rank === 2 && (
-                                                <span className="px-3 py-1 rounded-[8px] bg-[#D1D5DC] text-[#364153] text-[12px]">
+                                                <span className="px-3 py-1 rounded-lg bg-silver text-silver-text text-[12px]">
                                                     Silver
                                                 </span>
                                             )}
                                             {r.rank > 2 && (
-                                                <span className="px-3 py-1 rounded-[8px] bg-[#FFEDD4] text-[#CA3500] text-[12px]">
+                                                <span className="px-3 py-1 rounded-lg bg-bronze text-bronze-text text-[12px]">
                                                     Bronze
                                                 </span>
                                             )}
@@ -391,11 +378,11 @@ export default function PayoutsAnalyticsPage() {
 
 
                 {/* Benchmarks */}
-                <div className="rounded-[14px] border-[0.82px] mt-6 p-5 border-[#E5E7EB] bg-[#FFFFFF] dark:bg-[#09090B] dark:border-[#27272A]">
-                    <h4 className="text-[16px] text-[#101828] dark:text-white mb-1">
+                <div className="rounded-[14px] border-[0.82px] mt-6 p-5 border-border bg-offer-search-main ">
+                    <h4 className="text-[16px] text-white-off mb-1">
                         Neighborhood Benchmarks
                     </h4>
-                    <p className="text-[14px] text-[#4A5565] dark:text-[#9F9FA9] mb-6">
+                    <p className="text-[14px] text-table-text-h mb-6">
                         How you compare to similar businesses
                     </p>
 
@@ -405,7 +392,7 @@ export default function PayoutsAnalyticsPage() {
 
                                 {/* Title + Status */}
                                 <div className="flex items-center justify-between mb-2">
-                                    <div className="text-[15px] text-[#101828] dark:text-white">
+                                    <div className="text-[15px] text-white-off">
                                         {b.label}
                                     </div>
 
@@ -430,23 +417,23 @@ export default function PayoutsAnalyticsPage() {
                                 </div>
 
                                 {/* Bar Background */}
-                                <div className="w-full bg-[#E5E7EB] dark:bg-[#1f1f1f] h-[8px] rounded-full">
+                                <div className="w-full bg-payout-line-bg h-2 rounded-full">
                                     {/* Fill bar */}
                                     <div
-                                        className="h-[8px] rounded-full bg-[#E8600F]"
+                                        className="h-2 rounded-full bg-[#E8600F]"
                                         style={{ width: `${Math.min(100, Math.round(b.value * 100))}%` }}
                                     />
                                 </div>
 
                                 {/* Bottom Labels */}
                                 <div className="flex justify-between mt-1">
-                                    <div className="text-[12px] text-[#6A7282] dark:text-[#9F9FA9]">
+                                    <div className="text-[12px] text-table-text-id">
                                         {b.label === "Redemption Volume"
                                             ? `Your volume: 890/mo`
                                             : `Your rate: ${(b.value * 100).toFixed(1)}%`}
                                     </div>
 
-                                    <div className="text-[12px] text-[#6A7282] dark:text-[#9F9FA9]">
+                                    <div className="text-[12px] text-table-text-id">
                                         {b.label === "Redemption Volume"
                                             ? `Avg: 620/mo`
                                             : `Avg: ${b.label === "Customer Retention" ? "45%" : "14.2%"}`}

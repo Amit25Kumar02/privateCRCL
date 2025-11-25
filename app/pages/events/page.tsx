@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Calendar, Users, Clock, Check, X, MoreHorizontal } from "lucide-react";
+import { Calendar, Users, Clock, Check, X, } from "lucide-react";
 import Sidebar from "@/app/component/sidebar/page";
 
 type BookingStatus =
@@ -118,11 +118,11 @@ export default function EventsBookingsPage() {
 
   const StatusPill = ({ status }: { status: BookingStatus }) => {
     const styles: Record<BookingStatus, string> = {
-      pending: "bg-[#FEF9C2] text-[#A65F00]",
-      tentative: "bg-[#DBEAFE] text-[#1447E6]",
-      confirmed: "bg-[#DCFCE7] text-[#008236]",
-      completed: "bg-[#E5E7EB] text-[#4A5565]",
-      canceled: "bg-[#FFE2E2] text-[#C10007]",
+      pending: "bg-panding-bg text-panding-bg-text",
+      tentative: "bg-tentative-bg text-tentative-bg-text",
+      confirmed: "bg-confirmed-bg text-confirmed-bg-text",
+      completed: "bg-completed-bg text-table-text-h",
+      canceled: "bg-canceled-bg text-canceled-bg-text",
     };
 
     return (
@@ -145,55 +145,55 @@ export default function EventsBookingsPage() {
       <main
         className="
           ml-64 min-h-screen p-8 
-          dark:bg-[#000000] dark:text-[#FAFAFA]
+          bg-background text-text
           transition-colors duration-300 flex-1
         "
       >
         {/* Header */}
-        <h1 className="text-[30px] text-[#101828]">Events & Bookings</h1>
-        <p className="text-[16px] text-[#4A5565] dark:text-[#9F9FA9]">
+        <h1 className="text-[30px] text-text">Events & Bookings</h1>
+        <p className="text-[16px] text-all-sub-h">
           Manage venue bookings and event requests
         </p>
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 h-[157px] gap-4 my-6">
           {/* Max Capacity */}
-          <div className="rounded-[14px]  bg-[#FFFFFF] p-6 dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
+          <div className="rounded-[14px]  bg-offer-search-main p-6  border-[0.82px] border-border ">
             <div className=" flex justify-between">
-              <p className="text-[14px] text-[#4A5565]">Max Capacity</p>
+              <p className="text-[14px] text-table-text-h">Max Capacity</p>
               <Users className="text-[#E8600F]" size={16} />
             </div>
-            <h2 className="text-[24px] text-[#101828] font-normal mt-10">150 guests</h2>
+            <h2 className="text-[24px] text-white-off font-normal mt-10">150 guests</h2>
             <p className="text-[12px] text-[#6A7282] mt-1">
               Indoor: 100 | Outdoor: 50
             </p>
           </div>
 
           {/* Pending */}
-          <div className="rounded-[14px]  bg-[#FFFFFF] p-6 dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
+          <div className="rounded-[14px]  bg-offer-search-main p-6  border-[0.82px] border-border ">
             <div className="flex justify-between">
-              <p className="text-[14px] text-[#4A5565]">Pending Requests</p>
+              <p className="text-[14px] text-table-text-h">Pending Requests</p>
               <Clock className="text-[#F0B100]" size={16} />
             </div>
-            <h2 className="text-[24px] text-[#101828] font-normal mt-10">{stats.pending}</h2>
+            <h2 className="text-[24px] text-white-off font-normal mt-10">{stats.pending}</h2>
             <p className="text-[12px] text-[#6A7282] mt-1">Awaiting response</p>
           </div>
 
           {/* Upcoming */}
-          <div className="rounded-[14px]  bg-[#FFFFFF] p-6 dark:bg-[#09090B] border-[0.82px] border-[#E5E7EB] dark:border-[#27272A]">
+          <div className="rounded-[14px]  bg-offer-search-main p-6  border-[0.82px] border-border ">
             <div className="flex justify-between">
-              <p className="text-[14px] text-[#4A5565]">Upcoming Events</p>
+              <p className="text-[14px] text-table-text-h">Upcoming Events</p>
               <Calendar className="text-[#00C950]" size={16} />
             </div>
-            <h2 className="text-[24px] text-[#101828] font-normal mt-10">{stats.upcoming}</h2>
+            <h2 className="text-[24px] text-white-off font-normal mt-10">{stats.upcoming}</h2>
             <p className="text-[12px] text-[#6A7282] mt-1">Next 30 days</p>
           </div>
         </div>
 
         {/* Tabs + Search */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 mt-[32px]">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-4 mt-4">
           {/* Tabs */}
-          <div className="flex gap-2 flex-wrap border-[0.82px] border-[#E5E7EB] rounded-[14px] bg-[#F3F4F6] px-[8px] py-[4px]">
+          <div className="flex gap-2 flex-wrap border-[0.82px] border-border rounded-[14px] bg-offer-search-main px-2 py-1">
             {(["All Requests", "Pending", "Confirmed", "Completed"] as const).map(
               (tab) => (
                 <button
@@ -201,7 +201,7 @@ export default function EventsBookingsPage() {
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-1 rounded-full cursor-pointer text-[14px] ${activeTab === tab
                     ? "bg-[#E8600F] text-[#FFFFFF] border-[#E8600F]"
-                    : " text-[#0A0A0A] dark:text-[#FAFAFA] "
+                    : " text-[#A1A1A1] "
                     }`}
                 >
                   {tab}
@@ -213,10 +213,10 @@ export default function EventsBookingsPage() {
         </div>
 
         {/* Table */}
-        <div className="rounded-[14px] overflow-hidden border-[0.82px] border-[#E5E7EB] dark:bg-[#09090B] dark:border-[#27272A]">
+        <div className="rounded-[14px] overflow-hidden border-[0.82px] border-border bg-offer-search-main ">
           <table className="w-full text-[14px]">
             <thead>
-              <tr className="text-[#4A5565] font-medium text-[14px] dark:text-[#9F9FA9]">
+              <tr className="font-medium text-[14px] text-table-text-h border-b-border">
                 <th className="p-4 text-left">Requester</th>
                 <th className="p-4 text-left">Event Type</th>
                 <th className="p-4 text-left">Date & Time</th>
@@ -230,27 +230,27 @@ export default function EventsBookingsPage() {
               {filtered.map((b) => (
                 <tr
                   key={b.id}
-                  className="dark:hover:bg-[#141414] transition"
+                  className=" transition"
                 >
                   <td className="p-4">
-                    <p className="font-medium text-[14px] text-[#101828]">{b.requester}</p>
-                    <p className="text-[14px] text-[#6A7282]">{b.email}</p>
+                    <p className="font-medium text-[14px] text-white-off">{b.requester}</p>
+                    <p className="text-[14px] text-table-text-id">{b.email}</p>
                   </td>
 
-                  <td className="p-4 text-[14px] text-[#101828]">{b.eventType}</td>
+                  <td className="p-4 text-[14px] text-white-off">{b.eventType}</td>
 
                   <td className="p-4">
                     <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-gray-400" />
+                      <Calendar size={16} className="text-table-text-id" />
                       <div>
-                        <p className="text-[14px] text-[#101828]">{b.date}</p>
-                        <p className="text-[14px] text-[#6A7282]">{b.time}</p>
+                        <p className="text-[14px] text-white-off">{b.date}</p>
+                        <p className="text-[14px] text-table-text-id">{b.time}</p>
                       </div>
                     </div>
                   </td>
 
-                  <td className="p-4 flex items-center text-[14px] text-[#101828] gap-2">
-                    <Users size={16} className="text-[#6A7282]" />
+                  <td className="p-4 flex items-center text-[14px] text-white-off gap-2">
+                    <Users size={16} className="text-table-text-id" />
                     {b.guests}
                   </td>
 
@@ -264,7 +264,7 @@ export default function EventsBookingsPage() {
                         onClick={() =>
                           setShowActionsFor(showActionsFor === b.id ? null : b.id)
                         }
-                        className="px-3 py-1 rounded-[8px] cursor-pointer text-[#364153] border-[0.82px] bg-[#FFFFFF] border-[#D1D5DC] dark:border-[#2a2a2a]"
+                        className="px-3 py-1 rounded-lg cursor-pointer text-white-off border-[0.82px] bg-offer-search border-border"
                       >
                         Details
                       </button>
@@ -274,14 +274,14 @@ export default function EventsBookingsPage() {
                         <>
                           <button
                             onClick={() => updateStatus(b.id, "confirmed")}
-                            className="w-8 h-8 bg-[#00A63E] cursor-pointer text-[#FFFFFF] rounded-[8px] flex items-center justify-center"
+                            className="w-8 h-8 bg-[#00A63E] cursor-pointer text-[#FFFFFF] rounded-lg flex items-center justify-center"
                           >
                             <Check size={16} />
                           </button>
 
                           <button
                             onClick={() => updateStatus(b.id, "canceled")}
-                            className="w-8 h-8 bg-[#FFFFFF] cursor-pointer text-[#E7000B] border-[0.82px] border-[#FFA2A2] rounded-[8px] flex items-center justify-center"
+                            className="w-8 h-8 bg-offer-search-main cursor-pointer text-[#E7000B] border-[0.82px] border-[#FFA2A2] rounded-lg flex items-center justify-center"
                           >
                             <X size={16} />
                           </button>

@@ -9,12 +9,19 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md border border-gray-700 dark:border-gray-300 hover:bg-gray-100 dark:hover:bg-[#1a1a1a]"
+      className="p-2 rounded-md w-full cursor-pointer "
     >
       {theme === "light" ? (
-        <Sun size={18} className="text-yellow-400" />
+        <div className=" flex gap-2 items-center">
+          <Moon size={18} className="text-sidebar-text" />
+          <span className="text-sidebar-text text-[16px]">Dark Mode</span>
+        </div>
       ) : (
-        <Moon size={18} className="text-gray-700" />
+        <div className=" flex gap-2 items-center">
+          <Sun size={18} className="text-sidebar-text" />
+          <span className="text-sidebar-text text-[16px]">Light Mode</span>
+        </div>
+
       )}
     </button>
   );
