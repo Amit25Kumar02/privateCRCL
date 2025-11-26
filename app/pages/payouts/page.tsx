@@ -146,10 +146,18 @@ export default function PayoutsAnalyticsPage() {
                     <div className="w-full h-[260px]">
                         <ResponsiveContainer>
                             <LineChart data={performanceData}>
-                                <CartesianGrid strokeDasharray="3 3" opacity={0.06} />
+                                <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                                 <XAxis dataKey="month" stroke="#6B7280" />
                                 <YAxis stroke="#6B7280" />
-                                <Tooltip />
+                                <Tooltip
+                                    cursor={{ stroke: "#6B7280", strokeDasharray: "3 3" }}
+                                    contentStyle={{
+                                        backgroundColor: "#1A1A1A",
+                                        border: "1px solid #2D2D2D",
+                                        borderRadius: "10px",
+                                        color: "#FFFFFF",
+                                        padding: "10px",
+                                    }} />
 
                                 <Line type="monotone" dataKey="impressions" stroke="#6B7280" strokeWidth={2} dot />
                                 <Line type="monotone" dataKey="clicks" stroke="#E8600F" strokeWidth={2} dot />
