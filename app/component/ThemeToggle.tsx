@@ -9,7 +9,7 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md w-full cursor-pointer "
+      className="p-2 rounded-md w-full cursor-pointer hover:bg-offer-search  "
     >
       {theme === "light" ? (
         <div className=" flex gap-2 items-center">
@@ -17,7 +17,7 @@ export default function ThemeToggle() {
           <span className="text-sidebar-text text-[16px]">Dark Mode</span>
         </div>
       ) : (
-        <div className=" flex gap-2 items-center">
+        <div className=" flex gap-2 items-center ">
           <Sun size={18} className="text-sidebar-text" />
           <span className="text-sidebar-text text-[16px]">Light Mode</span>
         </div>
