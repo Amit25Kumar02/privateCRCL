@@ -234,8 +234,8 @@ export default function OffersPage() {
         </div>
 
         <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">Dashboard</h1>
-          <p className="text-sm text-all-sub-h">Today at a glance</p>
+          <h1 className="text-xl font-semibold">Offers Management</h1>
+          <p className="text-sm text-all-sub-h">Create and manage perks and discounts</p>
         </div>
 
         {/* Header */}
@@ -245,7 +245,7 @@ export default function OffersPage() {
             <p className="text-[16px] text-all-sub-h">Create and manage perks and discounts</p>
           </div>
 
-          <div className="flex h-[37px] items-center md:justify-end gap-3 w-full md:w-auto">
+          <div className="flex h-[37px] items-center md:-mt-16 md:justify-end gap-3 w-full md:w-auto">
             <button
               onClick={() => setShowCreateModal(true)}
               className="bg-[#E8600F] px-4 py-2 rounded-lg cursor-pointer text-[14px] text-[#FFFFFF]"
@@ -256,7 +256,7 @@ export default function OffersPage() {
         </div>
 
         {/* Search + Filters row */}
-        <div className="rounded-[14px] p-6 flex flex-col md:flex-row gap-4 items-center bg-offer-search-main border-[0.82px] border-border">
+        <div className="rounded-[14px] p-6 flex flex-col md:mt-16 md:flex-row gap-4 items-center bg-offer-search-main border-[0.82px] border-border">
           <div className="flex h-10 px-4 items-center gap-3 w-full rounded-lg border-[0.82px] bg-offer-search border-border">
             <Search size={18} className="dark:text-[#A1A1A1]" />
             <input
@@ -463,8 +463,8 @@ export default function OffersPage() {
         )}
 
         {/* DESKTOP TABLE */}
-        <div className="mt-6 w-[310px] md:w-full  overflow-x-auto rounded-[14px] bg-table-bg border-[0.82px] border-border">
-          <table className="text-[14px] ">
+        <div className="mt-6 w-[310px] md:w-full overflow-x-auto rounded-[14px] bg-table-bg border-[0.82px] border-border">
+          <table className="text-[14px] w-full ">
             <thead>
               <tr className=" text-[14px] border-[0.82px] border-border text-table-text-h">
                 <th className="p-4 text-left">Offer</th>

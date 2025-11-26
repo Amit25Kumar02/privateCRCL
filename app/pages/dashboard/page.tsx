@@ -80,13 +80,13 @@ export default function Dashboard() {
                     <p className="text-[16px] text-all-sub-h">Today at a glance</p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 h-auto md:h-[157px]  gap-4 mb-6">
                     <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
                             <p className="text-table-text-h text-sm">Active Offers</p>
                             <CheckCircle className="text-[#00C950]" size={18} />
                         </div>
-                        <h2 className="text-white-off text-[24px] mt-2">8</h2>
+                        <h2 className="text-white-off text-[24px] mt-10">8</h2>
                         <p className="text-xs text-[#6A7282]">2 scheduled</p>
                     </div>
 
@@ -95,7 +95,7 @@ export default function Dashboard() {
                             <p className="text-table-text-h text-sm">Pending Approvals</p>
                             <Clock className="text-[#F0B100]" size={18} />
                         </div>
-                        <h2 className="text-white-off text-[24px] mt-2">3</h2>
+                        <h2 className="text-white-off text-[24px] mt-10">3</h2>
                         <p className="text-xs text-[#6A7282]">2 drafts saved</p>
                     </div>
 
@@ -104,7 +104,7 @@ export default function Dashboard() {
                             <p className="text-table-text-h text-sm">Paused / Expired</p>
                             <XCircle className="text-[#71717B]" size={18} />
                         </div>
-                        <h2 className="text-white-off text-[24px] mt-2">5</h2>
+                        <h2 className="text-white-off text-[24px] mt-10">5</h2>
                         <p className="text-xs text-[#6A7282]">2 paused, 3 expired</p>
                     </div>
 
@@ -113,7 +113,7 @@ export default function Dashboard() {
                             <p className="text-table-text-h text-sm">Conversion Rate</p>
                             <TrendingUp className="text-[#E8600F]" size={18} />
                         </div>
-                        <h2 className="text-white-off text-[24px] mt-2">18.5%</h2>
+                        <h2 className="text-white-off text-[24px] mt-10">18.5%</h2>
                         <p className="text-xs text-[#00C950]">+2.4% from last week</p>
                     </div>
                 </div>

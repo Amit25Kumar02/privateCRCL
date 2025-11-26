@@ -231,7 +231,7 @@ export default function EventsBookingsPage() {
         <div className="rounded-[14px] w-[310px] md:w-full overflow-auto border-[0.82px] border-border bg-offer-search-main ">
           <table className="w-full md:w-full overflow-auto text-[14px]">
             <thead>
-              <tr className="font-medium text-[14px] text-table-text-h border-b-border">
+              <tr className="font-medium text-[14px] text-table-text-h border-b-[0.82px] border-b-border">
                 <th className="p-4 text-left">Requester</th>
                 <th className="p-4 text-left">Event Type</th>
                 <th className="p-4 text-left">Date & Time</th>
@@ -245,7 +245,7 @@ export default function EventsBookingsPage() {
               {filtered.map((b) => (
                 <tr
                   key={b.id}
-                  className=" transition"
+                  className=" transition border-b-[0.82px] border-b-border"
                 >
                   <td className="p-4">
                     <p className="font-medium text-[14px] text-white-off">{b.requester}</p>

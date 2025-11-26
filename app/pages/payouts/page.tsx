@@ -113,15 +113,15 @@ export default function PayoutsAnalyticsPage() {
                 </div>
 
                 {/* Export CSV button */}
-                <div className="flex md:justify-end mb-6">
-                    <button className="px-4 py-2 rounded-lg bg-[#E8600F] text-white flex items-center gap-2">
+                <div className="flex md:justify-end md:-mt-18 mb-6">
+                    <button className="px-4 py-2 rounded-lg cursor-pointer bg-[#E8600F] text-white flex items-center gap-2">
                         <Download className="w-5 h-5 text-white" />
                         Export CSV
                     </button>
                 </div>
 
                 {/* Stat cards */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:mt-18 mb-6">
                     {statCards.map((c, i) => {
                         const Icon = c.icon;
                         return (

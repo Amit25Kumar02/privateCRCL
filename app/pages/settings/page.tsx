@@ -192,7 +192,7 @@ export default function AccountSettings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main border border-border w-fit rounded-[14px] overflow-x-auto">
+        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main  border border-border w-fit rounded-[14px] overflow-x-auto">
           <Tab
             label="Business Details"
             active={tab === "details"}
@@ -386,7 +386,7 @@ export default function AccountSettings() {
               </div>
 
               <div className="flex justify-end mt-6">
-                <button className="px-4 py-2 rounded-md bg-[#E8600F] text-white flex items-center gap-2">
+                <button className="px-4 py-2 rounded-md cursor-pointer bg-[#E8600F] text-white flex items-center gap-2">
                   <Edit size={14} /> Save Changes
                 </button>
               </div>
@@ -412,7 +412,7 @@ export default function AccountSettings() {
 
                   <button
                     onClick={inviteUser}
-                    className="px-3 py-2 rounded-md bg-[#E8600F] text-white flex items-center gap-2"
+                    className="px-3 py-2 rounded-md cursor-pointer bg-[#E8600F] text-white flex items-center gap-2"
                   >
                     <Plus size={14} /> Invite User
                   </button>
@@ -465,13 +465,13 @@ export default function AccountSettings() {
 
                             <td className="py-4 px-4">
                               <div className="flex justify-end gap-2">
-                                <button className="px-3 py-2 text-white-off rounded-md bg-offer-search border border-border">
+                                <button className="px-3 py-2 cursor-pointer text-white-off rounded-md bg-offer-search border border-border">
                                   Edit
                                 </button>
 
                                 <button
                                   onClick={() => removeTeamMember(m.id)}
-                                  className="px-3 py-1 rounded-md border bg-offer-search border-border text-[#FF6467]"
+                                  className="px-3 py-1 rounded-md cursor-pointer border bg-offer-search border-border text-[#FF6467]"
                                 >
                                   <Trash size={14} />
                                 </button>
@@ -575,7 +575,7 @@ export default function AccountSettings() {
                     </div>
                   </div>
 
-                  <button className="px-3 py-2 rounded-md border border-border text-white-off">
+                  <button className="px-3 py-2 cursor-pointer rounded-md border border-border text-white-off">
                     Set Up
                   </button>
                 </div>
@@ -606,7 +606,7 @@ export default function AccountSettings() {
 
                     <button
                       onClick={() => removeDevice(d.id)}
-                      className="px-3 py-1 rounded-md border border-border text-[#FF6467]"
+                      className="px-3 py-1 cursor-pointer rounded-md border border-border text-[#FF6467]"
                     >
                       Remove
                     </button>
@@ -634,7 +634,7 @@ export default function AccountSettings() {
                 </label>
                 <input className="w-full p-2 rounded-md bg-offer-search border border-border" />
 
-                <button className="px-3 py-2 rounded-md bg-[#E8600F] text-white mt-2">
+                <button className="px-3 py-2 cursor-pointer rounded-md bg-[#E8600F] text-white mt-2">
                   Update Password
                 </button>
               </div>
@@ -670,14 +670,14 @@ export default function AccountSettings() {
                     </div>
 
                     <div>
-                      <button className="px-3 py-1 rounded-md border border-border text-white-off">
+                      <button className="px-3 py-1 cursor-pointer rounded-md border border-border text-white-off">
                         Edit
                       </button>
                     </div>
                   </div>
                 ))}
 
-                <button className="w-full px-3 py-2 rounded-md border border-border bg-offer-search text-table-text-h">
+                <button className="w-full px-3 py-2 cursor-pointer rounded-md border border-border bg-offer-search text-table-text-h">
                   + Add Payment Method
                 </button>
               </div>
@@ -705,7 +705,7 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-[14px] text-[14px] flex items-center gap-2 whitespace-nowrap ${active
+      className={`px-4 py-2 rounded-[14px] cursor-pointer text-[14px] flex items-center gap-2 whitespace-nowrap ${active
         ? "bg-[#E8600F] text-white-off"
         : "text-[#A1A1A1]"
         }`}

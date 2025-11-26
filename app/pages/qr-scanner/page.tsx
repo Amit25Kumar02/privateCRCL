@@ -149,7 +149,7 @@ export default function QRScanner() {
               <div className="flex p-1 gap-1 mb-4 bg-offer-search border-[0.82px] border-border rounded-[10px]">
                 <button
                   onClick={() => setScanMode("camera")}
-                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${scanMode === "camera" ? "bg-[#E8600F] text-white" : "text-table-text-id"
+                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-lg cursor-pointer ${scanMode === "camera" ? "bg-[#E8600F] text-white" : "text-table-text-id"
                     }`}
                 >
                   <Camera className="w-4 h-4" />
@@ -158,7 +158,7 @@ export default function QRScanner() {
 
                 <button
                   onClick={() => setScanMode("manual")}
-                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-[8px] ${scanMode === "manual" ? "bg-[#E8600F] text-white" : "text-table-text-id"
+                  className={`flex-1 py-2 flex items-center justify-center gap-2 text-[14px] rounded-lg cursor-pointer ${scanMode === "manual" ? "bg-[#E8600F] text-white" : "text-table-text-id"
                     }`}
                 >
                   <Keyboard className="w-4 h-4" />

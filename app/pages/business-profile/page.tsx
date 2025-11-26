@@ -120,7 +120,7 @@ export default function BusinessProfilePage() {
           </div>
 
           <button
-            className="flex items-center gap-2 bg-[#E8600F] text-[#FFFFFF] px-4 py-2 rounded-md"
+            className="flex items-center gap-2 cursor-pointer bg-[#E8600F] text-[#FFFFFF] px-4 py-2 rounded-md"
             aria-label="Edit profile"
           >
             <Edit size={16} />
