@@ -14,12 +14,9 @@ import {
     Cell,
 } from "recharts";
 
-import { TrendingUp, Eye, DollarSign, Users, Menu } from "lucide-react";
+import { TrendingUp, Eye, DollarSign, Users, Menu ,Download } from "lucide-react";
 import Sidebar from "@/app/component/sidebar/page";
 
-
-
-const csvIcon = "../../../public/Icon.png";
 
 const statCards = [
     { title: "Total Redemptions", value: "890", sub: "+18.7% from last month", icon: TrendingUp },
@@ -118,7 +115,7 @@ export default function PayoutsAnalyticsPage() {
                 {/* Export CSV button */}
                 <div className="flex md:justify-end mb-6">
                     <button className="px-4 py-2 rounded-lg bg-[#E8600F] text-white flex items-center gap-2">
-                        <img src={csvIcon} alt="CSV Icon" className="w-5 h-5" />
+                        <Download className="w-5 h-5 text-white" />
                         Export CSV
                     </button>
                 </div>

@@ -129,7 +129,7 @@ export default function BusinessProfilePage() {
         </div>
 
         {/* Tabs */}
-        <div className="grid grid-cols-2 md:grid-cols-1 gap-3 bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-full md:w-fit px-2 py-1 mb-6">
+        <div className="grid grid-cols-2 md:flex gap-3 bg-offer-search-main border-[0.82px] border-border rounded-[14px] text-center w-full md:w-fit px-2 py-1 mb-6">
           <Tab label="Basic Info" active={tab === "basic"} onClick={() => setTab("basic")} />
           <Tab label="Opening Hours" active={tab === "hours"} onClick={() => setTab("hours")} />
           <Tab label="Location" active={tab === "location"} onClick={() => setTab("location")} />
@@ -166,7 +166,7 @@ export default function BusinessProfilePage() {
               {/* categories */}
               <div className="mt-4">
                 <label className="text-[14px] text-table-text-h">Categories</label>
-                <div className="mt-2 grid grid-cols-3 gap-2">
+                <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-2">
                   {allCategories.map((c) => {
                     const active = basicInfo.categories.includes(c);
                     return (
@@ -236,7 +236,7 @@ export default function BusinessProfilePage() {
 
           {/* OPENING HOURS */}
           {tab === "hours" && (
-            <section className="rounded-xl p-6 borde bg-offer-search-main border-[0.82px] border-border">
+            <section className="rounded-xl p-6 w-[310px] md:w-full overflow-auto borde bg-offer-search-main border-[0.82px] border-border">
               <h2 className="text-[16px] text-white-off font-medium mb-4">Opening Hours</h2>
 
               <div className="space-y-3 w-[310px] md:w-full overflow-auto">
@@ -376,7 +376,7 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-[14px] text-[14px] ${active
+      className={`px-4 py-2 text-center rounded-[14px] text-[14px] ${active
         ? "bg-[#E8600F] cursor-pointer text-white-off"
         : "text-[#A1A1A1] cursor-pointer"
         }`}

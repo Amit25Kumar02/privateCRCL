@@ -217,35 +217,35 @@ export default function OffersPage() {
         <Sidebar />
       </div>
 
-   
+
 
       {/* MAIN CONTENT */}
       <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
 
-      
-                <div className="md:hidden flex items-center justify-between mb-4 pt-1">
-                    <div className="text-xl font-semibold">PrivateCRCL</div>
-                    <button
-                        onClick={() => setSidebarOpen(true)}
-                        className="p-2 rounded-lg border border-border bg-background"
-                    >
-                        <Menu size={22} />
-                    </button>
-                </div>
 
-                <div className="md:hidden mb-4">
-                    <h1 className="text-xl font-semibold">Dashboard</h1>
-                    <p className="text-sm text-all-sub-h">Today at a glance</p>
-                </div>
+        <div className="md:hidden flex items-center justify-between mb-4 pt-1">
+          <div className="text-xl font-semibold">PrivateCRCL</div>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 rounded-lg border border-border bg-background"
+          >
+            <Menu size={22} />
+          </button>
+        </div>
+
+        <div className="md:hidden mb-4">
+          <h1 className="text-xl font-semibold">Dashboard</h1>
+          <p className="text-sm text-all-sub-h">Today at a glance</p>
+        </div>
 
         {/* Header */}
-        <div className="flex flex-col hidden md:block md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-          <div>
+        <div className="flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <div  className="hidden md:block">
             <h1 className="text-[30px] text-text">Offers Management</h1>
             <p className="text-[16px] text-all-sub-h">Create and manage perks and discounts</p>
           </div>
 
-          <div className="flex h-[37px] items-center gap-3 w-full md:w-auto">
+          <div className="flex h-[37px] items-center md:justify-end gap-3 w-full md:w-auto">
             <button
               onClick={() => setShowCreateModal(true)}
               className="bg-[#E8600F] px-4 py-2 rounded-lg cursor-pointer text-[14px] text-[#FFFFFF]"
@@ -280,7 +280,7 @@ export default function OffersPage() {
         </div>
 
         {/* Tabs */}
-        <div className="grid grid-cols-3 md:grid-cols-1 md:flex bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-fit mt-5 p-2 hide-scrollbar">
+        <div className="grid grid-cols-3 md:grid-cols-1 md:flex bg-offer-search-main border-[0.82px] border-border rounded-[14px] w-full md:w-fit mt-5 p-2 hide-scrollbar">
           {tabs.map((t) => (
             <button
               key={t}

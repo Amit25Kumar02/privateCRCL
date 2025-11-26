@@ -206,7 +206,7 @@ export default function EventsBookingsPage() {
         </div>
 
         {/* Tabs + Search */}
-        <div className="grid md:grid-cols-1 grid-cols-1 w-fit  justify-between items-center gap-4 mb-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-1 w-full md:w-fit  justify-between items-center gap-4 mb-4 mt-4">
           {/* Tabs */}
           <div className="flex gap-2 flex-wrap border-[0.82px] border-border rounded-[14px] bg-offer-search-main px-2 py-1">
             {(["All Requests", "Pending", "Confirmed", "Completed"] as const).map(
