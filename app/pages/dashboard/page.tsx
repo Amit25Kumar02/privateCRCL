@@ -10,6 +10,9 @@ import {
     ResponsiveContainer,
     BarChart,
     Bar,
+    CartesianGrid,
+    Area,
+    AreaChart,
 } from "recharts";
 
 import {
@@ -80,7 +83,7 @@ export default function Dashboard() {
                     <p className="text-[16px] text-all-sub-h">Today at a glance</p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 h-auto md:h-[157px]  gap-4 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 h-auto md:min-h-[157px]  gap-4 mb-6">
                     <div className="bg-offer-search-main p-5 rounded-[14px] border border-border">
                         <div className="flex justify-between">
                             <p className="text-table-text-h text-sm">Active Offers</p>
@@ -122,14 +125,40 @@ export default function Dashboard() {
                     <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
                         <p className="text-white-off text-[16px] mb-1">Performance Overview</p>
                         <p className="text-table-text-id text-sm mb-4">Last 7 days</p>
-                        <div className="h-[250px] md:h-[300px]">
+
+                        <div className="h-[250px] md:h-[300px] -ml-4 md:ml-0 w-full">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={performanceData}>
+                                <AreaChart data={performanceData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={1} />
                                     <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
                                     <YAxis stroke="#6B7280" fontSize={12} />
-                                    <Tooltip />
-                                    <Line type="monotone" dataKey="value" stroke="#E8600F" strokeWidth={3} dot={false} />
-                                </LineChart>
+                                    <Tooltip
+                                        cursor={{ stroke: "#6B7280", strokeDasharray: "3 3" }}
+                                        contentStyle={{
+                                            backgroundColor: "#1A1A1A",
+                                            border: "1px solid #2D2D2D",
+                                            borderRadius: "10px",
+                                            color: "#FFFFFF",
+                                            padding: "10px",
+                                        }}
+                                    />
+                                    <defs>
+                                        <linearGradient id="orangeShadow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stopColor="#E8600F" stopOpacity={0.5} />
+                                            <stop offset="95%" stopColor="#E8600F" stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <Area
+                                        type="monotone"
+                                        dataKey="value"
+                                        stroke="#E8600F"
+                                        strokeWidth={3}
+                                        fillOpacity={1}
+                                        fill="url(#orangeShadow)"
+                                        dot={false}
+                                        activeDot={{ r: 6, stroke: "#E8600F", strokeWidth: 2, fill: "#fff" }}
+                                    />
+                                </AreaChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
@@ -137,12 +166,24 @@ export default function Dashboard() {
                     <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
                         <p className="text-white-off text-[16px] mb-1">Redemptions by Day</p>
                         <p className="text-table-text-id text-sm mb-4">Last 7 days</p>
-                        <div className="h-[250px] md:h-[300px]">
+                        <div className="h-[250px] md:h-[300px] -ml-4 md:ml-0 w-full">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={redemptionData}>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={1} />
                                     <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
                                     <YAxis stroke="#6B7280" fontSize={12} />
-                                    <Tooltip />
+                                    <Tooltip
+                                        cursor={{ fill: "rgba(255, 255, 255, 0)" }}
+                                        contentStyle={{
+                                            backgroundColor: "#1A1A1A",
+                                            border: "1px solid #2D2D2D",
+                                            borderRadius: "10px",
+                                            color: "#FFFFFF",
+                                            padding: "10px",
+                                        }}
+                                        labelStyle={{ fontSize: "12px", color: "#ffffff" }}
+                                        itemStyle={{ color: "#FFA869", fontSize: "13px" }}
+                                    />
                                     <Bar dataKey="value" fill="#E8600F" radius={[6, 6, 0, 0]} />
                                 </BarChart>
                             </ResponsiveContainer>

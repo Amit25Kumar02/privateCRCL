@@ -182,7 +182,7 @@ export default function AccountSettings() {
 
         <div className="md:hidden mb-6">
           <h1 className="text-xl font-semibold leading-tight">Account Settings</h1>
-          <p className="text-sm text-all-sub-h -mt-1">Manage your business</p>
+          <p className="text-sm text-all-sub-h mt-2">Manage your business</p>
         </div>
 
         <div className="hidden md:block mb-6">
@@ -192,7 +192,7 @@ export default function AccountSettings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main  border border-border w-fit rounded-[14px] overflow-x-auto">
+        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main  border border-border w-full md:w-fit rounded-[14px] overflow-x-auto">
           <Tab
             label="Business Details"
             active={tab === "details"}
@@ -394,10 +394,10 @@ export default function AccountSettings() {
           )}
 
           {tab === "users" && (
-            <section className="w-[300px] md:w-full">
+            <section>
 
               {/* TEAM MEMBERS TABLE */}
-              <div className="rounded-[14px] border bg-offer-search-main border-border px-6 py-4">
+              <div className="rounded-[14px] md:w-full overflow-x-auto border bg-offer-search-main border-border px-6 py-4">
 
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4">
@@ -412,122 +412,115 @@ export default function AccountSettings() {
 
                   <button
                     onClick={inviteUser}
-                    className="px-3 py-2 rounded-md cursor-pointer bg-[#E8600F] text-white flex items-center gap-2"
+                    className="px-3 py-2 rounded-md cursor-pointer text-xs md:text-lg bg-[#E8600F] text-white flex items-center gap-2"
                   >
                     <Plus size={14} /> Invite User
                   </button>
                 </div>
 
                 {/* Scroll wrapper */}
-                <div className="overflow-x-auto w-full">
-                  <div className="min-w-[900px]">
+                <div className="w-full max-w-[100px] md:max-w-full">
+                  <table className="w-full min-w-[700px] text-sm">
+                    <thead>
+                      <tr className="text-table-text-h border-b border-border">
+                        <th className="p-4 text-left">Name</th>
+                        <th className="p-4 text-left">Email</th>
+                        <th className="p-4 text-left">Role</th>
+                        <th className="p-4 text-left">Status</th>
+                        <th className="p-4 text-left">Last Login</th>
+                        <th className="p-4 text-right w-36">Actions</th>
+                      </tr>
+                    </thead>
 
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="text-table-text-h border-b border-border">
-                          <th className="p-4 text-left">Name</th>
-                          <th className="p-4 text-left">Email</th>
-                          <th className="p-4 text-left">Role</th>
-                          <th className="p-4 text-left">Status</th>
-                          <th className="p-4 text-left">Last Login</th>
-                          <th className="p-4 text-right w-36">Actions</th>
+                    <tbody className="divide-y divide-border">
+                      {team.map((m) => (
+                        <tr key={m.id}>
+                          <td className="p-4 text-white-off">{m.name}</td>
+
+                          <td className="p-4 text-xs text-all-sub-h">
+                            {m.email}
+                          </td>
+
+                          <td className="p-4">
+                            <span
+                              className={`px-3 py-1 rounded-full text-xs ${roleColors[m.role]}`}
+                            >
+                              {m.role}
+                            </span>
+                          </td>
+
+                          <td className="p-4">
+                            <span
+                              className={`px-3 py-1 rounded-full text-xs ${statusColors[m.status]}`}
+                            >
+                              {m.status}
+                            </span>
+                          </td>
+
+                          <td className="p-4 text-all-sub-h">
+                            {m.lastLogin ?? "—"}
+                          </td>
+
+                          <td className="py-4 px-4">
+                            <div className="flex justify-end gap-2">
+                              <button className="px-3 py-2 cursor-pointer text-white-off rounded-md bg-offer-search border border-border">
+                                Edit
+                              </button>
+
+                              <button
+                                onClick={() => removeTeamMember(m.id)}
+                                className="px-3 py-1 rounded-md cursor-pointer border bg-offer-search border-border text-[#FF6467]"
+                              >
+                                <Trash size={14} />
+                              </button>
+                            </div>
+                          </td>
                         </tr>
-                      </thead>
-
-                      <tbody className="divide-y divide-border">
-                        {team.map((m) => (
-                          <tr key={m.id}>
-                            <td className="p-4 text-white-off">{m.name}</td>
-
-                            <td className="p-4 text-xs text-all-sub-h">
-                              {m.email}
-                            </td>
-
-                            <td className="p-4">
-                              <span
-                                className={`px-3 py-1 rounded-full text-xs ${roleColors[m.role]}`}
-                              >
-                                {m.role}
-                              </span>
-                            </td>
-
-                            <td className="p-4">
-                              <span
-                                className={`px-3 py-1 rounded-full text-xs ${statusColors[m.status]}`}
-                              >
-                                {m.status}
-                              </span>
-                            </td>
-
-                            <td className="p-4 text-all-sub-h">
-                              {m.lastLogin ?? "—"}
-                            </td>
-
-                            <td className="py-4 px-4">
-                              <div className="flex justify-end gap-2">
-                                <button className="px-3 py-2 cursor-pointer text-white-off rounded-md bg-offer-search border border-border">
-                                  Edit
-                                </button>
-
-                                <button
-                                  onClick={() => removeTeamMember(m.id)}
-                                  className="px-3 py-1 rounded-md cursor-pointer border bg-offer-search border-border text-[#FF6467]"
-                                >
-                                  <Trash size={14} />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-
-                  </div>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               </div>
 
               {/* PERMISSION TABLE */}
-              <div className="mt-6 rounded-[14px] border bg-offer-search-main border-border p-4">
+              <div className="mt-6 rounded-[14px] border-[0.82px] bg-offer-search-main md:w-full overflow-x-auto border-border p-4">
                 <h4 className="text-sm font-medium mb-3">Role Permissions</h4>
 
-                <div className="overflow-x-auto w-full">
-                  <div className="min-w-[700px]">
+                {/* <div className="overflow-x-auto w-full"> */}
+                <div className="w-full max-w-[100px] md:max-w-full">
+                  <table className="w-full min-w-[700px] text-sm">
+                    <thead>
+                      <tr className="border-b border-border text-table-text-h">
+                        <th className="p-4 text-left">Permission</th>
+                        <th className="p-4 text-center">Owner</th>
+                        <th className="p-4 text-center">Manager</th>
+                        <th className="p-4 text-center">Staff</th>
+                      </tr>
+                    </thead>
 
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="border-b border-border text-table-text-h">
-                          <th className="p-4 text-left">Permission</th>
-                          <th className="p-4 text-center">Owner</th>
-                          <th className="p-4 text-center">Manager</th>
-                          <th className="p-4 text-center">Staff</th>
+                    <tbody className="divide-y divide-border">
+                      {permissions.map((p, i) => (
+                        <tr key={i} className="text-silver-text">
+                          <td className="p-4">{p.label}</td>
+
+                          <td className="p-4 text-center">
+                            {p.owner ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
+                          </td>
+
+                          <td className="p-4 text-center">
+                            {p.manager ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
+                          </td>
+
+                          <td className="p-4 text-center">
+                            {p.staff ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
+                          </td>
                         </tr>
-                      </thead>
+                      ))}
+                    </tbody>
+                  </table>
 
-                      <tbody className="divide-y divide-border">
-                        {permissions.map((p, i) => (
-                          <tr key={i} className="text-silver-text">
-                            <td className="p-4">{p.label}</td>
-
-                            <td className="p-4 text-center">
-                              {p.owner ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
-                            </td>
-
-                            <td className="p-4 text-center">
-                              {p.manager ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
-                            </td>
-
-                            <td className="p-4 text-center">
-                              {p.staff ? <Check size={14} className="mx-auto text-white-off" /> : "—"}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-
-                  </div>
                 </div>
               </div>
-
             </section>
           )}
 
@@ -706,8 +699,8 @@ function Tab({
     <button
       onClick={onClick}
       className={`px-4 py-2 rounded-[14px] cursor-pointer text-[14px] flex items-center gap-2 whitespace-nowrap ${active
-        ? "bg-[#E8600F] text-white-off"
-        : "text-[#A1A1A1]"
+        ? "bg-tab-bg border-[0.82px] text-tab-text-a border-border cursor-pointer"
+        : "text-tab-text cursor-pointer"
         }`}
     >
       {icon} <span>{label}</span>

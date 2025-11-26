@@ -13,10 +13,14 @@ import {
   QrCode,
   Settings,
   X,
+  LogOut,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar({ isMobile = false, onClose }: any) {
   const pathname = usePathname();
+  const router = useRouter();
+
 
   const menu = [
     { label: "Dashboard", icon: <LayoutDashboard size={18} />, href: "/pages/dashboard" },
@@ -49,11 +53,11 @@ export default function Sidebar({ isMobile = false, onClose }: any) {
       )}
 
       <div>
-        <div className="px-4 pb-4">
+        <div className="px-4 pb-4 mt-4 border-b-[0.82px] border-border md:text-center w-full ">
           <h1 className="text-2xl font-semibold">PrivateCRCL</h1>
         </div>
 
-        <nav className="mt-2 space-y-1">
+        <nav className="mt-4 space-y-1">
           {menu.map((item, idx) => {
             const active = pathname === item.href;
             return (
@@ -63,20 +67,35 @@ export default function Sidebar({ isMobile = false, onClose }: any) {
                 onClick={onClose}
                 className={`
                   flex items-center gap-3 px-4 py-3 rounded-lg transition
-                  ${active ? "bg-[#E8600F] text-white" : "text-sidebar-text hover:bg-offer-search hover:text-white"}
+                  ${active ? "bg-[#E8600F] text-white" : "text-sidebar-text hover:bg-sidebar-hover hover:text-white-off"}
                 `}
               >
                 {item.icon}
-                <span className="text-sm">{item.label}</span>
+                <span className="text-md">{item.label}</span>
               </Link>
             );
           })}
-          <ThemeToggle />
         </nav>
       </div>
 
-      <div className="p-2 space-y-4">
-      
+      <div className="p-2 space-y-3 border-t-[0.82px] border-border">
+        <ThemeToggle />
+        <button
+          onClick={() => {
+            localStorage.removeItem("token");
+            router.push("/");
+          }}
+          className="
+      w-full flex items-center justify-start gap-2 
+      px-2 py-2 rounded-lg cursor-pointer
+      bg-offer-search-main 
+      text-md transition
+      text-sidebar-text hover:bg-sidebar-hover hover:text-white-off
+    "
+        >
+          <LogOut size={18} />
+          Logout
+        </button>
 
         <div className="dark:bg-[#09090B] rounded-xl p-3 flex items-center gap-3">
           <div className="h-[32px] w-[32px] flex items-center justify-center rounded-full bg-[#E5E7EB] dark:bg-[#333] text-[#364153] dark:text-white">

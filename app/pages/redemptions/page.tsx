@@ -66,7 +66,7 @@ export default function RedemptionsPage() {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-8">
-          
+
           <div className="bg-offer-search-main p-6 rounded-[14px] border border-border">
             <div className="flex items-center gap-2 mb-4">
               <ScanLine className="text-[#E8600F]" size={22} />
@@ -85,7 +85,7 @@ export default function RedemptionsPage() {
                 className="w-full max-w-xs px-4 py-3 rounded-lg text-[14px] border border-border bg-offer-search-main text-white-off placeholder-table-text-id outline-none mb-4"
               />
 
-              <button onClick={handleScan} className="bg-[#E8600F] text-white text-[14px] px-6 py-3 rounded-lg w-full max-w-xs hover:bg-[#d15509]">
+              <button onClick={handleScan} className="bg-[#E8600F] cursor-pointer text-white text-[14px] px-6 py-3 rounded-lg w-full max-w-xs hover:bg-[#d15509]">
                 Verify & Redeem
               </button>
             </div>
@@ -145,7 +145,7 @@ export default function RedemptionsPage() {
                     <p className="text-red-500 text-[14px]">{scanResult.reason}</p>
                   </div>
 
-                  <button onClick={() => { setScanResult(null); setScanInput(""); }} className="w-full py-3 border border-border rounded-[10px] text-white-off hover:bg-offer-search text-[14px]">
+                  <button onClick={() => { setScanResult(null); setScanInput(""); }} className="w-full py-3 border border-border rounded-[10px] text-white-off hover:bg-offer-search cursor-pointer text-[14px]">
                     Try Again
                   </button>
                 </div>
@@ -154,12 +154,12 @@ export default function RedemptionsPage() {
           )}
         </div>
 
-        <div className="bg-offer-search-main p-6 rounded-[14px] border border-border w-[310px] md:w-full  overflow-x-auto">
+        <div className="md:w-full overflow-x-auto rounded-lg bg-offer-search-main p-6  border-[0.82px] border-border">
           <h3 className="text-white-off text-[16px] mb-1">Recent Redemptions</h3>
           <p className="text-table-text-id text-sm mb-4">Last 24 hours</p>
 
-          <div className="hidden md:block">
-            <table className="w-full text-[14px]">
+          <div className="w-full max-w-[100px] md:max-w-full">
+            <table className="w-full min-w-[700px] text-[14px]">
               <thead>
                 <tr className="border-b border-border text-table-text-h">
                   <th className="p-4 text-left">Customer</th>
@@ -203,53 +203,6 @@ export default function RedemptionsPage() {
               </tbody>
             </table>
           </div>
-
-          <div className="md:hidden overflow-x-auto">
-            <table className="w-full min-w-[650px] text-[12px]">
-              <thead>
-                <tr className="border-b border-border text-table-text-h">
-                  <th className="p-3 text-left">Customer</th>
-                  <th className="p-3 text-left">Offer</th>
-                  <th className="p-3 text-left">Time</th>
-                  <th className="p-3 text-left">Status</th>
-                  <th className="p-3 text-left">Remaining</th>
-                </tr>
-              </thead>
-              <tbody>
-                {redemptions.map((r, i) => (
-                  <tr key={i} className="border-b border-border">
-                    <td className="p-3">
-                      <p className="text-white-off font-medium">{r.customer}</p>
-                      <p className="text-[10px] text-table-text-id">{r.id}</p>
-                    </td>
-                    <td className="p-3 text-white-off">{r.offer}</td>
-                    <td className="p-3">
-                      <div className="flex items-center gap-1 text-table-text-id">
-                        <Calendar size={12} />
-                        <span>{r.time}</span>
-                      </div>
-                    </td>
-                    <td className="p-3">
-                      {r.status === "Success" && (
-                        <span className="flex items-center gap-1 px-2 py-1 rounded-[10px] text-[10px] bg-[#0D542B] text-[#7BF1A8] w-fit">
-                          <CheckCircle size={10} />
-                          Success
-                        </span>
-                      )}
-                      {r.status === "Failed" && (
-                        <span className="flex items-center gap-1 px-2 py-1 rounded-[10px] text-[10px] bg-[#5B0A0A] text-[#FF8A8A] w-fit">
-                          <XCircle size={10} />
-                          Failed
-                        </span>
-                      )}
-                    </td>
-                    <td className="p-3 text-white-off">{r.remaining}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
         </div>
       </div>
     </div>

@@ -14,12 +14,12 @@ export default function ThemeToggle() {
       {theme === "light" ? (
         <div className=" flex gap-2 items-center">
           <Moon size={18} className="text-sidebar-text" />
-          <span className="text-sidebar-text text-[16px]">Dark Mode</span>
+          <span className="text-sidebar-text text-md">Dark Mode</span>
         </div>
       ) : (
         <div className=" flex gap-2 items-center ">
           <Sun size={18} className="text-sidebar-text" />
-          <span className="text-sidebar-text text-[16px]">Light Mode</span>
+          <span className="text-sidebar-text text-md">Light Mode</span>
         </div>
 
       )}

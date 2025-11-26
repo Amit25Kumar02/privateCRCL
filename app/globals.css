@@ -8,6 +8,7 @@
   --table-text-h: #4A5565;
   --table-text-id: #6A7282;
   --table-bg: #FFFFFF;
+  --sidebar-hover: #4b4a4a4d;
   --offer-search: #F9FAFB;
   --offer-search-main: #FFFFFF;
   --offer-tab-text: #FFFFFF;
@@ -28,11 +29,14 @@
   --panding-bg-text: #A65F00;
   --tentative-bg: #DBEAFE;
   --tentative-bg-text: #1447E6;
-  --confirmed-bg: #DCFCE7;
+  --con-bg: #DCFCE7;
   --confirmed-bg-text: #008236;
   --completed-bg: #E5E7EB;
   --canceled-bg: #FFE2E2;
   --canceled-bg-text: #C10007;
+  --tab-bg: #E8600F;
+  --tab-text: #0A0A0A;
+  --tab-text-a: #ffffff;
 }
 
 .dark {
@@ -44,6 +48,7 @@
   --table-text-id: #71717B;
   --table-bg: #09090B;
   --offer-search: #2626264D;
+  --sidebar-hover: #2626264D;
   --offer-search-main: #09090B;
   --offer-tab-text: #09090B;
   --sidebar-text: #9F9FA9;
@@ -57,16 +62,20 @@
   --bronze: #7E2A0C;
   --bronze-text: #FFB86A;
   --payout-bg: #0D542B;
+  --payout-bg-text: #7BF1A8;
   --payout-line-bg: #27272A;
   --panding-bg: #733E0A;
   --panding-bg-text: #FFDF20;
   --tentative-bg: #1C398E;
   --tentative-bg-text: #8EC5FF;
-  --confirmed-bg: #0D542B;
+  --con-bg: #0D542B;
   --confirmed-bg-text: #7BF1A8;
   --completed-bg: #27272A;
   --canceled-bg: #82181A;
   --canceled-bg-text: #FFA2A2;
+  --tab-bg: #2626264D;
+  --tab-text: #A1A1A1;
+  --tab-text-a: #ffffff;
 }
 
 @theme inline {
@@ -78,6 +87,7 @@
   --color-border: var(--border);
   --color-table-bg: var(--table-bg);
   --color-offer-search: var(--offer-search);
+  --color-sidebar-hover: var(--sidebar-hover);
   --color-offer-search-main: var(--offer-search-main);
   --color-offer-tab-text: var(--offer-tab-text);
   --color-sidebar-text: var(--sidebar-text);
@@ -97,16 +107,26 @@
   --color-panding-bg-text: var(--panding-bg-text);
   --color-tentative-bg: var(--tentative-bg);
   --color-tentative-bg-text: var(--tentative-bg-text);
-  --color-confirmed-bg: var(--confiremd-bg);
+  --color-con-bg: var(--con-bg);
   --color-confirmed-bg-text: var(--confirmed-bg-text);
   --color-completed-bg: var(--completed-bg);
   --color-canceled-bg: var(--canceled-bg);
   --color-canceled-bg-text: var(--canceled-bg-text);
+  --color-tab-bg: var(--tab-bg);
+  --color-tab-text: var(--tab-text);
+  --color-tab-text-a: var(--tab-text-a);
 
 }
+
+
 @keyframes slideIn {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
 .animate-slideIn {
@@ -134,7 +154,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-html, body {
+html,
+body {
   overflow-y: auto;
 }
 

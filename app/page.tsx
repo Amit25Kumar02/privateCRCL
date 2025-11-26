@@ -48,15 +48,15 @@ export default function LoginPage() {
 
         {/* Email */}
         <label className="text-sm text-table-text-h">Email Address</label>
-        <div className="mt-2 flex items-center gap-2  rounded-lg px-3 bg-offer-search border-[0.82px] border-border">
+        <div className="mt-2 flex items-center gap-2  rounded-lg px-3  border-[0.82px] border-border">
           <Mail size={18} className="text-table-text-id" />
           <input
             type="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@business.com"
-            className="w-full py-2 bg-offer-search text-sm outline-none text-table-text-h "
+            placeholder="demo@business.com"
+            className="w-full py-2 text-sm outline-none text-table-text-h "
           />
         </div>
 
@@ -69,13 +69,13 @@ export default function LoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-            className="w-full py-2 bg-offer-search text-sm outline-none "
+            placeholder="12345678"
+            className="w-full py-2 text-sm outline-none "
           />
           <button
             type="button"
             onClick={() => setShowPass(!showPass)}
-            className="text-table-text-h"
+            className="text-table-text-h cursor-pointer"
           >
             {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
           </button>
@@ -93,10 +93,10 @@ export default function LoginPage() {
         {/* Options */}
         <div className="flex justify-between items-center mt-3 text-sm">
           <label className="flex items-center gap-2 text-table-text-h">
-            <input type="checkbox" />
+            <input type="checkbox" className="cursor-pointer" />
             Remember me
           </label>
-          <button type="button" className="text-[#E8600F]">Forgot?</button>
+          <button type="button" className="text-[#E8600F] cursor-pointer">Forgot password?</button>
         </div>
 
         {/* Sign in button */}

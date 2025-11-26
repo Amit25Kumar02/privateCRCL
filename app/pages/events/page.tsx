@@ -121,7 +121,7 @@ export default function EventsBookingsPage() {
     const styles: Record<BookingStatus, string> = {
       pending: "bg-panding-bg text-panding-bg-text",
       tentative: "bg-tentative-bg text-tentative-bg-text",
-      confirmed: "bg-confirmed-bg text-confirmed-bg-text",
+      confirmed: "bg-con-bg text-confirmed-bg-text",
       completed: "bg-completed-bg text-table-text-h",
       canceled: "bg-canceled-bg text-canceled-bg-text",
     };
@@ -215,8 +215,8 @@ export default function EventsBookingsPage() {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-4 py-1 rounded-full cursor-pointer text-[14px] ${activeTab === tab
-                    ? "bg-[#E8600F] text-[#FFFFFF] border-[#E8600F]"
-                    : " text-[#A1A1A1] "
+                    ? "bg-tab-bg border-[0.82px] text-white-off border-border"
+                    : " text-tab-text "
                     }`}
                 >
                   {tab}
@@ -228,98 +228,100 @@ export default function EventsBookingsPage() {
         </div>
 
         {/* Table */}
-        <div className="rounded-[14px] w-[310px] md:w-full overflow-auto border-[0.82px] border-border bg-offer-search-main ">
-          <table className="w-full md:w-full overflow-auto text-[14px]">
-            <thead>
-              <tr className="font-medium text-[14px] text-table-text-h border-b-[0.82px] border-b-border">
-                <th className="p-4 text-left">Requester</th>
-                <th className="p-4 text-left">Event Type</th>
-                <th className="p-4 text-left">Date & Time</th>
-                <th className="p-4 text-left">Guests</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y divide-[#E5E7EB] dark:divide-[#1f1f1f]">
-              {filtered.map((b) => (
-                <tr
-                  key={b.id}
-                  className=" transition border-b-[0.82px] border-b-border"
-                >
-                  <td className="p-4">
-                    <p className="font-medium text-[14px] text-white-off">{b.requester}</p>
-                    <p className="text-[14px] text-table-text-id">{b.email}</p>
-                  </td>
-
-                  <td className="p-4 text-[14px] text-white-off">{b.eventType}</td>
-
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-table-text-id" />
-                      <div>
-                        <p className="text-[14px] text-white-off">{b.date}</p>
-                        <p className="text-[14px] text-table-text-id">{b.time}</p>
-                      </div>
-                    </div>
-                  </td>
-
-                  <td className="p-4 flex items-center text-[14px] text-white-off gap-2">
-                    <Users size={16} className="text-table-text-id" />
-                    {b.guests}
-                  </td>
-
-                  <td className="p-4">
-                    <StatusPill status={b.status} />
-                  </td>
-                  <td className="p-4">
-                    <div className="flex items-center gap-2">
-                      {/* Details */}
-                      <button
-                        onClick={() =>
-                          setShowActionsFor(showActionsFor === b.id ? null : b.id)
-                        }
-                        className="px-3 py-1 rounded-lg cursor-pointer text-white-off border-[0.82px] bg-offer-search border-border"
-                      >
-                        Details
-                      </button>
-
-                      {/* Only for pending */}
-                      {showActionsFor === b.id && b.status === "pending" && (
-                        <>
-                          <button
-                            onClick={() => updateStatus(b.id, "confirmed")}
-                            className="w-8 h-8 bg-[#00A63E] cursor-pointer text-[#FFFFFF] rounded-lg flex items-center justify-center"
-                          >
-                            <Check size={16} />
-                          </button>
-
-                          <button
-                            onClick={() => updateStatus(b.id, "canceled")}
-                            className="w-8 h-8 bg-offer-search-main cursor-pointer text-[#E7000B] border-[0.82px] border-[#FFA2A2] rounded-lg flex items-center justify-center"
-                          >
-                            <X size={16} />
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </td>
-
+        <div className="rounded-lg md:w-full overflow-auto border-[0.82px] border-border bg-offer-search-main ">
+          <div className="w-full max-w-[100px] md:max-w-full">
+            <table className="w-full  min-w-[700px] text-[14px]">
+              <thead>
+                <tr className="font-medium text-[14px] text-table-text-h border-b-[0.82px] border-b-border">
+                  <th className="p-4 text-left">Requester</th>
+                  <th className="p-4 text-left">Event Type</th>
+                  <th className="p-4 text-left">Date & Time</th>
+                  <th className="p-4 text-left">Guests</th>
+                  <th className="p-4 text-left">Status</th>
+                  <th className="p-4 text-left">Actions</th>
                 </tr>
-              ))}
+              </thead>
 
-              {filtered.length === 0 && (
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="p-6 text-center text-gray-500 dark:text-[#9F9FA9]"
+              <tbody className="divide-y divide-[#E5E7EB] dark:divide-[#1f1f1f]">
+                {filtered.map((b) => (
+                  <tr
+                    key={b.id}
+                    className=" transition border-b-[0.82px] border-b-border"
                   >
-                    No requests found.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                    <td className="p-4">
+                      <p className="font-medium text-[14px] text-white-off">{b.requester}</p>
+                      <p className="text-[14px] text-table-text-id">{b.email}</p>
+                    </td>
+
+                    <td className="p-4 text-[14px] text-white-off">{b.eventType}</td>
+
+                    <td className="p-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} className="text-table-text-id" />
+                        <div>
+                          <p className="text-[14px] text-white-off">{b.date}</p>
+                          <p className="text-[14px] text-table-text-id">{b.time}</p>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="p-4 flex items-center text-[14px] text-white-off gap-2">
+                      <Users size={16} className="text-table-text-id" />
+                      {b.guests}
+                    </td>
+
+                    <td className="p-4">
+                      <StatusPill status={b.status} />
+                    </td>
+                    <td className="p-4">
+                      <div className="flex items-center gap-2">
+                        {/* Details */}
+                        <button
+                          onClick={() =>
+                            setShowActionsFor(showActionsFor === b.id ? null : b.id)
+                          }
+                          className="px-3 py-1 rounded-lg cursor-pointer text-white-off border-[0.82px] bg-offer-search border-border"
+                        >
+                          Details
+                        </button>
+
+                        {/* Only for pending */}
+                        {showActionsFor === b.id && b.status === "pending" && (
+                          <>
+                            <button
+                              onClick={() => updateStatus(b.id, "confirmed")}
+                              className="w-8 h-8 bg-[#00A63E] cursor-pointer text-[#FFFFFF] rounded-lg flex items-center justify-center"
+                            >
+                              <Check size={16} />
+                            </button>
+
+                            <button
+                              onClick={() => updateStatus(b.id, "canceled")}
+                              className="w-8 h-8 bg-offer-search-main cursor-pointer text-[#E7000B] border-[0.82px] border-[#FFA2A2] rounded-lg flex items-center justify-center"
+                            >
+                              <X size={16} />
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </td>
+
+                  </tr>
+                ))}
+
+                {filtered.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      className="p-6 text-center text-gray-500 dark:text-[#9F9FA9]"
+                    >
+                      No requests found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
     </div>

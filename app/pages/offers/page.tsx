@@ -70,6 +70,14 @@ export default function OffersPage() {
   const [clickRange, setClickRange] = useState<[number, number]>([clicksMin, clicksMax]);
   const [redeemRange, setRedeemRange] = useState<[number, number]>([redemptionMin, redemptionMax]);
 
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+
+  const toggleDay = (day: string) => {
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
+
   // populate available statuses on mount
   useEffect(() => {
     const statuses = Array.from(new Set(offers.map((o) => o.status)));
@@ -240,7 +248,7 @@ export default function OffersPage() {
 
         {/* Header */}
         <div className="flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-          <div  className="hidden md:block">
+          <div className="hidden md:block">
             <h1 className="text-[30px] text-text">Offers Management</h1>
             <p className="text-[16px] text-all-sub-h">Create and manage perks and discounts</p>
           </div>
@@ -286,8 +294,8 @@ export default function OffersPage() {
               key={t}
               onClick={() => setActiveTab(t)}
               className={`px-2 py-1 cursor-pointer text-[14px] whitespace-nowrap rounded-[14px] ${activeTab === t
-                ? "bg-[#E8600F] dark:bg-[#2626264D] text-offer-tab-text border-border"
-                : " dark:text-[#A1A1A1]"
+                ? "bg-tab-bg border-[0.82px] text-tab-text-a border-border cursor-pointer"
+                : " text-tab-text cursor-pointer"
                 }`}
             >
               {t}
@@ -463,105 +471,70 @@ export default function OffersPage() {
         )}
 
         {/* DESKTOP TABLE */}
-        <div className="mt-6 w-[310px] md:w-full overflow-x-auto rounded-[14px] bg-table-bg border-[0.82px] border-border">
-          <table className="text-[14px] w-full ">
-            <thead>
-              <tr className=" text-[14px] border-[0.82px] border-border text-table-text-h">
-                <th className="p-4 text-left">Offer</th>
-                <th className="p-4 text-left">Status</th>
-                <th className="p-4 text-left">Performance</th>
-                <th className="p-4 text-left">Redemptions</th>
-                <th className="p-4 text-left">Period</th>
-                <th className="p-4 text-left w-10">Actions</th>
-              </tr>
-            </thead>
-
-            <tbody className="divide-y  dark:divide-[#1f1f1f]">
-              {filteredOffers.map((item) => (
-                <tr key={item.id} className="border-border">
-                  <td className="p-4">
-                    <p className="text-white-off text-[14px]">{item.title}</p>
-                    <p className="text-[14px] text-table-text-id">ID: {item.id}</p>
-                  </td>
-
-                  <td className="p-4">
-                    <span className={`px-2 py-1 text-[12px] rounded-lg ${statusColor[item.status]}`}>
-                      {item.status}
-                    </span>
-                  </td>
-
-                  <td className="p-4">
-                    <p className="text-white-off text-[14px]">{item.impressions} impressions</p>
-                    <p className="text-[14px] text-table-text-id">{item.clicks} clicks</p>
-                  </td>
-
-                  <td className="p-4">
-                    <p className="text-[14px] text-white-off">{item.redeemed} / {item.total}</p>
-                    <div className="w-full bg-payout-line-bg rounded-full h-1.5 mt-1">
-                      <div className="bg-[#E8600F] h-1.5 rounded-full" style={{ width: `${(item.redeemed / item.total) * 100}%` }} />
-                    </div>
-                  </td>
-
-                  <td className="p-4">
-                    <p className="text-[14px] text-white-off">{item.start}</p>
-                    <p className="text-[14px] text-table-text-id">{item.end}</p>
-                  </td>
-
-                  <td className="p-4">
-                    <MoreVertical className="text-white-off cursor-pointer" />
-                  </td>
+        <div className="mt-6 md:w-full overflow-x-auto rounded-lg bg-offer-search-main border-[0.82px] border-border">
+          <div className="w-full max-w-[100px] md:max-w-full">
+            <table className="text-[14px] min-w-[700px] w-full ">
+              <thead>
+                <tr className=" text-[14px] border-[0.82px] border-border text-table-text-h">
+                  <th className="p-4 text-left">Offer</th>
+                  <th className="p-4 text-left">Status</th>
+                  <th className="p-4 text-left">Performance</th>
+                  <th className="p-4 text-left">Redemptions</th>
+                  <th className="p-4 text-left">Period</th>
+                  <th className="p-4 text-left w-10">Actions</th>
                 </tr>
-              ))}
+              </thead>
 
-              {filteredOffers.length === 0 && (
-                <tr>
-                  <td colSpan={6} className="p-6 text-center text-sm dark:text-[#FAFAFA]">
-                    No offers match your filters.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+              <tbody className="divide-y  dark:divide-[#1f1f1f]">
+                {filteredOffers.map((item) => (
+                  <tr key={item.id} className="border-border">
+                    <td className="p-4">
+                      <p className="text-white-off text-[14px] line-clamp-2 max-w-[400px]">{item.title}</p>
+                      <p className="text-[14px] text-table-text-id">ID: {item.id}</p>
+                    </td>
+
+                    <td className="p-4">
+                      <span className={`px-2 py-1 text-[12px] rounded-lg ${statusColor[item.status]}`}>
+                        {item.status}
+                      </span>
+                    </td>
+
+                    <td className="p-4">
+                      <p className="text-white-off text-[14px]">{item.impressions} impressions</p>
+                      <p className="text-[14px] text-table-text-id">{item.clicks} clicks</p>
+                    </td>
+
+                    <td className="p-4">
+                      <p className="text-[14px] text-white-off">{item.redeemed} / {item.total}</p>
+                      <div className="w-full bg-payout-line-bg rounded-full h-1.5 mt-1">
+                        <div className="bg-[#E8600F] h-1.5 rounded-full" style={{ width: `${(item.redeemed / item.total) * 100}%` }} />
+                      </div>
+                    </td>
+
+                    <td className="p-4">
+                      <p className="text-[14px] text-white-off">{item.start}</p>
+                      <p className="text-[14px] text-table-text-id">{item.end}</p>
+                    </td>
+
+                    <td className="p-4">
+                      <MoreVertical className="text-white-off cursor-pointer" />
+                    </td>
+                  </tr>
+                ))}
+
+                {filteredOffers.length === 0 && (
+                  <tr>
+                    <td colSpan={6} className="p-6 text-center text-sm dark:text-[#FAFAFA]">
+                      No offers match your filters.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* MOBILE CARDS */}
-        {/* <div className="md:hidden mt-6 space-y-4">
-          {filteredOffers.map((item) => (
-            <div key={item.id} className="p-4 space-y-3 rounded-xl border bg-gray-50 dark:bg-[#111] border-gray-300 dark:border-[#27272A]">
-              <div className="flex justify-between">
-                <h3 className="font-medium">{item.title}</h3>
-                <MoreVertical className="text-gray-500 dark:text-gray-400" />
-              </div>
 
-              <p className="text-xs text-gray-500">ID: {item.id}</p>
-
-              <span className={`px-2 py-1 text-xs rounded-md ${statusColor[item.status]}`}>
-                {item.status}
-              </span>
-
-              <div>
-                <p className="text-sm">{item.impressions} impressions</p>
-                <p className="text-xs text-gray-500">{item.clicks} clicks</p>
-              </div>
-
-              <div>
-                <p className="text-sm">{item.redeemed} / {item.total}</p>
-                <div className="w-full bg-gray-300 dark:bg-[#2a2a2a] h-1.5 rounded-full mt-1">
-                  <div className="bg-[#E8600F] h-1.5 rounded-full" style={{ width: `${(item.redeemed / item.total) * 100}%` }} />
-                </div>
-              </div>
-
-              <div>
-                <p className="text-sm">{item.start}</p>
-                <p className="text-xs text-gray-500">{item.end}</p>
-              </div>
-            </div>
-          ))}
-
-          {filteredOffers.length === 0 && (
-            <div className="p-4 text-center text-sm text-gray-500">No offers match your filters.</div>
-          )}
-        </div> */}
       </div>
       {showCreateModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
@@ -642,16 +615,29 @@ export default function OffersPage() {
             <div className="mb-4">
               <label className="text-sm text-all-sub-h">Days of Week</label>
               <div className="flex flex-wrap gap-2 mt-2">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
-                  <button
-                    key={d}
-                    className="px-4 py-2 cursor-pointer rounded-[10px] border border-border bg-offer-search-main"
-                  >
-                    {d}
-                  </button>
-                ))}
+                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => {
+                  const isActive = selectedDays.includes(d);
+
+                  return (
+                    <button
+                      key={d}
+                      onClick={() => toggleDay(d)}
+                      className={`
+            px-4 py-2 cursor-pointer rounded-[10px] border text-[14px] 
+            transition-all duration-200
+            ${isActive
+                          ? "bg-[#E8600F] border-[#E8600F] text-white"
+                          : "bg-offer-search-main border-border text-all-sub-h hover:border-[#E8600F]/40"
+                        }
+          `}
+                    >
+                      {d}
+                    </button>
+                  );
+                })}
               </div>
             </div>
+
 
             {/* T&C */}
             <div className="mb-4">

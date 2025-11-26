@@ -236,14 +236,14 @@ export default function BusinessProfilePage() {
 
           {/* OPENING HOURS */}
           {tab === "hours" && (
-            <section className="rounded-xl p-6 w-[310px] md:w-full overflow-auto borde bg-offer-search-main border-[0.82px] border-border">
+            <section className="rounded-xl p-6 md:w-full overflow-x-auto borde bg-offer-search-main border-[0.82px] border-border">
               <h2 className="text-[16px] text-white-off font-medium mb-4">Opening Hours</h2>
 
-              <div className="space-y-3 w-[310px] md:w-full overflow-auto">
+              <div className="space-y-3 w-full max-w-[100px] md:max-w-full">
                 {Object.keys(hours).map((day) => {
                   const h = hours[day];
                   return (
-                    <div key={day} className="rounded-md p-3 bg-offer-search  border border-border w-[610px] md:w-full flex items-center gap-4">
+                    <div key={day} className="rounded-md p-3 bg-offer-search  border border-border  flex items-center gap-4">
                       <div className="w-36 text-[14px] text-white-off">{day}</div>
 
                       <div className="flex items-center gap-2">
@@ -377,8 +377,8 @@ function Tab({
     <button
       onClick={onClick}
       className={`px-4 py-2 text-center rounded-[14px] text-[14px] ${active
-        ? "bg-[#E8600F] cursor-pointer text-white-off"
-        : "text-[#A1A1A1] cursor-pointer"
+        ? "bg-tab-bg border-[0.82px] text-tab-text-a border-border cursor-pointer"
+        : "text-tab-text cursor-pointer"
         }`}
     >
       {label}

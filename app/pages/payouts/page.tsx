@@ -14,7 +14,7 @@ import {
     Cell,
 } from "recharts";
 
-import { TrendingUp, Eye, DollarSign, Users, Menu ,Download } from "lucide-react";
+import { TrendingUp, Eye, DollarSign, Users, Menu, Download } from "lucide-react";
 import Sidebar from "@/app/component/sidebar/page";
 
 
@@ -196,7 +196,7 @@ export default function PayoutsAnalyticsPage() {
                     </div>
 
                     {/* Gender */}
-                    <div className="rounded-[14px] border p-4 bg-offer-search-main border-border">
+                    <div className="rounded-lg border-[0.82px] p-4 bg-offer-search-main border-border">
                         <h4 className="text-[16px] text-white-off mb-1">Gender Distribution</h4>
                         <p className="text-[14px] text-table-text-h mb-3">Customer breakdown</p>
 
@@ -214,29 +214,53 @@ export default function PayoutsAnalyticsPage() {
                     </div>
                 </div>
 
-                {/* Top offers */}
-                <div className="rounded-[14px]  mb-6 border p-5 bg-offer-search-main border-border">
-                    <h4 className="text-[16px] text-white-off mb-1">Top Performing Offers</h4>
-                    <p className="text-[14px] text-table-text-h mb-4">November 2024</p>
+                {/* Top Performing Offers */}
+                <div className="rounded-lg border-[0.82px] border-border bg-offer-search-main md:w-full overflow-x-auto p-4 mb-6  ">
+                    <h4 className="text-[16px] font-semibold text-white-off mb-1">
+                        Top Performing Offers
+                    </h4>
+                    <p className="text-[14px] text-table-text-h mb-6">November 2024</p>
+                    <div className="w-full max-w-[100px] md:max-w-full">
+                        <table className="w-full min-w-[700px] text-sm">
+                            {/* Header */}
+                            <thead>
+                                <tr className="border-b-[0.82px] border-b-border text-table-text-h">
+                                    <th className="py-3 text-left font-normal">Offer Name</th>
+                                    <th className="py-3 text-center font-normal">Redemptions</th>
+                                    <th className="py-3 text-right font-normal">Actions</th>
+                                </tr>
+                            </thead>
 
-                    {topOffers.map((o) => (
-                        <div key={o.id} className="grid grid-cols-3 p-3 border-b border-border">
-                            <div className="text-white-off">{o.title}</div>
-                            <div>
-                                <span className="px-3 py-1 rounded-lg bg-[#E8600F] text-white text-[12px]">{o.redemptions}</span>
-                            </div>
-                            <div className="text-right">
-                                <button className="px-3 py-1 rounded-md bg-offer-search border border-border text-white-off flex items-center gap-2">
-                                    <Eye size={16} /> View
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                            {/* Body */}
+                            <tbody className="divide-y divide-border">
+                                {topOffers.map((o) => (
+                                    <tr key={o.id} className="py-4">
+                                        <td className="py-4 text-white-off">{o.title}</td>
+
+                                        <td className="py-4 text-center">
+                                            <span className="min-w-[45px] inline-block text-center px-3 py-1 rounded-md bg-[#E8600F] text-white text-[12px] font-semibold">
+                                                {o.redemptions}
+                                            </span>
+                                        </td>
+
+                                        <td className="py-4 text-right">
+                                            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-offer-search border-[0.82px] border-border text-white text-[13px] hover:border-[#E8600F] transition cursor-pointer">
+                                                <Eye size={16} className="text-white" />
+                                                View Details
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
+
+
                 {/* Top redeemers */}
-                <div className="rounded-[14px] border p-5 bg-offer-search-main border-border mb-6 
-                w-[310px] overflow-auto md:w-full ">
+                <div className="rounded-lg border-[0.82px] p-5 bg-offer-search-main border-border mb-6 
+                md:w-full overflow-x-auto ">
 
                     <h4 className="text-[16px] text-white-off mb-1">Top Redeemers</h4>
                     <p className="text-[14px] text-table-text-h mb-4">
@@ -244,9 +268,9 @@ export default function PayoutsAnalyticsPage() {
                     </p>
 
                     {/* SCROLL WRAPPER */}
-                    <div className="overflow-x-auto ">
+                    <div className="w-full max-w-[100px] md:max-w-full">
 
-                        <table className=" w-[610px] overflow-auto md:w-full text-sm">
+                        <table className="w-full text-sm min-w-[700px]">
                             <thead>
                                 <tr className="border-b border-border text-table-text-h">
                                     <th className="py-3 text-left">Rank</th>
@@ -307,7 +331,7 @@ export default function PayoutsAnalyticsPage() {
 
 
                 {/* Benchmarks */}
-                <div className="rounded-[14px] border p-5 bg-offer-search-main border-border">
+                <div className="rounded-lg border p-5 bg-offer-search-main border-border">
                     <h4 className="text-[16px] text-white-off mb-1">Neighborhood Benchmarks</h4>
                     <p className="text-[14px] text-table-text-h mb-6">Comparison with similar businesses</p>
 
