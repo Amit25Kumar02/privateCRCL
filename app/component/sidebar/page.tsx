@@ -16,6 +16,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Sidebar({ isMobile = false, onClose }: any) {
   const pathname = usePathname();
@@ -29,7 +30,7 @@ export default function Sidebar({ isMobile = false, onClose }: any) {
     { label: "Payouts & Analytics", icon: <DollarSign size={18} />, href: "/pages/payouts" },
     { label: "Events", icon: <Calendar size={18} />, href: "/pages/events" },
     { label: "Business Profile", icon: <Store size={18} />, href: "/pages/business-profile" },
-    { label: "QR Scanner", icon: <QrCode size={18} />, href: "/pages/qr-scanner" },
+    // { label: "QR Scanner", icon: <QrCode size={18} />, href: "/pages/qr-scanner" },
     { label: "Account Settings", icon: <Settings size={18} />, href: "/pages/settings" },
   ];
 
@@ -53,11 +54,12 @@ export default function Sidebar({ isMobile = false, onClose }: any) {
       )}
 
       <div>
-        <div className="px-4 pb-4 mt-4 border-b-[0.82px] border-border md:text-center w-full ">
-          <h1 className="text-2xl font-semibold">PrivateCRCL</h1>
+        <div className="flex justify-center items-center border-b-[0.82px] border-b-border mb-4">
+          <h1 className="sidebar-logo" />
         </div>
 
-        <nav className="mt-4 space-y-1">
+
+        <nav className="mt-4 space-y-2">
           {menu.map((item, idx) => {
             const active = pathname === item.href;
             return (
@@ -78,7 +80,7 @@ export default function Sidebar({ isMobile = false, onClose }: any) {
         </nav>
       </div>
 
-      <div className="p-2 space-y-3 border-t-[0.82px] border-border">
+      <div className="p-2 space-y-2 border-t-[0.82px] border-border">
         <ThemeToggle />
         <button
           onClick={() => {

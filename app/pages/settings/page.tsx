@@ -68,7 +68,7 @@ export default function AccountSettings() {
       name: "Mike Chen",
       email: "mike@business.com",
       role: "Staff",
-      status: "Active",
+      status: "Pending",
       lastLogin: "2024-11-11",
     },
     {
@@ -109,16 +109,16 @@ export default function AccountSettings() {
   ]);
 
   const roleColors = {
-    Owner: "bg-[#E8600F] text-white",
-    Manager: "bg-[#334155] text-white",
-    Staff: "bg-[#111827] text-white",
-    Finance: "bg-[#064e3b] text-[#7BF1A8]",
+    Owner: "bg-[#E8600F] text-[#ffffff]",
+    Manager: "bg-[#1C398E] text-[#8EC5FF]",
+    Staff: "bg-[#27272A] text-[#D4D4D8]",
+    Finance: "bg-[#0D542B] text-[#7BF1A8]",
   };
 
   const statusColors = {
-    Active: "bg-[#064e3b] text-[#7BF1A8]",
-    Invited: "bg-[#7c4a03] text-white",
-    Pending: "bg-[#F59E0B] text-black",
+    Active: "bg-[#0D542B] text-[#7BF1A8]",
+    Invited: "bg-[#733E0A] text-[#FFDF20]",
+    Pending: "bg-[#F59E0B] text-[#7BF1A8]",
   };
 
   const permissions = [
@@ -171,7 +171,10 @@ export default function AccountSettings() {
 
       <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
         <div className="md:hidden flex items-center justify-between mb-4 pt-1">
-          <h1 className="text-xl font-semibold">PrivateCRCL</h1>
+          <div>
+            <h1 className="text-xl font-semibold leading-tight">Account Settings</h1>
+            <p className="text-sm text-all-sub-h mt-2">Manage your business</p>
+          </div>
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 rounded-lg border border-border bg-background"
@@ -180,10 +183,6 @@ export default function AccountSettings() {
           </button>
         </div>
 
-        <div className="md:hidden mb-6">
-          <h1 className="text-xl font-semibold leading-tight">Account Settings</h1>
-          <p className="text-sm text-all-sub-h mt-2">Manage your business</p>
-        </div>
 
         <div className="hidden md:block mb-6">
           <h1 className="text-[30px] font-saga">Account Settings</h1>
@@ -192,7 +191,7 @@ export default function AccountSettings() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main  border border-border w-full md:w-fit rounded-[14px] overflow-x-auto">
+        <div className="grid grid-cols-2 md:grid-cols-1 md:flex px-2 py-1 gap-3 mb-6 bg-offer-search-main border-[0.82px] border-border w-full md:w-fit rounded-[14px] overflow-x-auto">
           <Tab
             label="Business Details"
             active={tab === "details"}
@@ -400,7 +399,7 @@ export default function AccountSettings() {
               <div className="rounded-[14px] md:w-full overflow-x-auto border bg-offer-search-main border-border px-6 py-4">
 
                 {/* Header */}
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-4 w-full">
                   <div>
                     <h3 className="text-sm text-white-off font-medium mb-1">
                       Team Members
@@ -412,7 +411,7 @@ export default function AccountSettings() {
 
                   <button
                     onClick={inviteUser}
-                    className="px-3 py-2 rounded-md cursor-pointer text-xs md:text-lg bg-[#E8600F] text-white flex items-center gap-2"
+                    className="md:px-3 p-2 rounded-md cursor-pointer text-xs md:text-lg bg-[#E8600F] text-white flex  items-center gap-2"
                   >
                     <Plus size={14} /> Invite User
                   </button>
@@ -443,7 +442,7 @@ export default function AccountSettings() {
 
                           <td className="p-4">
                             <span
-                              className={`px-3 py-1 rounded-full text-xs ${roleColors[m.role]}`}
+                              className={`px-3 py-1 rounded-md text-xs ${roleColors[m.role]}`}
                             >
                               {m.role}
                             </span>
@@ -451,7 +450,7 @@ export default function AccountSettings() {
 
                           <td className="p-4">
                             <span
-                              className={`px-3 py-1 rounded-full text-xs ${statusColors[m.status]}`}
+                              className={`px-3 py-1 rounded-md text-xs ${statusColors[m.status]}`}
                             >
                               {m.status}
                             </span>
@@ -678,7 +677,7 @@ export default function AccountSettings() {
           )}
         </div>
 
-        <img src={designImage} alt="design" className="hidden" />
+        {/* <img src={designImage} alt="design" className="hidden" /> */}
       </div>
     </div>
   );
@@ -698,7 +697,7 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-[14px] cursor-pointer text-[14px] flex items-center gap-2 whitespace-nowrap ${active
+      className={`p-2 md:px-4 md:py-2 rounded-full cursor-pointer text-[14px] flex items-center gap-2 whitespace-nowrap ${active
         ? "bg-tab-bg border-[0.82px] text-tab-text-a border-border cursor-pointer"
         : "text-tab-text cursor-pointer"
         }`}

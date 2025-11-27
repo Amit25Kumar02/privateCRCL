@@ -63,8 +63,11 @@ export default function Dashboard() {
 
             <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
 
-                <div className="md:hidden flex items-center justify-between mb-4 pt-1">
-                    <div className="text-xl font-semibold">PrivateCRCL</div>
+                <div className="md:hidden flex items-center justify-between mb-4">
+                    <div className="md:hidden ">
+                        <h1 className="text-xl font-semibold">Dashboard</h1>
+                        <p className="text-sm text-all-sub-h">Today at a glance</p>
+                    </div>
                     <button
                         onClick={() => setSidebarOpen(true)}
                         className="p-2 rounded-lg border border-border bg-background"
@@ -73,10 +76,10 @@ export default function Dashboard() {
                     </button>
                 </div>
 
-                <div className="md:hidden mb-4">
+                {/* <div className="md:hidden mb-4">
                     <h1 className="text-xl font-semibold">Dashboard</h1>
                     <p className="text-sm text-all-sub-h">Today at a glance</p>
-                </div>
+                </div> */}
 
                 <div className="hidden md:block mb-6">
                     <h1 className="text-[30px] font-saga">Dashboard</h1>
@@ -129,7 +132,7 @@ export default function Dashboard() {
                         <div className="h-[250px] md:h-[300px] -ml-4 md:ml-0 w-full">
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={performanceData}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={1} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={0.5} />
                                     <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
                                     <YAxis stroke="#6B7280" fontSize={12} />
                                     <Tooltip
@@ -169,7 +172,7 @@ export default function Dashboard() {
                         <div className="h-[250px] md:h-[300px] -ml-4 md:ml-0 w-full">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={redemptionData}>
-                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={1} />
+                                    <CartesianGrid strokeDasharray="3 3" stroke="#27272A" opacity={0.5} />
                                     <XAxis dataKey="name" stroke="#6B7280" fontSize={12} />
                                     <YAxis stroke="#6B7280" fontSize={12} />
                                     <Tooltip

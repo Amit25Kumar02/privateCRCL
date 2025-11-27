@@ -49,16 +49,16 @@ export default function RedemptionsPage() {
       <div className="flex-1 md:ml-64 bg-background min-h-screen p-4 md:p-6 lg:p-8">
 
         <div className="md:hidden flex items-center justify-between mb-4 pt-1">
-          <div className="text-xl font-semibold">PrivateCRCL</div>
+          
+        <div>
+          <h1 className="text-xl font-semibold">Redemptions</h1>
+          <p className="text-sm text-all-sub-h">Scan membership cards and track redemptions</p>
+        </div>
           <button onClick={() => setSidebarOpen(true)} className="p-2 rounded-lg border border-border bg-background">
             <Menu size={22} />
           </button>
         </div>
 
-        <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">Redemptions</h1>
-          <p className="text-sm text-all-sub-h">Scan membership cards and track redemptions</p>
-        </div>
 
         <div className="hidden md:block mb-6">
           <h1 className="text-[30px] font-saga">Redemptions</h1>

@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Sidebar from "../../component/sidebar/page";
 import { MapPin, Clock, Edit, Globe, Menu } from "lucide-react";
+import Image from "next/image";
 
-const designImage = "/mnt/data/88ec2f84-50a6-4262-bfbb-e349b96f80b4.png";
+const designImage = "/ImageWithFallback.png";
 
 type Hours = { open?: string; close?: string; closed?: boolean };
 
@@ -48,19 +49,22 @@ export default function BusinessProfilePage() {
   // Media (logo + hero)
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [heroFile, setHeroFile] = useState<File | null>(null);
-  const logoPreview = useRef<string | null>(null);
-  const heroPreview = useRef<string | null>(designImage); // show design image by default
+  const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [heroPreview, setHeroPreview] = useState<string>(designImage);
+
 
   function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0] ?? null;
-    setLogoFile(f);
-    logoPreview.current = f ? URL.createObjectURL(f) : null;
+    const file = e.target.files?.[0] ?? null;
+    setLogoFile(file);
+    setLogoPreview(file ? URL.createObjectURL(file) : null);
   }
+
   function handleHeroChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0] ?? null;
-    setHeroFile(f);
-    heroPreview.current = f ? URL.createObjectURL(f) : designImage;
+    const file = e.target.files?.[0] ?? null;
+    setHeroFile(file);
+    setHeroPreview(file ? URL.createObjectURL(file) : designImage);
   }
+
 
   // Helper to update opening hours
   function updateHour(day: string, key: "open" | "close" | "closed", val: any) {
@@ -96,7 +100,10 @@ export default function BusinessProfilePage() {
       <main className="md:ml-64 flex-1 min-h-screen p-6 md:p-8 bg-background text-text">
         {/* Mobile top bar */}
         <div className="md:hidden flex justify-between items-center mb-4">
-          <h1 className="text-xl font-semibold">PrivateCRCL</h1>
+          <div className="md:hidden">
+            <h1 className="text-xl font-semibold">Business Profile</h1>
+            <p className="text-sm text-all-sub-h">  Manage your public business information</p>
+          </div>
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 border-[0.82px] border-border rounded-lg bg-background">
@@ -104,11 +111,6 @@ export default function BusinessProfilePage() {
           </button>
         </div>
 
-        {/* Mobile heading */}
-        <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">Business Profile</h1>
-          <p className="text-sm text-all-sub-h">  Manage your public business information</p>
-        </div>
 
         {/* Header + Edit button */}
         <div className="flex items-start justify-between mb-6">
@@ -120,7 +122,7 @@ export default function BusinessProfilePage() {
           </div>
 
           <button
-            className="flex items-center gap-2 cursor-pointer bg-[#E8600F] text-[#FFFFFF] px-4 py-2 rounded-md"
+            className="flex items-center gap-2 cursor-pointer bg-[#E8600F] text-[#FFFFFF] p-2 md:px-4 md:py-2 rounded-md"
             aria-label="Edit profile"
           >
             <Edit size={16} />
@@ -322,12 +324,23 @@ export default function BusinessProfilePage() {
           {tab === "media" && (
             <section>
               <div className="grid grid-cols-1 lg:grid-cols-2 md:h-[218px] gap-6">
+
                 {/* Logo */}
-                <div className="rounded-[14px] p-4 border-[0.82px] border-border bg-offer-search-main  ">
+                <div className="rounded-[14px] p-4 border-[0.82px] border-border bg-offer-search-main">
                   <div className="text-[14px] text-table-text-h mb-3">Logo</div>
+
                   <div className="rounded-lg border-[0.82px] border-border bg-offer-search h-36 flex items-center justify-center">
-                    {logoPreview.current ? (
-                      <img src={logoPreview.current} alt="logo preview" className="h-20 object-contain" />
+                    {logoPreview ? (
+                      <div className="relative h-20 w-20">
+                        <Image
+                          src={logoPreview}
+                          alt="Logo Preview"
+                          fill
+                          unoptimized
+                          className="object-contain rounded-md"
+                          sizes="80px"
+                        />
+                      </div>
                     ) : (
                       <label className="flex flex-col items-center gap-2 cursor-pointer text-table-text-h">
                         <Globe size={24} className="text-table-text-id opacity-70" />
@@ -335,34 +348,46 @@ export default function BusinessProfilePage() {
                         <input type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
                       </label>
                     )}
+
                   </div>
                 </div>
 
                 {/* Hero */}
-                <div className="rounded-xl p-4 border-[0.82px] border-border bg-offer-search  ">
+                <div className="rounded-xl p-4 border-[0.82px] border-border bg-offer-search">
                   <div className="text-[14px] text-table-text-h mb-3">Hero Image</div>
+
                   <div className="rounded-lg border-[0.82px] border-border bg-offer-search h-36 overflow-hidden">
-                    {heroPreview.current ? (
-                      <img src={heroPreview.current} alt="hero preview" className="w-full h-full object-cover rounded-md text-[14px] text-[#364153]" />
+                    {heroPreview ? (
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={heroPreview}
+                          alt="Hero Preview"
+                          fill
+                          unoptimized
+                          className="object-cover rounded-md"
+                          sizes="100vw"
+                        />
+                      </div>
                     ) : (
                       <label className="flex flex-col items-center gap-2 justify-center h-full text-gray-500 cursor-pointer">
                         <div className="text-xs">Upload hero image</div>
                         <input type="file" accept="image/*" onChange={handleHeroChange} className="hidden" />
                       </label>
                     )}
-                  </div>
 
+                  </div>
                 </div>
+
               </div>
             </section>
           )}
+
         </div>
       </main>
     </div>
   );
 }
 
-/* Helper components */
 
 function Tab({
   label,
@@ -376,7 +401,7 @@ function Tab({
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 text-center rounded-[14px] text-[14px] ${active
+      className={`p-2 md:px-4 md:py-2 text-center rounded-full text-[14px] ${active
         ? "bg-tab-bg border-[0.82px] text-tab-text-a border-border cursor-pointer"
         : "text-tab-text cursor-pointer"
         }`}

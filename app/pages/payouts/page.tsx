@@ -92,7 +92,10 @@ export default function PayoutsAnalyticsPage() {
             <main className="md:ml-64 flex-1 min-h-screen p-6 md:p-8 bg-background text-text">
                 {/* Mobile top bar */}
                 <div className="md:hidden flex justify-between items-center mb-4">
-                    <h1 className="text-xl font-semibold">PrivateCRCL</h1>
+                    <div>
+                        <h1 className="text-xl font-semibold">Payouts & analytics</h1>
+                        <p className="text-sm text-all-sub-h">Track performance and insights</p>
+                    </div>
                     <button
                         onClick={() => setSidebarOpen(true)}
                         className="p-2 border-[0.82px] border-border rounded-lg bg-background">
@@ -100,11 +103,6 @@ export default function PayoutsAnalyticsPage() {
                     </button>
                 </div>
 
-                {/* Mobile heading */}
-                <div className="md:hidden mb-4">
-                    <h1 className="text-xl font-semibold">Payouts & analytics</h1>
-                    <p className="text-sm text-all-sub-h">Track performance and insights</p>
-                </div>
 
                 {/* Desktop heading */}
                 <div className="hidden md:block mb-6">

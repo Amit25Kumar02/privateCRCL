@@ -149,20 +149,19 @@ export default function EventsBookingsPage() {
 
       {/* Main */}
       <main className="md:ml-64 flex-1 min-h-screen p-6 md:p-8 bg-background text-text">
-        {/* Mobile top bar */}
+   
         <div className="md:hidden flex justify-between items-center mb-4">
-          <h1 className="text-xl font-semibold">PrivateCRCL</h1>
+        <div>
+          <h1 className="text-xl font-semibold">Events & Bookings</h1>
+          <p className="text-sm text-all-sub-h">Manage venue bookings and event requests</p>
+        </div>
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 border-[0.82px] border-border rounded-lg bg-background">
             <Menu size={22} />
           </button>
         </div>
-        {/* Mobile heading */}
-        <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">Events & Bookings</h1>
-          <p className="text-sm text-all-sub-h">Manage venue bookings and event requests</p>
-        </div>
+       
 
         {/* Desktop heading */}
         <div className="hidden md:block mb-6">
@@ -206,7 +205,7 @@ export default function EventsBookingsPage() {
         </div>
 
         {/* Tabs + Search */}
-        <div className="grid grid-cols-1 md:grid-cols-1 w-full md:w-fit  justify-between items-center gap-4 mb-4 mt-4">
+        <div className="grid grid-cols-1  w-full md:w-fit  justify-between items-center gap-4 mb-4 mt-4">
           {/* Tabs */}
           <div className="flex gap-2 flex-wrap border-[0.82px] border-border rounded-[14px] bg-offer-search-main px-2 py-1">
             {(["All Requests", "Pending", "Confirmed", "Completed"] as const).map(

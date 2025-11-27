@@ -232,7 +232,10 @@ export default function OffersPage() {
 
 
         <div className="md:hidden flex items-center justify-between mb-4 pt-1">
-          <div className="text-xl font-semibold">PrivateCRCL</div>
+          <div>
+            <h1 className="text-xl font-semibold">Offers Management</h1>
+            <p className="text-sm text-all-sub-h">Create and manage perks and discounts</p>
+          </div>
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 rounded-lg border border-border bg-background"
@@ -241,10 +244,7 @@ export default function OffersPage() {
           </button>
         </div>
 
-        <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">Offers Management</h1>
-          <p className="text-sm text-all-sub-h">Create and manage perks and discounts</p>
-        </div>
+
 
         {/* Header */}
         <div className="flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">

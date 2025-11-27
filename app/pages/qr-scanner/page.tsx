@@ -97,9 +97,7 @@ export default function QRScanner() {
       {sidebarOpen && (
         <div className="fixed inset-0 z-40">
           <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-          <div className="fixed left-0 top-0 h-full w-80 bg-[var(--background)] border-r border-border z-50">
-            {/* If your Sidebar accepts props use them; else plain render */}
-            {/* @ts-ignore allow unknown props if Sidebar doesn't accept them */}
+          <div className="fixed left-0 top-0 h-full w-80 bg-background border-r border-border z-50">
             <Sidebar isMobile onClose={() => setSidebarOpen(false)} />
           </div>
         </div>
@@ -111,11 +109,14 @@ export default function QRScanner() {
       </div>
 
       {/* Main */}
-      <main className="flex-1 md:ml-64 min-h-screen bg-[var(--background)] p-4 md:p-8 transition-colors duration-300">
+      <main className="flex-1 md:ml-64 min-h-screen bg-background p-4 md:p-8 transition-colors duration-300">
 
         {/* Mobile header */}
         <div className="md:hidden flex items-center justify-between mb-6">
-          <h1 className="text-lg font-semibold text-text">PrivateCRCL</h1>
+          <div>
+            <h1 className="text-xl font-semibold">QR Scanner</h1>
+            <p className="text-sm text-all-sub-h line-clamp-2">Scan customer membership cards for redemptions</p>
+          </div>
           <button
             onClick={() => setSidebarOpen(true)}
             className="p-2 rounded-lg border border-border bg-background"
@@ -124,10 +125,7 @@ export default function QRScanner() {
             <Menu size={20} />
           </button>
         </div>
-        <div className="md:hidden mb-4">
-          <h1 className="text-xl font-semibold">QR Scanner</h1>
-          <p className="text-sm text-all-sub-h">Scan customer membership cards for redemptions</p>
-        </div>
+
 
         {/* Desktop header */}
         <div className="hidden md:block mb-6">
@@ -211,10 +209,10 @@ export default function QRScanner() {
           {/* Result Card */}
           <aside
             className={`rounded-[14px] p-4 md:p-6 bg-offer-search-main border-[0.82px] ${scanResult
-                ? scanResult.success
-                  ? "border-green-500"
-                  : "border-red-500"
-                : "border-border"
+              ? scanResult.success
+                ? "border-green-500"
+                : "border-red-500"
+              : "border-border"
               }`}
           >
             <div className="flex items-center gap-2 mb-4">
